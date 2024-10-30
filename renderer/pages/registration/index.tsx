@@ -1,4 +1,5 @@
 import { RootLayout } from '@/renderer/components/AppLayout'
+import HeaderTitle from '@/renderer/components/HeaderTitle'
 import React from 'react'
 
 type Props = {}
@@ -6,7 +7,7 @@ type Props = {}
 const Page = (props: Props) => {
   return (
     <RootLayout>
-      <div>Page</div>
+      <HeaderTitle title='تسجيل'/>
     </RootLayout>
   )
 }

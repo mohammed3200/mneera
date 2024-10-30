@@ -8,9 +8,6 @@ interface ButtonNavigationProps {
 }
 
 export const ButtonNavigation = ({ title, path }: ButtonNavigationProps) => {
-    console.log('====================================');
-    console.log({ title, path });
-    console.log('====================================');
     return (
         <div className='w-full p-2 self-center justify-self-center'>
             <Button className='w-full h-16 rounded-md border border-gray-400 bg-transparent'>

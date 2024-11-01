@@ -75,10 +75,31 @@
     @apply border-border;
     direction: rtl;
   }
+
   body {
     @apply bg-background text-foreground;
     font-feature-settings: "rlig" 1, "calt" 1;
   }
+    /* Remove scrollbar */
+    .remove-scrollbar::-webkit-scrollbar {
+      width: 0px;
+      height: 0px;
+      border-radius: 0px;
+    }
+  
+    .remove-scrollbar::-webkit-scrollbar-track {
+      background: transparent;
+    }
+  
+    .remove-scrollbar::-webkit-scrollbar-thumb {
+      background: transparent;
+      border-radius: 0px;
+    }
+  
+    .remove-scrollbar::-webkit-scrollbar-thumb:hover {
+      /* background: #1e2238; */
+      background: transparent;
+    }
 }
 
 @font-face {
@@ -106,4 +127,14 @@
   /* Specify the font weight if applicable */
   font-style: normal;
   /* Specify the font style if applicable */
+}
+
+
+@layer utilities {
+  /* ===== UTILITIES */
+  /* =====  REACT PHONE NUMBER INPUT OVERRIDES */
+  .input-phone {
+    @apply  flex flex-row-reverse gap-2 mt-2 h-11 rounded-md px-3 text-sm border bg-transparent placeholder:text-gray-600 font-din-regular placeholder:font-din-regular placeholder:text-left !important;
+    /* direction: ltr !important; */
+  }
 }

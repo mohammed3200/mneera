@@ -4,9 +4,10 @@ import React from 'react'
 
 type HeaderTitleProps = {
     title: string;
+    back:string;
 }
 
-const HeaderTitle = ({ title }: HeaderTitleProps) => {
+const HeaderTitle = ({ title,back }: HeaderTitleProps) => {
     return (
         <div className='flex flex-row-reverse items-center justify-between px-8 py-2 w-full'>
             <p className='font-din-regular text-right text-4xl text-gray-100'>{title}</p>
@@ -14,7 +15,7 @@ const HeaderTitle = ({ title }: HeaderTitleProps) => {
                 <Link href={"/dashboard"} className='flex items-center justify-center p-2 rounded-full border border-gray-400 text-blue-500'>
                     <Home size={28} />
                 </Link>
-                <Link href={"/dashboard"} className='flex items-center justify-center p-2 rounded-full border border-gray-400 text-blue-500'>
+                <Link href={back} className='flex items-center justify-center p-2 rounded-full border border-gray-400 text-blue-500'>
                     <CircleArrowOutUpRight size={28} />
                 </Link>
             </div>

@@ -21,3 +21,8 @@ export const UserFormValidation = z.object({
         new File([""], "logo.png", { type: "image/png", lastModified: Date.now() })
     ]).optional(),
 });
+
+export const AdminFormValidation = z.object({
+    username: z.string(),
+    password: z.string(),
+})

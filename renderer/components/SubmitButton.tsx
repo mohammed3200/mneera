@@ -9,7 +9,7 @@ type ButtonProps  = {
 } & React.ComponentProps<'button'>
 
 export const SubmitButton = ({ isLoading, className, children }: ButtonProps) => {
-  return (<Button type="submit" disabled={isLoading} className={className ?? 'shad-primary-btn w-full'} >
+  return (<Button type="submit" disabled={isLoading} className={className ?? 'w-full'} >
     {isLoading ? (
         <div className="flex items-center gap-4">
             <Image

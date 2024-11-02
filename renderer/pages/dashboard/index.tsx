@@ -10,16 +10,16 @@ type ButtonDashboardProps = {
 }
 const ButtonDashboard: ButtonDashboardProps[] = [
   {
-    title: "تسجيل",
+    title: "التسجيل",
     path: "/registration"
   },
   {
-    title: "الأقسام",
-    path: "/sections"
+    title: "الأفراد",
+    path: "/individuals"
   },
   {
-    title: "الكتائب",
-    path: "/battalions"
+    title: "الألوية و الكتائب و السرايا",
+    path: "/brigadesBattalionsCompanies"
   },
   {
     title: "تعاون و التواصل",
@@ -31,18 +31,22 @@ const ButtonDashboard: ButtonDashboardProps[] = [
   },
   {
     title: "الادارة والتنسيق",
-    path: "/ManagementAndCoordination"
+    path: "/managementCoordination"
   },
   {
-    title: "فارغ",
-    path: ""
+    title: "التدريب و التطوير",
+    path: "/trainingDevelopment"
   },
   {
-    title: "فارغ",
-    path: ""
+    title: "الجرحى و الشهداء",
+    path: "/woundedMartyrs"
   },
   {
-    title: "دعم و صيانة",
+    title: "الدعم و الصيانة",
+    path: "/support"
+  },
+  {
+    title: "المعلومات التوثيق",
     path: "/support"
   }
 ]
@@ -55,6 +59,9 @@ const Dashboard = ( ) => {
           <p className="font-din-regular text-gray-300 text-3xl text-right">منظومة المجلس العسكري</p>
         </div>
         <Header />
+        <div className="flex flex-row w-full items-center justify-center -mt-4 py-2">
+          <p className="text-white text-right text-2xl font-din-regular">الأقسام</p>
+        </div>
         <div className="space-y-4">
           {ButtonDashboard.reduce((rows, item, index) => {
             if (index % 3 === 0) rows.push([]); // Start a new row every 3 items

@@ -6,7 +6,7 @@ import Image from 'next/image'
 export const Header = () => {
   return (
     <div className='w-full flex flex-row items-center justify-between p-8 '>
-      <div className='flex flex-col justify-end'>
+      <div className='flex flex-col justify-center items-center'>
         <p className='font-din-regular text-gray-100 text-right text-2xl'>
           دولة ليبيا
         </p>
@@ -14,7 +14,7 @@ export const Header = () => {
           المجلس العسكري
         </p>
         <p className='font-din-regular text-gray-100 text-right text-2xl'>
-          شهداء مصراتة
+          لثوار مصراتة
         </p>
       </div>
       <Image

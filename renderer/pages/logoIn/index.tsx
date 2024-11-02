@@ -5,7 +5,6 @@
 
 
 import { Header, RootLayout, SubmitButton } from '@/renderer/components'
-import { Button } from '@/renderer/components/ui/button';
 import { LogIn } from '@/renderer/lib'
 import { zodResolver } from '@hookform/resolvers/zod';
 import { AdminFormValidation } from '@/renderer/lib/validation';
@@ -17,9 +16,6 @@ import { useForm } from 'react-hook-form';
 import { Input } from '@/renderer/components/ui/input';
 import { Form, FormField, FormLabel, FormItem, FormControl, FormMessage } from '@/renderer/components/ui/form';
 
-interface LoginProps {
-
-}
 
 const Login = () => {
   const router = useRouter()

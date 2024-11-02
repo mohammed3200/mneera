@@ -17,7 +17,6 @@ import {
 } from '@/renderer/components/ui/form'
 import { UserFormValidation } from '@/renderer/lib/validation';
 import FileUploader from '@/renderer/components/FileUploader';
-import { CalendarIcon } from 'lucide-react';
 import { format } from 'date-fns';
 import PhoneInput from "react-phone-number-input";
 import { E164Number } from "libphonenumber-js/core";

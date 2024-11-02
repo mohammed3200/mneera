@@ -3,6 +3,8 @@ import { ButtonNavigation } from "@/renderer/components/ButtonNavigation"
 import React from "react"
 import { CircleArrowLeft } from "lucide-react";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
+import { Button } from "@/renderer/components/ui/button";
 
 type ButtonDashboardProps = {
   title: string;
@@ -51,7 +53,8 @@ const ButtonDashboard: ButtonDashboardProps[] = [
   }
 ]
 
-const Dashboard = ( ) => {
+const Dashboard = () => {
+  const router = useRouter()
   return (
     <RootLayout>
       <div className="flex flex-col w-full h-full">
@@ -66,7 +69,11 @@ const Dashboard = ( ) => {
           {ButtonDashboard.reduce((rows, item, index) => {
             if (index % 3 === 0) rows.push([]); // Start a new row every 3 items
             rows[rows.length - 1].push(
-              <ButtonNavigation key={index.toString()} title={item.title} path={item.path} />
+              <ButtonNavigation
+                key={index.toString()}
+                title={item.title}
+                handleRouter={() => router.replace(item.path)}
+              />
             );
             return rows;
           }, []).map((row, rowIndex) => (
@@ -76,13 +83,13 @@ const Dashboard = ( ) => {
           ))}
         </div>
         <div className="w-full h-fit flex items-center justify-center mt-6">
-          <Link
-            href={'/logoIn'}
+          <Button
+            onClick={() => router.replace('/logoIn')}
             className="w-1/4 flex flex-row gap-2 items-center justify-center border border-red-600 rounded-full bg-transparent text-red-600 py-6 hover:bg-red-700 hover:text-white"
           >
             <p className="font-din-regular  text-lg text-right">تسجيل الخروج</p>
             <CircleArrowLeft size={24} />
-          </Link>
+          </Button>
         </div>
       </div>
     </RootLayout>

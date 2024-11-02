@@ -2,7 +2,6 @@ import { Header, RootLayout } from "@/renderer/components"
 import { ButtonNavigation } from "@/renderer/components/ButtonNavigation"
 import React from "react"
 import { CircleArrowLeft } from "lucide-react";
-import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { Button } from "@/renderer/components/ui/button";
 

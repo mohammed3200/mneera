@@ -18,18 +18,16 @@ import {
 import { UserFormValidation } from '@/renderer/lib/validation';
 import FileUploader from '@/renderer/components/FileUploader';
 import { format } from 'date-fns';
-import PhoneInput from "react-phone-number-input";
-import { E164Number } from "libphonenumber-js/core";
-import "react-phone-number-input/style.css";
 import { Select, SelectContent, SelectValue, SelectItem, SelectTrigger } from '@/renderer/components/ui/select';
 import { blood, TypeOfDefinition } from '@/renderer/constants';
-import { SubmitButton } from '@/renderer/components';
+import { SubmitButton, InputPhone } from '@/renderer/components';
+
 
 type Props = {}
 
 const Page = (props: Props) => {
 
-  const [Loading, setLoading] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
   const [typeOfDefinition, setTypeOfDefinition] = useState<"ID card" | "passport">("ID card");
 
   const form = useForm<z.infer<typeof UserFormValidation>>({
@@ -54,11 +52,13 @@ const Page = (props: Props) => {
 
   const onSubmit = (values: z.infer<typeof UserFormValidation>) => {
     console.log("done !");
-    setLoading(true);
+    setIsLoading(true);
     try {
       console.log({ json: values });
     } catch (error) {
       console.error(error);
+    } finally {
+      setIsLoading(false);
     }
   };
 
@@ -85,7 +85,7 @@ const Page = (props: Props) => {
                         <Input
                           {...field}
                           type="text"
-                          placeholder="الاسم الرباعي"
+                          placeholder=""
                         />
                       </FormControl>
                       <FormMessage />
@@ -102,7 +102,7 @@ const Page = (props: Props) => {
                         <Input
                           {...field}
                           type="text"
-                          placeholder="0123456789"
+                          placeholder=""
                         />
                       </FormControl>
                       <FormMessage />
@@ -116,14 +116,8 @@ const Page = (props: Props) => {
                     <FormItem>
                       <FormLabel>الرقم الهاتف</FormLabel>
                       <FormControl>
-                        <PhoneInput
-                          defaultCountry="LY"
-                          placeholder="+218 - "
-                          international
-                          withCountryCallingCode
-                          value={field.value as E164Number | undefined}
-                          onChange={field.onChange}
-                          className="input-phone"
+                        <InputPhone
+                          {...field}
                         />
                       </FormControl>
                       <FormMessage />
@@ -178,7 +172,7 @@ const Page = (props: Props) => {
                       <Input
                         {...field}
                         type="text"
-                        placeholder="مستشفى ..."
+                        placeholder=""
                       />
                     </FormControl>
                     <FormMessage />
@@ -380,15 +374,14 @@ const Page = (props: Props) => {
                 )}
               />
             </div>
-            <SubmitButton
-              isLoading={Loading}
-              className='rounded-2xl border-gray-500 border w-full flex items-center justify-center text-gray-500 bg-transparent hover:bg-blue-500 hover:text-gray-50'
-              type='submit'
-            >
-              <p className='font-din-regular text-right text-lg'>
-                تسجيل عضو جديد
-              </p>
-            </SubmitButton>
+            <div className='w-full flex flex-row px-64 justify-center items-center'>
+              <SubmitButton
+                onClick={() => console.log("done!")}
+                isLoading={isLoading}
+                className='w-full border border-gray-200 text-gray-300 rounded-full bg-transparent hover:bg-blue-700 hover:border-none items-center justify-center py-6 mt-5 justify-self-center self-center duration-500 transition-all ease-out'>
+                <p className='font-din-bold text-md text-right'> تسجيل عضو جديد</p>
+              </SubmitButton>
+            </div>
           </form>
         </Form>
       </div>

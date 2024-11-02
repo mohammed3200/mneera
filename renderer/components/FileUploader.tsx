@@ -29,11 +29,14 @@ const FileUploader = ({ files, onChange }: FileUploaderProps) => {
           height={250}
           alt="uploaded image"
           className="max-h-[400px] overflow-hidden object-cover"
+          style={{
+            width: "auto"
+          }}
         />
       ) : (
         <>
           <div className="h-full flex flex-col items-center justify-center gap-2 text-center text-white">
-          <Upload size={40} className="text-blue-500" />
+            <Upload size={40} className="text-blue-500" />
             <p className="text-lg font-din-regular text-right ">
               <span className="text-blue-500">انقر لرفع</span>
               {" "}أو اسحب و أفلت

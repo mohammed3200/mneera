@@ -23,6 +23,6 @@ export const UserFormValidation = z.object({
 });
 
 export const AdminFormValidation = z.object({
-    username: z.string(),
-    password: z.string(),
+    username: z.string().min(1,"مطلوب"),
+    password: z.string().min(1,"مطلوب"),
 })

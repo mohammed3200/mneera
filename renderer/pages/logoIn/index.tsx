@@ -1,61 +1,105 @@
+"use client";
 /* eslint-disable @typescript-eslint/no-explicit-any */
 /* eslint-disable prettier/prettier */
 /* eslint-disable @typescript-eslint/explicit-function-return-type */
-import { CustomInput, SubmitButton, Header, RootLayout } from '@/renderer/components'
+
+
+import { Header, RootLayout, SubmitButton } from '@/renderer/components'
+import { Button } from '@/renderer/components/ui/button';
 import { LogIn } from '@/renderer/lib'
+import { zodResolver } from '@hookform/resolvers/zod';
+import { AdminFormValidation } from '@/renderer/lib/validation';
+import { useRouter } from 'next/navigation'
+
 import React, { useState } from 'react'
+import { z } from "zod";
+import { useForm } from 'react-hook-form';
+import { Input } from '@/renderer/components/ui/input';
+import { Form, FormField, FormLabel, FormItem, FormControl, FormMessage } from '@/renderer/components/ui/form';
 
 interface LoginProps {
-  setIsSignIn: (SingIn: boolean) => void
+
 }
 
-const Login = ({ setIsSignIn }: LoginProps) => {
+const Login = () => {
+  const router = useRouter()
   const [isLoading, setIsLoading] = useState(false)
-  const [userName, setUserName] = useState('');
-  const [password, setPassword] = useState('');
 
-  const onSubmit = async () => {
-    setIsLoading(true)
+  const form = useForm<z.infer<typeof AdminFormValidation>>({
+    resolver: zodResolver(AdminFormValidation),
+    defaultValues: {
+      username: "",
+      password: ""
+    },
+  });
+
+  const onSubmit = (values: z.infer<typeof AdminFormValidation>) => {
+    setIsLoading(true);
     try {
-      if (LogIn(userName, password)) setIsSignIn(true)
+      if (LogIn(values.username, values.password)) return router.replace("/dashboard");
     } catch (error) {
+      console.error(error);
     } finally {
       setIsLoading(false)
     }
-  }
+  };
 
   return (
     <RootLayout>
-      <div className="w-full flex flex-col">
+      <div className="grid grid-rows-3 w-full flex-col">
         <Header />
-        <div className='h-full flex flex-col justify-center items-center'>
+        <div className='flex flex-col h-full justify-center items-center row-span-2'>
           <p className="font-din-bold text-zinc-200 text-center text-4xl">تسجيل الدخول</p>
-          <form id="" className="flex-col justify-center mt-4">
-            <div>
-              <CustomInput
-                placeholder="أدخل اسم المستخدم"
-                className="pr-3 text-zinc-300 font-din-regular font-bold text-sm"
-                onChange={(e) => setUserName(e.target.value)}
-                isArabic
-              />
-            </div>
-            <div>
-              <CustomInput
-                placeholder="كلمة المرور"
-                className="pr-3 text-zinc-300 font-din-regular font-bold text-sm"
-                type="password"
-                onChange={(e) => setPassword(e.target.value)}
-                isArabic
-              />
-            </div>
-            <SubmitButton
-              onClick={onSubmit}
-              isLoading={isLoading}
-              className="rounded-lg flex justify-center items-center w-full mt-14"
+          <Form {...form}>
+            <form
+              onSubmit={form.handleSubmit(onSubmit)}
+              className="w-full px-4 space-y-8"
             >
-              <p className="font-din-regular text-zinc-200 text-lg text-center p-2">الدخول</p>
-            </SubmitButton>
-          </form>
+              <div className='w-full flex-col justify-center px-10 space-y-6'>
+                <FormField
+                  name="username"
+                  control={form.control}
+                  render={({ field }) => (
+                    <FormItem>
+                      <FormLabel>الاسم المستخدم</FormLabel>
+                      <FormControl>
+                        <Input
+                          {...field}
+                          type="text"
+                          placeholder='اسم المستخدم'
+                        />
+                      </FormControl>
+                      <FormMessage />
+                    </FormItem>
+                  )}
+                />
+                <FormField
+                  name="password"
+                  control={form.control}
+                  render={({ field }) => (
+                    <FormItem>
+                      <FormLabel>كلمة المرور</FormLabel>
+                      <FormControl>
+                        <Input
+                          {...field}
+                          type="password"
+                          placeholder='كلمة المرور'
+                        />
+                      </FormControl>
+                      <FormMessage />
+                    </FormItem>
+                  )}
+                />
+              </div>
+              <div className='w-full flex flex-row px-64 justify-center items-center'>
+                <SubmitButton
+                  isLoading={isLoading}
+                  className='w-full border border-gray-200 text-gray-300 rounded-full bg-transparent hover:bg-blue-700 hover:border-none items-center justify-center py-6 mt-5 justify-self-center self-center duration-500 transition-all ease-out'>
+                  <p className='font-din-bold text-md text-right'> تسجيل الدخول</p>
+                </SubmitButton>
+              </div>
+            </form>
+          </Form>
         </div>
       </div>
     </RootLayout>

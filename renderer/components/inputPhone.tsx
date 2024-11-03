@@ -23,19 +23,19 @@ const formatPhoneNumber = (value: string) => {
 }
 
 export const InputPhone = ({ ...field }: Props) => {
-    const [typeNumber, setTypeNumber] = useState<"Almadar" | "Libyana" | undefined>(undefined)
+    const [typeNumber, setTypeNumber] = useState<"Almadar" | "Libyana" | "MyTLL" | undefined>(undefined)
 
     const handlePhoneNumberChange = (value: string) => {
         const digits = value.replace(/\D/g, '');
         if (digits.length > 2) {
             const thirdDigit = digits[2];
-            if (thirdDigit === '1' || thirdDigit === '3') {
-                setTypeNumber("Almadar");
-            } else if (thirdDigit === '2' || thirdDigit === '4') {
-                setTypeNumber("Libyana");
-            } else {
-                setTypeNumber(undefined);
-            }
+            thirdDigit === '1' || thirdDigit === '3' ?
+                setTypeNumber("Almadar")
+                : thirdDigit === '2' || thirdDigit === '4' ?
+                    setTypeNumber("Libyana")
+                    : thirdDigit === '5' ?
+                        setTypeNumber("MyTLL")
+                        : setTypeNumber(undefined);
         }
     }
 
@@ -63,9 +63,20 @@ export const InputPhone = ({ ...field }: Props) => {
                     width={24}
                     height={24}
                     className='w-10 h-10 object-cover rounded-md'
-                />
-            ) : (
-                <PhoneCallIcon className='text-gray-50' size={24} />)}
+                />)
+                : typeNumber === "MyTLL" ? (
+                    <Image
+                        src={"/assets/MyTLL.png"}
+                        alt='MyTLL'
+                        width={24}
+                        height={24}
+                        className='w-10 h-10 object-cover rounded-md'
+                    />
+                ) : (
+                    <PhoneCallIcon
+                        className='text-gray-50'
+                        size={24} />
+                )}
         </div>
     )
 };

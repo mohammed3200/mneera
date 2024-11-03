@@ -3,3 +3,5 @@ export * from './CustomInput'
 export * from './Header'
 export * from './SubmitButton'
 export * from "./inputPhone";
+export * from "./HeaderTitle";
+export * from "./CourseCard";

@@ -5,11 +5,12 @@ export const UserFormValidation = z.object({
     nationalNumber: z.string().min(12,"هذا ليس رقم وطني").max(12,"هذا ليس رقم وطني"),
     nationality: z.string(),
     birthDate: z.coerce.date(),
-    PlaceOfBirth:z.string().min(2,"هذا قصير جدا"),
+    PlaceOfBirth:z.string().min(2,"هذا قصير جدا").optional(),
     phone: z
     .string()
-    .refine((phone) => /^\+\d{10,15}$/.test(phone), "ليس رقم هاتف"),
+    .refine((phone) => /^\d{3}-\d{6,10}$/.test(phone), "ليس رقم هاتف"),
     TypeOfDefinition : z.enum(["ID card","Passport"]),
+    battalionNumber: z.string().optional(),
     IDCard: z.string().min(6,"هذا ليس رقم تعريف").max(6,"هذا ليس رقم تعريف").optional(),
     passport:z.string().min(9,"هذا ليس رقم جواز سفر").max(9,"هذا ليس رقم جواز سفر").optional(),
     employer: z.string(),

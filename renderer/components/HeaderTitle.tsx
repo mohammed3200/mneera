@@ -7,7 +7,7 @@ type HeaderTitleProps = {
     back:string;
 }
 
-const HeaderTitle = ({ title,back }: HeaderTitleProps) => {
+export const HeaderTitle = ({ title,back }: HeaderTitleProps) => {
     return (
         <div className='flex flex-row-reverse items-center justify-between px-8 py-2 w-full'>
             <p className='font-din-regular text-right text-4xl text-gray-100'>{title}</p>
@@ -22,5 +22,3 @@ const HeaderTitle = ({ title,back }: HeaderTitleProps) => {
         </div>
     )
 }
-
-export default HeaderTitle

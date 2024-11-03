@@ -8,7 +8,8 @@ import { Button } from "@/renderer/components/ui/button";
 type ButtonDashboardProps = {
   title: string;
   path: string
-}
+};
+
 const ButtonDashboard: ButtonDashboardProps[] = [
   {
     title: "التسجيل",
@@ -50,7 +51,7 @@ const ButtonDashboard: ButtonDashboardProps[] = [
     title: "المعلومات التوثيق",
     path: "/support"
   }
-]
+];
 
 const Dashboard = () => {
   const router = useRouter()

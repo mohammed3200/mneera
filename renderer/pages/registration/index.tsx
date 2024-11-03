@@ -5,7 +5,6 @@ import { z } from "zod";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { RootLayout } from '@/renderer/components/AppLayout'
-import HeaderTitle from '@/renderer/components/HeaderTitle'
 import { Input } from "@/renderer/components/ui/input";
 import {
   Form,
@@ -20,7 +19,8 @@ import FileUploader from '@/renderer/components/FileUploader';
 import { format } from 'date-fns';
 import { Select, SelectContent, SelectValue, SelectItem, SelectTrigger } from '@/renderer/components/ui/select';
 import { blood, TypeOfDefinition } from '@/renderer/constants';
-import { SubmitButton, InputPhone } from '@/renderer/components';
+import { HeaderTitle, InputPhone } from '@/renderer/components';
+import { Button } from '@/renderer/components/ui/button';
 
 
 type Props = {}
@@ -153,7 +153,7 @@ const Page = (props: Props) => {
                     <FormControl>
                       <Input
                         {...field}
-                        type="date"
+                        type="text"
                         value={format(field.value, "yyyy-MM-dd")}
                         onChange={(e) => field.onChange(format(new Date(e.target.value), "yyyy-MM-dd"))}
                       />
@@ -181,75 +181,97 @@ const Page = (props: Props) => {
               />
             </div>
 
-            {/* TypeOfDefinition && (IDCard || passport) */}
+            {/* ((IDCard || passport) && TypeOfDefinition ) && Battalion Number */}
             <div className="grid grid-cols-2 gap-x-6 ">
-              <FormField
-                name="TypeOfDefinition"
-                control={form.control}
-                render={({ field }) => (
-                  <FormItem>
-                    <FormLabel>نوع التعريف الشخصي</FormLabel>
-                    <FormControl>
-                      <Select
-                        onValueChange={(value) => {
-                          field.onChange(value); // Update form state
-                          setTypeOfDefinition(value as "ID card" | "passport"); // Update local state
-                        }}
-                        defaultValue={field.value}
-                      >
-                        <SelectTrigger className="text-gray-400  placeholder:text-gray-400 border-dark-500 h-12 focus:ring-0 focus:ring-offset-0 !important;">
-                          <SelectValue placeholder={field.value} />
-                        </SelectTrigger>
-                        <SelectContent>
-                          {TypeOfDefinition.map((item) => (
-                            <SelectItem key={item.key} value={item.key}>
-                              <div className='flex flex-row'>
-                                <p className='font-din-bold'>{item.name}</p>
-                              </div>
-                            </SelectItem>
-                          ))}
-                        </SelectContent>
-                      </Select>
-                    </FormControl>
-                    <FormMessage />
-                  </FormItem>
-                )}
-              />
-              {typeOfDefinition === "ID card" ? (<FormField
-                name="IDCard"
-                control={form.control}
-                render={({ field }) => (
-                  <FormItem>
-                    <FormLabel>رقم التعريف الشخصي</FormLabel>
-                    <FormControl>
-                      <Input
-                        {...field}
-                        type="text"
-                        placeholder="123456"
-                      />
-                    </FormControl>
-                    <FormMessage />
-                  </FormItem>
-                )}
-              />) : (
+              <div className="flex flex-row">
+                {typeOfDefinition === "ID card" ?
+                  (<FormField
+                    name="IDCard"
+                    control={form.control}
+                    render={({ field }) => (
+                      <FormItem className="grow">
+                        <FormLabel>رقم التعريف الشخصي</FormLabel>
+                        <FormControl>
+                          <Input
+                            {...field}
+                            type="text"
+                            placeholder="123456"
+                            className="rounded-l-none"
+                          />
+                        </FormControl>
+                        <FormMessage />
+                      </FormItem>
+                    )}
+                  />) : (
+                    <FormField
+                      name="passport"
+                      control={form.control}
+                      render={({ field }) => (
+                        <FormItem className="grow">
+                          <FormLabel>رقم جواز السفر</FormLabel>
+                          <FormControl>
+                            <Input
+                              {...field}
+                              type="text"
+                              placeholder="01D7E5K"
+                              className="rounded-l-none"
+                            />
+                          </FormControl>
+                          <FormMessage />
+                        </FormItem>
+                      )}
+                    />
+                  )}
                 <FormField
-                  name="passport"
+                  name="TypeOfDefinition"
                   control={form.control}
                   render={({ field }) => (
                     <FormItem>
-                      <FormLabel>رقم جواز السفر</FormLabel>
+                      <FormLabel className="text-xs">نوع التعريف الشخصي</FormLabel>
                       <FormControl>
-                        <Input
-                          {...field}
-                          type="text"
-                          placeholder="01D7E5K"
-                        />
+                        <Select
+                          onValueChange={(value) => {
+                            field.onChange(value); // Update form state
+                            setTypeOfDefinition(value as "ID card" | "passport"); // Update local state
+                          }}
+                          defaultValue={field.value}
+                        >
+                          <SelectTrigger className="text-gray-400 rounded-r-none placeholder:text-gray-400 border-dark-500 h-12 focus:ring-0 focus:ring-offset-0 !important;">
+                            <SelectValue placeholder={field.value} />
+                          </SelectTrigger>
+                          <SelectContent>
+                            {TypeOfDefinition.map((item) => (
+                              <SelectItem key={item.key} value={item.key}>
+                                <div className='flex flex-row'>
+                                  <p className='font-din-bold'>{item.name}</p>
+                                </div>
+                              </SelectItem>
+                            ))}
+                          </SelectContent>
+                        </Select>
                       </FormControl>
                       <FormMessage />
                     </FormItem>
                   )}
                 />
-              )}
+              </div>
+              <FormField
+                name="battalionNumber"
+                control={form.control}
+                render={({ field }) => (
+                  <FormItem>
+                    <FormLabel> رقم الكتيبة </FormLabel>
+                    <FormControl>
+                      <Input
+                        {...field}
+                        type="text"
+                        placeholder=""
+                      />
+                    </FormControl>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
             </div>
 
             {/* Employer && Academic */}
@@ -264,7 +286,7 @@ const Page = (props: Props) => {
                       <Input
                         {...field}
                         type="text"
-                        placeholder="موظف ، معلم ..."
+                        placeholder=""
                       />
                     </FormControl>
                     <FormMessage />
@@ -314,10 +336,10 @@ const Page = (props: Props) => {
                 control={form.control}
                 render={({ field }) => (
                   <FormItem>
-                    <FormLabel>نوع التعريف الشخصي</FormLabel>
+                    <FormLabel> فصيلة الدم </FormLabel>
                     <FormControl>
                       <Select onValueChange={field.onChange} defaultValue={field.value} >
-                        <SelectTrigger className="text-gray-400  placeholder:text-gray-400 border-dark-500 h-12 focus:ring-0 focus:ring-offset-0 !important;">
+                        <SelectTrigger className="text-gray-400  placeholder:text-gray-400 border-dark-500 h-12 focus:ring focus:ring-offset-0 !important;">
                           <SelectValue placeholder={field.value} />
                         </SelectTrigger>
                         <SelectContent className="bg-gray-300">
@@ -374,14 +396,19 @@ const Page = (props: Props) => {
                 )}
               />
             </div>
-            <div className='w-full flex flex-row px-64 justify-center items-center'>
+
+            {/* <div className='w-full flex flex-row px-64 justify-center items-center'>
               <SubmitButton
-                onClick={() => console.log("done!")}
                 isLoading={isLoading}
                 className='w-full border border-gray-200 text-gray-300 rounded-full bg-transparent hover:bg-blue-700 hover:border-none items-center justify-center py-6 mt-5 justify-self-center self-center duration-500 transition-all ease-out'>
                 <p className='font-din-bold text-md text-right'> تسجيل عضو جديد</p>
               </SubmitButton>
-            </div>
+            </div> */}
+            <Button
+              onClick={() => onSubmit(form.getValues())}
+              className='w-full border border-gray-200 text-gray-300 rounded-full bg-transparent hover:bg-blue-700 hover:border-none items-center justify-center py-6 mt-5 justify-self-center self-center duration-500 transition-all ease-out'>
+              <p className='font-din-bold text-md text-right'> تسجيل عضو جديد</p>
+            </Button>
           </form>
         </Form>
       </div>

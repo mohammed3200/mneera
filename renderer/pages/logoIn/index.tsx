@@ -19,7 +19,8 @@ import { Form, FormField, FormLabel, FormItem, FormControl, FormMessage } from '
 
 const Login = () => {
   const router = useRouter()
-  const [isLoading, setIsLoading] = useState(false)
+  const [isLoading, setIsLoading] = useState(false);
+  const [errorMessage, setErrorMessage] = useState(null);
 
   const form = useForm<z.infer<typeof AdminFormValidation>>({
     resolver: zodResolver(AdminFormValidation),
@@ -34,7 +35,7 @@ const Login = () => {
     try {
       if (LogIn(values.username, values.password)) return router.replace("/dashboard");
     } catch (error) {
-      console.error(error);
+      setErrorMessage((error as Error).message);
     } finally {
       setIsLoading(false)
     }
@@ -87,6 +88,10 @@ const Login = () => {
                   )}
                 />
               </div>
+              {errorMessage &&
+                (<div className='w-full flex flex-row items-center justify-center'>
+                  <p className='font-din-bold text-red-700 text-right text-lg'>{errorMessage}</p>
+                </div>)}
               <div className='w-full flex flex-row px-64 justify-center items-center'>
                 <SubmitButton
                   isLoading={isLoading}

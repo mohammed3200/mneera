@@ -146,3 +146,70 @@ export const MockDataBrigades: DataBrigades[] = [
     JoiningDate: 2023
   }
 ]
+
+export const MockDataCourse: DataCourses[] = [
+  {
+    id: '1',
+    NameCourse: 'Introduction to Programming',
+    StartDate: '2023-01-15',
+    EndDate: '2023-05-15',
+    StudentsName: ['John Doe', 'Jane Smith', 'Alice Johnson'],
+    TeacherName: 'Dr. Emily Carter'
+  },
+  {
+    id: '2',
+    NameCourse: 'Advanced Mathematics',
+    StartDate: '2023-02-01',
+    EndDate: '2023-06-01',
+    StudentsName: ['Bob Brown', 'Charlie Davis'],
+    TeacherName: 'Prof. Michael Johnson'
+  },
+  {
+    id: '3',
+    NameCourse: 'History of Art',
+    StartDate: '2023-03-10',
+    EndDate: '2023-07-10',
+    StudentsName: ['Eve Adams', 'Frank White', 'Grace Green'],
+    TeacherName: 'Ms. Sarah Lee'
+  },
+  {
+    id: '4',
+    NameCourse: 'Data Science Fundamentals',
+    StartDate: '2023-04-20',
+    EndDate: '2023-08-20',
+    StudentsName: ['Hank Black', 'Ivy Blue'],
+    TeacherName: 'Dr. Robert Brown'
+  },
+  {
+    id: '5',
+    NameCourse: 'Web Development Basics',
+    StartDate: '2023-05-01',
+    EndDate: '2023-09-01',
+    StudentsName: ['Alice Johnson', 'Charlie Davis', 'Eve Adams'],
+    TeacherName: 'Mr. Alan Turing'
+  },
+  {
+    id: '6',
+    NameCourse: 'Machine Learning 101',
+    StartDate: '2023-06-15',
+    EndDate: '2023-10-15',
+    StudentsName: ['John Doe', 'Jane Smith', 'Grace Green'],
+    TeacherName: 'Dr. Ada Lovelace'
+  },
+  {
+    id: '7',
+    NameCourse: 'Cybersecurity Essentials',
+    StartDate: '2023-07-01',
+    EndDate: '2023-11-01',
+    StudentsName: ['Bob Brown', 'Hank Black'],
+    TeacherName: 'Prof. Alan Turing'
+  },
+  {
+    id: '8',
+    NameCourse: 'Digital Marketing Strategies',
+    StartDate: '2023-08-10',
+    EndDate: '2023-12-10',
+    StudentsName: ['Ivy Blue', 'Frank White'],
+    TeacherName: 'Ms. Sarah Lee'
+  }
+]

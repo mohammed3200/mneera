@@ -1,6 +1,6 @@
 import React from "react";
 import { useRouter } from 'next/router';
-import { CourseCard, HeaderTitle, RootLayout } from "@/renderer/components";
+import { CourseTable, HeaderTitle, RootLayout } from "@/renderer/components";
 import { InfoCards } from "@/renderer/constants";
 
 
@@ -13,10 +13,7 @@ const CoursePage = () => {
         <RootLayout>
             <HeaderTitle title={title} back="/trainingDevelopment" />
             <div className="w-full px-4">
-                <CourseCard />
-                <CourseCard />
-                <CourseCard />
-                <CourseCard />
+                <CourseTable />
             </div>
         </RootLayout>
     );

@@ -4,8 +4,13 @@ import React from 'react'
 import { Table, TableBody, TableHead, TableHeader, TableRow } from '../components/ui/table'
 
 interface CustomTableProps {
-  columns: Columns[]
+  columns: Column[]
   Data: React.FC
+}
+
+interface Column {
+  key: string;
+  name: string;
 }
 
 const CustomTable: React.FC<CustomTableProps> = ({ columns, Data }) => {
@@ -16,7 +21,7 @@ const CustomTable: React.FC<CustomTableProps> = ({ columns, Data }) => {
           {columns?.map((column) => (
             <TableHead
               key={column.key}
-              className="text-zinc-50 text-sm text-center font-SpaceMono font-bold"
+              className="text-zinc-50 text-sm text-center font-din-bold font-bold"
             >
               {column.name}
             </TableHead>

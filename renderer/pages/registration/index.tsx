@@ -1,10 +1,10 @@
 "use client";
 
-import React, { useState } from 'react'
+import React, { useState } from "react";
 import { z } from "zod";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { RootLayout } from '@/renderer/components/AppLayout'
+import { RootLayout } from "@/renderer/components/AppLayout";
 import { Input } from "@/renderer/components/ui/input";
 import {
   Form,
@@ -13,30 +13,38 @@ import {
   FormItem,
   FormLabel,
   FormMessage,
-} from '@/renderer/components/ui/form'
-import { UserFormValidation } from '@/renderer/lib/validation';
-import FileUploader from '@/renderer/components/FileUploader';
-import { format } from 'date-fns';
-import { Select, SelectContent, SelectValue, SelectItem, SelectTrigger } from '@/renderer/components/ui/select';
-import { blood, TypeOfDefinition } from '@/renderer/constants';
-import { HeaderTitle, InputPhone } from '@/renderer/components';
-import { Button } from '@/renderer/components/ui/button';
+} from "@/renderer/components/ui/form";
+import { UserFormValidation } from "@/renderer/lib/validation";
+import FileUploader from "@/renderer/components/FileUploader";
+import { format } from "date-fns";
+import {
+  Select,
+  SelectContent,
+  SelectValue,
+  SelectItem,
+  SelectTrigger,
+} from "@/renderer/components/ui/select";
+import { blood, TypeOfDefinition } from "@/renderer/constants";
+import { HeaderTitle, InputPhone } from "@/renderer/components";
+import { Button } from "@/renderer/components/ui/button";
+import { InputDate } from "@/renderer/components/InputDate";
 
-
-type Props = {}
+type Props = {};
 
 const Page = (props: Props) => {
-
   const [isLoading, setIsLoading] = useState(false);
-  const [typeOfDefinition, setTypeOfDefinition] = useState<"ID card" | "passport">("ID card");
+  const [typeOfDefinition, setTypeOfDefinition] = useState<
+    "ID card" | "passport"
+  >("ID card");
 
   const form = useForm<z.infer<typeof UserFormValidation>>({
     resolver: zodResolver(UserFormValidation),
     defaultValues: {
       fullName: "",
       nationalNumber: "",
+      battalionName: "",
       nationality: "ليبي",
-      birthDate: new Date(),
+      birthDate: `${format(new Date(),"yyyy-MM-dd")}`,
       PlaceOfBirth: "",
       phone: "",
       TypeOfDefinition: "ID card",
@@ -64,17 +72,20 @@ const Page = (props: Props) => {
 
   return (
     <RootLayout>
-      <HeaderTitle title='تسجيل' back="/dashboard" />
-      <div className='w-full flex flex-col items-center'>
-        <p className='font-din-bold text-2xl text-right text-white my-4'>نموذج التسجيل</p>
+      <HeaderTitle title="تسجيل" back="/dashboard" />
+      <div className="w-full flex flex-col items-center">
+        <p className="font-din-bold text-2xl text-right text-white my-4">
+          نموذج التسجيل
+        </p>
         <Form {...form}>
-          <form className="w-full px-4 space-y-4" onSubmit={form.handleSubmit(onSubmit)}>
-
+          <form
+            className="w-full px-4 space-y-4"
+            onSubmit={form.handleSubmit(onSubmit)}
+          >
             {/* ( Name && National Number && phone number ) && Selfie */}
             <div className="grid grid-cols-2 gap-x-6 ">
-
               {/* Name && National Number && phone number */}
-              <div className='h-full flex flex-col gap-y-2'>
+              <div className="h-full flex flex-col gap-y-2">
                 <FormField
                   name="fullName"
                   control={form.control}
@@ -82,11 +93,7 @@ const Page = (props: Props) => {
                     <FormItem>
                       <FormLabel>الاسم الكامل ( الاسم الرباعي ) </FormLabel>
                       <FormControl>
-                        <Input
-                          {...field}
-                          type="text"
-                          placeholder=""
-                        />
+                        <Input {...field} type="text" placeholder="" />
                       </FormControl>
                       <FormMessage />
                     </FormItem>
@@ -99,11 +106,7 @@ const Page = (props: Props) => {
                     <FormItem>
                       <FormLabel>الرقم الوطني</FormLabel>
                       <FormControl>
-                        <Input
-                          {...field}
-                          type="text"
-                          placeholder=""
-                        />
+                        <Input {...field} type="text" placeholder="" />
                       </FormControl>
                       <FormMessage />
                     </FormItem>
@@ -116,24 +119,25 @@ const Page = (props: Props) => {
                     <FormItem>
                       <FormLabel>الرقم الهاتف</FormLabel>
                       <FormControl>
-                        <InputPhone
-                          {...field}
-                        />
+                        <InputPhone {...field} />
                       </FormControl>
                       <FormMessage />
                     </FormItem>
                   )}
                 />
               </div>
-              <div className='h-full flex-1'>
+              <div className="h-full flex-1">
                 <FormField
                   name="selfie"
                   control={form.control}
                   render={({ field }) => (
-                    <FormItem className='h-full'>
+                    <FormItem className="h-full">
                       <FormLabel>الصورة الشخصية</FormLabel>
                       <FormControl>
-                        <FileUploader files={field.value} onChange={field.onChange} />
+                        <FileUploader
+                          files={field.value}
+                          onChange={field.onChange}
+                        />
                       </FormControl>
                       <FormMessage />
                     </FormItem>
@@ -151,12 +155,7 @@ const Page = (props: Props) => {
                   <FormItem>
                     <FormLabel>تاريخ الميلاد</FormLabel>
                     <FormControl>
-                      <Input
-                        {...field}
-                        type="text"
-                        value={format(field.value, "yyyy-MM-dd")}
-                        onChange={(e) => field.onChange(format(new Date(e.target.value), "yyyy-MM-dd"))}
-                      />
+                      <InputDate {...field} />
                     </FormControl>
                     <FormMessage />
                   </FormItem>
@@ -169,11 +168,7 @@ const Page = (props: Props) => {
                   <FormItem>
                     <FormLabel>مكان الولادة </FormLabel>
                     <FormControl>
-                      <Input
-                        {...field}
-                        type="text"
-                        placeholder=""
-                      />
+                      <Input {...field} type="text" placeholder="" />
                     </FormControl>
                     <FormMessage />
                   </FormItem>
@@ -184,8 +179,8 @@ const Page = (props: Props) => {
             {/* ((IDCard || passport) && TypeOfDefinition ) && Battalion Number */}
             <div className="grid grid-cols-2 gap-x-6 ">
               <div className="flex flex-row">
-                {typeOfDefinition === "ID card" ?
-                  (<FormField
+                {typeOfDefinition === "ID card" ? (
+                  <FormField
                     name="IDCard"
                     control={form.control}
                     render={({ field }) => (
@@ -202,37 +197,42 @@ const Page = (props: Props) => {
                         <FormMessage />
                       </FormItem>
                     )}
-                  />) : (
-                    <FormField
-                      name="passport"
-                      control={form.control}
-                      render={({ field }) => (
-                        <FormItem className="grow">
-                          <FormLabel>رقم جواز السفر</FormLabel>
-                          <FormControl>
-                            <Input
-                              {...field}
-                              type="text"
-                              placeholder="01D7E5K"
-                              className="rounded-l-none"
-                            />
-                          </FormControl>
-                          <FormMessage />
-                        </FormItem>
-                      )}
-                    />
-                  )}
+                  />
+                ) : (
+                  <FormField
+                    name="passport"
+                    control={form.control}
+                    render={({ field }) => (
+                      <FormItem className="grow">
+                        <FormLabel>رقم جواز السفر</FormLabel>
+                        <FormControl>
+                          <Input
+                            {...field}
+                            type="text"
+                            placeholder="01D7E5K"
+                            className="rounded-l-none"
+                          />
+                        </FormControl>
+                        <FormMessage />
+                      </FormItem>
+                    )}
+                  />
+                )}
                 <FormField
                   name="TypeOfDefinition"
                   control={form.control}
                   render={({ field }) => (
                     <FormItem>
-                      <FormLabel className="text-xs">نوع التعريف الشخصي</FormLabel>
+                      <FormLabel className="text-xs">
+                        نوع التعريف الشخصي
+                      </FormLabel>
                       <FormControl>
                         <Select
                           onValueChange={(value) => {
                             field.onChange(value); // Update form state
-                            setTypeOfDefinition(value as "ID card" | "passport"); // Update local state
+                            setTypeOfDefinition(
+                              value as "ID card" | "passport"
+                            ); // Update local state
                           }}
                           defaultValue={field.value}
                         >
@@ -242,8 +242,8 @@ const Page = (props: Props) => {
                           <SelectContent>
                             {TypeOfDefinition.map((item) => (
                               <SelectItem key={item.key} value={item.key}>
-                                <div className='flex flex-row'>
-                                  <p className='font-din-bold'>{item.name}</p>
+                                <div className="flex flex-row">
+                                  <p className="font-din-bold">{item.name}</p>
                                 </div>
                               </SelectItem>
                             ))}
@@ -256,17 +256,13 @@ const Page = (props: Props) => {
                 />
               </div>
               <FormField
-                name="battalionNumber"
+                name="battalionName"
                 control={form.control}
                 render={({ field }) => (
                   <FormItem>
-                    <FormLabel> رقم الكتيبة </FormLabel>
+                    <FormLabel> اسم الكتيبة </FormLabel>
                     <FormControl>
-                      <Input
-                        {...field}
-                        type="text"
-                        placeholder=""
-                      />
+                      <Input {...field} type="text" placeholder="" />
                     </FormControl>
                     <FormMessage />
                   </FormItem>
@@ -275,7 +271,7 @@ const Page = (props: Props) => {
             </div>
 
             {/* Employer && Academic */}
-            <div className='grid grid-cols-2 gap-x-6'>
+            <div className="grid grid-cols-2 gap-x-6">
               <FormField
                 name="employer"
                 control={form.control}
@@ -283,11 +279,7 @@ const Page = (props: Props) => {
                   <FormItem>
                     <FormLabel>جهة العمل </FormLabel>
                     <FormControl>
-                      <Input
-                        {...field}
-                        type="text"
-                        placeholder=""
-                      />
+                      <Input {...field} type="text" placeholder="" />
                     </FormControl>
                     <FormMessage />
                   </FormItem>
@@ -313,7 +305,7 @@ const Page = (props: Props) => {
             </div>
 
             {/* Employer && Academic */}
-            <div className='grid grid-cols-2 gap-x-6'>
+            <div className="grid grid-cols-2 gap-x-6">
               <FormField
                 name="weapon"
                 control={form.control}
@@ -338,15 +330,20 @@ const Page = (props: Props) => {
                   <FormItem>
                     <FormLabel> فصيلة الدم </FormLabel>
                     <FormControl>
-                      <Select onValueChange={field.onChange} defaultValue={field.value} >
+                      <Select
+                        onValueChange={field.onChange}
+                        defaultValue={field.value}
+                      >
                         <SelectTrigger className="text-gray-400  placeholder:text-gray-400 border-dark-500 h-12 focus:ring focus:ring-offset-0 !important;">
                           <SelectValue placeholder={field.value} />
                         </SelectTrigger>
                         <SelectContent className="bg-gray-300">
                           {blood.map((item) => (
                             <SelectItem key={item} value={item}>
-                              <div className='flex flex-row'>
-                                <p className='font-din-bold text-left'>{item}</p>
+                              <div className="flex flex-row">
+                                <p className="font-din-bold text-left">
+                                  {item}
+                                </p>
                               </div>
                             </SelectItem>
                           ))}
@@ -360,7 +357,7 @@ const Page = (props: Props) => {
             </div>
 
             {/* Nationality && Address */}
-            <div className='grid grid-cols-2 gap-x-6'>
+            <div className="grid grid-cols-2 gap-x-6">
               <FormField
                 name="address"
                 control={form.control}
@@ -396,24 +393,20 @@ const Page = (props: Props) => {
                 )}
               />
             </div>
-
-            {/* <div className='w-full flex flex-row px-64 justify-center items-center'>
-              <SubmitButton
-                isLoading={isLoading}
-                className='w-full border border-gray-200 text-gray-300 rounded-full bg-transparent hover:bg-blue-700 hover:border-none items-center justify-center py-6 mt-5 justify-self-center self-center duration-500 transition-all ease-out'>
-                <p className='font-din-bold text-md text-right'> تسجيل عضو جديد</p>
-              </SubmitButton>
-            </div> */}
             <Button
               onClick={() => onSubmit(form.getValues())}
-              className='w-full border border-gray-200 text-gray-300 rounded-full bg-transparent hover:bg-blue-700 hover:border-none items-center justify-center py-6 mt-5 justify-self-center self-center duration-500 transition-all ease-out'>
-              <p className='font-din-bold text-md text-right'> تسجيل عضو جديد</p>
+              className="w-full border border-gray-200 text-gray-300 rounded-full bg-transparent hover:bg-blue-700 hover:border-none items-center justify-center py-6 mt-5 justify-self-center self-center duration-500 transition-all ease-out"
+            >
+              <p className="font-din-bold text-md text-right">
+                {" "}
+                تسجيل عضو جديد
+              </p>
             </Button>
           </form>
         </Form>
       </div>
     </RootLayout>
-  )
-}
+  );
+};
 
-export default Page
+export default Page;

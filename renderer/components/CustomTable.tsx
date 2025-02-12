@@ -5,7 +5,7 @@ import { Table, TableBody, TableHead, TableHeader, TableRow } from '../component
 
 interface CustomTableProps {
   columns: Column[]
-  Data: React.FC
+  Data?: React.FC
 }
 
 interface Column {
@@ -28,18 +28,17 @@ const CustomTable: React.FC<CustomTableProps> = ({ columns, Data }) => {
           ))}
         </TableRow>
       </TableHeader>
-      <TableBody>{<Data />}</TableBody>
+      {Data && <TableBody>{<Data />}</TableBody>}
     </Table>
   )
 }
-
 CustomTable.propTypes = {
   columns: PropTypes.arrayOf(
-    PropTypes.shape({
+    PropTypes.exact({
       key: PropTypes.string.isRequired,
       name: PropTypes.string.isRequired
-    }).isRequired // Ensure the shape is required
-  ).isRequired // Ensure the array is required
+    })
+  ).isRequired
 }
 
 export default CustomTable

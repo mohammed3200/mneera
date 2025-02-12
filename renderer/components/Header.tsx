@@ -22,7 +22,7 @@ export const Header = () => {
         alt='Logo'
         width={80}
         height={80}
-        className='w-36 h-3w-36 object-cover'
+        className='h-36 object-cover w-auto'
       />
     </div>
   )

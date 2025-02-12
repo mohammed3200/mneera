@@ -6,4 +6,3 @@ export * from "./inputPhone";
 export * from "./HeaderTitle";
 export * from "./CourseCard";
 export * from "./CustomTable";
-export * from "./CourseTable";

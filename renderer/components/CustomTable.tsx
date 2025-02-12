@@ -13,7 +13,7 @@ interface Column {
   name: string;
 }
 
-const CustomTable: React.FC<CustomTableProps> = ({ columns, Data }) => {
+export const CustomTable: React.FC<CustomTableProps> = ({ columns, Data }) => {
   return (
     <Table>
       <TableHeader>
@@ -41,4 +41,3 @@ CustomTable.propTypes = {
   ).isRequired
 }
 
-export default CustomTable

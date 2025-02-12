@@ -14,3 +14,9 @@ dist
 
 # env
 .env
+
+# codegpt
+.codegpt
+
+# gitignore
+.gitignore

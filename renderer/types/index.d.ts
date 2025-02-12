@@ -42,6 +42,7 @@ declare type DataBrigades = {
   WeaponType: string;
   Mechanisms: string;
   JoiningDate: number;
+  HerPlace:string;
 };
 
 declare type DataCourses = {

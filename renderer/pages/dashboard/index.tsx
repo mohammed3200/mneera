@@ -49,7 +49,7 @@ const ButtonDashboard: ButtonDashboardProps[] = [
   },
   {
     title: "المعلومات التوثيق",
-    path: "/support"
+    path: "/DocumentationInformation"
   }
 ];
 
@@ -77,7 +77,7 @@ const Dashboard = () => {
             );
             return rows;
           }, []).map((row, rowIndex) => (
-            <div key={rowIndex.toString()} className='grid items-center grid-cols-1 gap-6 sm:grid-cols-3 sm:gap-2 '>
+            <div key={rowIndex.toString()} className='grid items-center grid-cols-1 gap-6 sm:grid-cols-3 sm:gap-2'>
               {row}
             </div>
           ))}

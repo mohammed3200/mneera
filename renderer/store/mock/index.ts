@@ -112,38 +112,67 @@ export const MockDataIndividuals: DataIndividuals[] = [
 export const MockDataBrigades: DataBrigades[] = [
   {
     id: '1',
-    name: 'Alpha Squad',
+    name: 'Alpha Brigade',
     WeaponType: 'Rifle',
-    Mechanisms: 'Stealth',
-    JoiningDate: 2021
+    Mechanisms: 'Standard',
+    JoiningDate: 2023,
+    HerPlace: 'Base Camp Alpha'
   },
   {
     id: '2',
-    name: 'Bravo Team',
+    name: 'Bravo Brigade',
     WeaponType: 'Pistol',
-    Mechanisms: 'Assault',
-    JoiningDate: 2020
+    Mechanisms: 'Advanced',
+    JoiningDate: 2022,
+    HerPlace: 'Base Camp Bravo'
   },
   {
     id: '3',
-    name: 'Charlie Unit',
-    WeaponType: 'Sniper',
-    Mechanisms: 'Recon',
-    JoiningDate: 2019
+    name: 'Charlie Brigade',
+    WeaponType: 'Crossbow',
+    Mechanisms: 'Stealth',
+    JoiningDate: 2021,
+    HerPlace: 'Base Camp Charlie'
   },
   {
     id: '4',
-    name: 'Delta Force',
+    name: 'Delta Brigade',
     WeaponType: 'Shotgun',
-    Mechanisms: 'Close Quarters',
-    JoiningDate: 2022
+    Mechanisms: 'Close Combat',
+    JoiningDate: 2020,
+    HerPlace: 'Base Camp Delta'
   },
   {
     id: '5',
-    name: 'Echo Group',
-    WeaponType: 'Crossbow',
-    Mechanisms: 'Silent',
-    JoiningDate: 2023
+    name: 'Echo Brigade',
+    WeaponType: 'Sniper Rifle',
+    Mechanisms: 'Long Range',
+    JoiningDate: 2019,
+    HerPlace: 'Base Camp Echo'
+  },
+  {
+    id: '6',
+    name: 'Foxtrot Brigade',
+    WeaponType: 'Grenade Launcher',
+    Mechanisms: 'Explosive',
+    JoiningDate: 2021,
+    HerPlace: 'Base Camp Foxtrot'
+  },
+  {
+    id: '7',
+    name: 'Golf Brigade',
+    WeaponType: 'Sword',
+    Mechanisms: 'Melee',
+    JoiningDate: 2022,
+    HerPlace: 'Base Camp Golf'
+  },
+  {
+    id: '8',
+    name: 'Hotel Brigade',
+    WeaponType: 'Axe',
+    Mechanisms: 'Heavy',
+    JoiningDate: 2023,
+    HerPlace: 'Base Camp Hotel'
   }
 ]
 

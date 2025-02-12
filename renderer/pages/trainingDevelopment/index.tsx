@@ -1,3 +1,4 @@
+import Link from "next/link";
 import React from "react";
 import { useRouter } from 'next/navigation'
 import { HeaderTitle, RootLayout } from "@/renderer/components";
@@ -8,7 +9,6 @@ import {
     CardTitle,
 } from "@/renderer/components/ui/card"
 import { InfoCards } from "@/renderer/constants";
-import Link from "next/link";
 
 
 type Props = {}
@@ -21,14 +21,14 @@ const Page = (props: Props) => {
             <div className="w-full px-8 flex flex-col mt-5">
                 {InfoCards.map((item) => (
                     <Card className="bg-[#0b0e14] border-none my-4">
-                        <Link
-                            href={`/trainingDevelopment/courses/${item.key}/`}
+                        <div
+                            onClick={() => router.push(`/trainingDevelopment/courses/${item.key}`)}
                         >
                             <CardHeader>
                                 <CardTitle>{item.title}</CardTitle>
                                 <CardDescription>{item.description}</CardDescription>
                             </CardHeader>
-                        </Link>
+                        </div>
                     </Card>
                 ))}
             </div>

@@ -1,9 +1,10 @@
-import { HeaderTitle, RootLayout, CustomTable } from '@/renderer/components'
-import { TableCell } from '@/renderer/components/ui/table';
-import { TableRow } from '@/renderer/components/ui/table';
-import { MockDataIndividuals } from '@/renderer/store/mock';
-import { useRouter } from 'next/navigation';
 import React from 'react'
+import { useRouter } from 'next/navigation';
+
+import { HeaderTitle, RootLayout, CustomTable } from '@/renderer/components'
+import { TableCell,TableRow } from '@/renderer/components/ui/table';
+
+import { MockDataIndividuals } from '@/renderer/store/mock';
 
 type Props = {}
 
@@ -44,5 +45,5 @@ const TableCellIndividuals = () => {
             <TableCell>{item.name}</TableCell>
             <TableCell>{item.PhoneNumber}</TableCell>
         </TableRow>
-    ))
-}   
+    ));
+};

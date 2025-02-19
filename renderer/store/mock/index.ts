@@ -116,7 +116,8 @@ export const MockDataBrigades: DataBrigades[] = [
     WeaponType: 'Rifle',
     Mechanisms: 'Standard',
     JoiningDate: 2023,
-    HerPlace: 'Base Camp Alpha'
+    HerPlace: 'Base Camp Alpha',
+    BattalionCommander: 'Bob Job'
   },
   {
     id: '2',
@@ -124,7 +125,8 @@ export const MockDataBrigades: DataBrigades[] = [
     WeaponType: 'Pistol',
     Mechanisms: 'Advanced',
     JoiningDate: 2022,
-    HerPlace: 'Base Camp Bravo'
+    HerPlace: 'Base Camp Bravo',
+    BattalionCommander: 'احمد محمد'
   },
   {
     id: '3',
@@ -132,7 +134,8 @@ export const MockDataBrigades: DataBrigades[] = [
     WeaponType: 'Crossbow',
     Mechanisms: 'Stealth',
     JoiningDate: 2021,
-    HerPlace: 'Base Camp Charlie'
+    HerPlace: 'Base Camp Charlie',
+    BattalionCommander: 'علي محمد'
   },
   {
     id: '4',
@@ -140,7 +143,8 @@ export const MockDataBrigades: DataBrigades[] = [
     WeaponType: 'Shotgun',
     Mechanisms: 'Close Combat',
     JoiningDate: 2020,
-    HerPlace: 'Base Camp Delta'
+    HerPlace: 'Base Camp Delta',
+    BattalionCommander: 'خالد احمد'
   },
   {
     id: '5',
@@ -148,7 +152,8 @@ export const MockDataBrigades: DataBrigades[] = [
     WeaponType: 'Sniper Rifle',
     Mechanisms: 'Long Range',
     JoiningDate: 2019,
-    HerPlace: 'Base Camp Echo'
+    HerPlace: 'Base Camp Echo',
+    BattalionCommander: 'سعيد علي'
   },
   {
     id: '6',
@@ -156,7 +161,8 @@ export const MockDataBrigades: DataBrigades[] = [
     WeaponType: 'Grenade Launcher',
     Mechanisms: 'Explosive',
     JoiningDate: 2021,
-    HerPlace: 'Base Camp Foxtrot'
+    HerPlace: 'Base Camp Foxtrot',
+    BattalionCommander: 'محمد خالد'
   },
   {
     id: '7',
@@ -164,7 +170,8 @@ export const MockDataBrigades: DataBrigades[] = [
     WeaponType: 'Sword',
     Mechanisms: 'Melee',
     JoiningDate: 2022,
-    HerPlace: 'Base Camp Golf'
+    HerPlace: 'Base Camp Golf',
+    BattalionCommander: 'عمر سعيد'
   },
   {
     id: '8',
@@ -172,7 +179,8 @@ export const MockDataBrigades: DataBrigades[] = [
     WeaponType: 'Axe',
     Mechanisms: 'Heavy',
     JoiningDate: 2023,
-    HerPlace: 'Base Camp Hotel'
+    HerPlace: 'Base Camp Hotel',
+    BattalionCommander: 'يوسف علي'
   }
 ]
 

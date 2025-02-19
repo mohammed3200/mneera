@@ -10,7 +10,7 @@ interface CustomTableProps {
 
 interface Column {
   key: string;
-  name: string;
+  label: string;
 }
 
 export const CustomTable: React.FC<CustomTableProps> = ({ columns, Data }) => {
@@ -23,7 +23,7 @@ export const CustomTable: React.FC<CustomTableProps> = ({ columns, Data }) => {
               key={column.key}
               className="text-zinc-50 text-sm text-center font-din-bold font-bold"
             >
-              {column.name}
+              {column.label}
             </TableHead>
           ))}
         </TableRow>
@@ -36,7 +36,7 @@ CustomTable.propTypes = {
   columns: PropTypes.arrayOf(
     PropTypes.exact({
       key: PropTypes.string.isRequired,
-      name: PropTypes.string.isRequired
+      label: PropTypes.string.isRequired
     })
   ).isRequired
 }

@@ -5,8 +5,8 @@ import { Button } from '@/renderer/components/ui/button';
 
 const branch = [
     {
-        title: "النقيلات و الاليات",
-        route: "/TransfersMachines"
+        title: "الناقلات والآلات",
+        route: "/CarriersAndMachinery"
     },
     {
         title: "الإمدادات",
@@ -32,20 +32,28 @@ const page = () => {
     return (
         <RootLayout>
             <HeaderTitle title="الادارة والتنسيق" back="/dashboard" />
-            <div className="flex justify-evenly px-2 mt-4 items-center gap-6 h-[50vh]">
-                {
-                    branch.map((item) => (
-                        <Button
-                            onClick={() => router.push(`/managementCoordination/${item.route}`)}
-                            className="w-full py-4 border border-gray-200 text-gray-300 rounded-lg
-         bg-transparent hover:bg-blue-700 hover:border-none items-center justify-center mt-5
-         justify-self-center self-center duration-500 transition-all ease-out"
-         disabled
-                        >
-                            <p className="font-din-bold text-md text-right ">
-                                {item.title}
-                            </p>
-                        </Button>
+            <div className="flex flex-col w-full h-[70vh] space-y-4 px-2">
+               {
+                    branch.reduce((rows, item, index) => {
+                        if (index % 3 === 0) rows.push([]); // Start a new row every 3 items
+                        rows[rows.length - 1].push(
+                            <Button
+                                onClick={() => router.push(`/help/${item.route}`)}
+                                className="w-full py-8 border border-gray-200 text-gray-300 rounded-lg
+                                    bg-transparent hover:bg-blue-700 hover:border-none items-center justify-center
+                                    justify-self-center self-center duration-500 transition-all ease-out m-4"
+                                    disabled
+                            >
+                                <p className="font-din-bold text-2xl text-right ">
+                                    {item.title}
+                                </p>
+                            </Button>
+                        );
+                        return rows; // Return the updated rows array
+                    }, []).map((row, rowIndex) => (
+                        <div key={rowIndex} className='base-1/2 mt-32 mx-4 items-center grid grid-cols-1 gap-6 sm:grid-cols-3'>
+                            {row}
+                        </div>
                     ))
                 }
             </div>

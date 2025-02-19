@@ -9,7 +9,7 @@ const branch = [
         route: "/Martyrs"
     },
     {
-        title: "الجراحة",
+        title: "الجرحى",
         route: "/Surgery"
     },
 ]
@@ -20,16 +20,16 @@ const page = () => {
     return (
         <RootLayout>
             <HeaderTitle title="الجرحى و الشهداء" back="/dashboard" />
-            <div className="flex justify-evenly px-2 mt-4 items-center gap-6 h-[50vh]">
+            <div className="flex justify-evenly px-6 items-center gap-6 h-[50vh]">
                 {
                     branch.map((item) => (
                         <Button
                             onClick={() => router.push(`/woundedMartyrs/${item.route}`)}
-                            className="w-full py-4 border border-gray-200 text-gray-300 rounded-lg
-         bg-transparent hover:bg-blue-700 hover:border-none items-center justify-center mt-5
+                            className="w-full py-8 border border-gray-200 text-gray-300 rounded-lg
+         bg-transparent hover:bg-blue-700 hover:border-none items-center justify-center gap-4
          justify-self-center self-center duration-500 transition-all ease-out"
                         >
-                            <p className="font-din-bold text-md text-right ">
+                            <p className="font-din-bold text-2xl text-right ">
                                 {item.title}
                             </p>
                         </Button>

@@ -43,18 +43,18 @@ const page = () => {
                         rows[rows.length - 1].push(
                             <Button
                                 onClick={() => router.push(`/help/${item.route}`)}
-                                className="w-full py-4 border border-gray-200 text-gray-300 rounded-lg
+                                className="w-full py-8 border border-gray-200 text-gray-300 rounded-lg
                                     bg-transparent hover:bg-blue-700 hover:border-none items-center justify-center
-                                    justify-self-center self-center duration-500 transition-all ease-out mx-2 px-2"
+                                    justify-self-center self-center duration-500 transition-all ease-out m-4"
                             >
-                                <p className="font-din-bold text-lg text-right ">
+                                <p className="font-din-bold text-2xl text-right ">
                                     {item.title}
                                 </p>
                             </Button>
                         );
                         return rows; // Return the updated rows array
                     }, []).map((row, rowIndex) => (
-                        <div key={rowIndex} className='base-1/2 mt-48  items-center grid grid-cols-1 gap-6 sm:grid-cols-3 sm:gap-2'>
+                        <div key={rowIndex} className='base-1/2 mt-32 mx-4 items-center grid grid-cols-1 gap-6 sm:grid-cols-3'>
                             {row}
                         </div>
                     ))

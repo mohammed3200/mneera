@@ -1,5 +1,6 @@
 import { z } from "zod";
 import React, { useState } from "react";
+import { format } from "date-fns";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 
@@ -28,7 +29,7 @@ const Page = () => {
       battalionName: "",
       place: "",
       conductor: "",
-      dateOfCreation: `${new Date()}`,
+      dateOfCreation: `${format(new Date(),"yyyy-MM-dd")}`,
       numberOfIndividuals: 0,
       weaponsType: "",
     },

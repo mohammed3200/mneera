@@ -31,7 +31,7 @@ const Page = () => {
           className="w-full py-20 border border-gray-200 text-gray-300 rounded-lg 
         bg-transparent hover:bg-blue-700 hover:border-none items-center justify-center mt-5 
         justify-self-center self-center duration-500 transition-all ease-out"
-          onClick={() => router.push("/brigadesBattalionsCompanies")}
+          onClick={() => router.push("/brigadesBattalionsCompanies/View")}
         >
           <p className="font-din-bold text-md text-right text-lg">
             عرض الألوية و الكتائب و السرايا

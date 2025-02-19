@@ -1,17 +1,20 @@
-import { HeaderTitle, RootLayout } from '@/renderer/components';
-import { useRouter } from 'next/router';
-import { MockDataIndividuals } from '@/renderer/store/mock';
 import React from 'react';
 import Image from 'next/image';
+import { useRouter } from 'next/router';
+
+import { HeaderTitle, RootLayout } from '@/renderer/components';
+import { MockDataBrigades, MockDataIndividuals } from '@/renderer/store/mock';
 
 const PageIndividual = () => {
     const router = useRouter();
     const { id } = router.query; // Get the individual ID from the URL
-    const Personal = MockDataIndividuals.filter((item) => item.id === id)[0]
+    const Personal = MockDataIndividuals.filter((item) => item.id === id)[0];
+    const Brigade = MockDataBrigades.filter(item => item.id == Personal.BrigadesId)[0].name;
+
     return (
         <RootLayout>
-            <HeaderTitle title={""} back="/individuals" />
-            <div className='w-full h-full flex items-center justify-center'>
+            <HeaderTitle title={"معلومات الفرد"} back="/individuals" />
+            <div className='w-full h-full flex justify-center'>
                 <div
                     className="flex flex-row py-4 px-8 gap-4 mx-auto bg-white rounded-xl shadow-lg space-y-2">
                     <div className="w-full h-full">
@@ -25,9 +28,14 @@ const PageIndividual = () => {
                     </div>
                     <div className="w-full space-y-2 text-right">
                         <div className="w-full space-y-0.5">
+                            <div className='w-full flex flex-row justify-between items-center gap-4'>
                             <p className="text-lg text-gray-900 font-din-bold">
                                 الاسم : <span className="text-base text-black font-din-regular">{Personal.name}</span>
                             </p>
+                            <p className="text-lg text-gray-900 font-din-bold">
+                                الكتيبة : <span className="text-base text-black font-din-regular">{Brigade}</span>
+                            </p>
+                            </div>
                             <p className='text-base text-gray-900 font-din-bold'>
                                 رقم الوطني : <span className='text-base text-black font-din-regular'>{Personal.NationalNumber}</span>
                             </p>

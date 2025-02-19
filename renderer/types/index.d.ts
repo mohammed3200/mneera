@@ -10,7 +10,7 @@ declare type SidebarItems = SidebarItem[];
 
 declare type Columns = {
   key: string;
-  name: string;
+  label: string;
 };
 
 declare type DataMembers = {
@@ -43,6 +43,7 @@ declare type DataBrigades = {
   Mechanisms: string;
   JoiningDate: number;
   HerPlace:string;
+  BattalionCommander: string;
 };
 
 declare type DataCourses = {

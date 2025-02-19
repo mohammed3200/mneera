@@ -10,15 +10,15 @@ type Props = {}
 const columns: Columns[] = [
     {
         key: "id",
-        name: "رقم المجلس"
+        label: "ID"
     },
     {
         key: "name",
-        name: "الاسم"
+        label: "الاسم"
     },
     {
         key: "PhoneNumber",
-        name: "رقم الهاتف"
+        label: "رقم الهاتف"
     }
 ];
 
@@ -40,7 +40,7 @@ const TableCellIndividuals = () => {
     return MockDataIndividuals.map((item) => (
         // Fix: Wrap TableCell components in a single TableRow
         <TableRow key={item.id} className="text-zinc-200 text-xs font-SpaceMono text-center cursor-pointer" onClick={() => router.push(`/individuals/${item.id}`)}>
-            <TableCell>{item.id}</TableCell>
+            <TableCell># {item.id}</TableCell>
             <TableCell>{item.name}</TableCell>
             <TableCell>{item.PhoneNumber}</TableCell>
         </TableRow>

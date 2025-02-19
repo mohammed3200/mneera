@@ -9,23 +9,23 @@ import { MockDataCourse } from "@/renderer/store/mock";
 const columns: Columns[] = [
     {
         key: 'id',
-        name: 'ID'
+        label: 'ID'
     },
     {
         key: 'Name Course',
-        name: 'اسم الدورة'
+        label: 'اسم الدورة'
     },
     {
         key: 'Date Start',
-        name: "تاريخ البدء"
+        label: "تاريخ البدء"
     },
     {
         key: 'Date End',
-        name: "تاريخ الانتهاء"
+        label: "تاريخ الانتهاء"
     },
     {
         key: 'TeacherName',
-        name: "اسم الأستاذ"
+        label: "اسم الأستاذ"
     }
 ]
 

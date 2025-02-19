@@ -9,11 +9,11 @@ import { MockDataCourse } from '@/renderer/store/mock';
 const columns: Columns[] = [
     {
         key: 'id',
-        name: 'ID'
+        label: 'ID'
     },
     {
         key: 'StudentName',
-        name: "اسم الطالب"
+        label: "اسم الطالب"
     }
 ]
 

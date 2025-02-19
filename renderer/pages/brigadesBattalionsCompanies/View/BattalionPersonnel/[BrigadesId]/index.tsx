@@ -1,67 +1,57 @@
-import { HeaderTitle, RootLayout } from '@/renderer/components';
-import { useRouter } from 'next/router';
-import { MockDataIndividuals } from '@/renderer/store/mock';
 import React from 'react';
-import Image from 'next/image';
+import { useRouter } from 'next/navigation';
+import { useRouter as useRoutes } from 'next/router';
+
+import { RootLayout, HeaderTitle, CustomTable } from '@/renderer/components';
+import { TableCell, TableRow } from '@/renderer/components/ui/table';
+
+import { MockDataBrigades, MockDataIndividuals } from '@/renderer/store/mock'
+
+type Props = {}
+
+const columns: Columns[] = [
+    {
+        key: "id",
+        label: "ID"
+    },
+    {
+        key: "name",
+        label: "الاسم"
+    },
+    {
+        key: "PhoneNumber",
+        label: "رقم الهاتف"
+    }
+];
 
 const PageBattalionPersonnel = () => {
-    const router = useRouter();
-    const { BrigadesId } = router.query; // Get the individual ID from the URL
-    const Personal = MockDataIndividuals.filter((item) => item.id === BrigadesId)[0]
+    const routes = useRoutes();
+    const { BrigadesId } = routes.query;
     return (
         <RootLayout>
-            <HeaderTitle title={"أعضاء الكتيبة"} back="/brigadesBattalionsCompanies/View" />
-            <div className='w-full h-full flex items-center justify-center'>
-                <div
-                    className="flex flex-row py-4 px-8 gap-4 mx-auto bg-white rounded-xl shadow-lg space-y-2">
-                    <div className="w-full h-full">
-                        <Image
-                            src={"https://picsum.photos/200/300"}
-                            width={100}
-                            height={100}
-                            alt="Personal Face"
-                            className="object-cover rounded-full h-24 w-24"
-                        />
-                    </div>
-                    <div className="w-full space-y-2 text-right">
-                        <div className="w-full space-y-0.5">
-                            <p className="text-lg text-gray-900 font-din-bold">
-                                الاسم : <span className="text-base text-black font-din-regular">{Personal.name}</span>
-                            </p>
-                            <p className='text-base text-gray-900 font-din-bold'>
-                                رقم الوطني : <span className='text-base text-black font-din-regular'>{Personal.NationalNumber}</span>
-                            </p>
-
-                            <div className="w-full flex flex-row justify-between items-center gap-4 py-2">
-                                <p className="text-base text-gray-900 font-din-bold text-nowrap">
-                                    فصيلة الدم : {" "}
-                                    <span className="text-white text-sm font-din-regular border rounded-full bg-red-500 border-transparent px-2 cursor-pointer">
-                                        {Personal.BloodType}
-                                    </span>
-                                </p>
-                                <p className='text-base text-gray-900 font-din-bold text-nowrap'>
-                                    سنة الميلاد  :
-                                    <span className='text-slate-800 text-sm'>
-                                        {"1996 - 01 - 05"}
-                                    </span>
-                                </p>
-                            </div>
-                            <p className='text-base text-gray-900 font-din-bold pt-2'>
-                                رقم الهاتف : <span className='text-base text-black font-din-regular'>{Personal.PhoneNumber}</span>
-                            </p>
-                            <div className='w-full flex flex-row justify-between items-center gap-4'>
-                            <p className='text-base text-gray-900 font-din-bold pt-2 text-nowrap'>
-                                نوع السلاح  : <span className='text-base text-black font-din-regular'>{Personal.WeaponType}</span>
-                            </p>
-                            <p className='text-base text-gray-900 font-din-bold pt-2 text-nowrap'>
-                                مكان العمل  : <span className='text-base text-black font-din-regular'>{Personal.Workplace}</span>
-                            </p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+            <HeaderTitle title='أعضاء الكتيبة' back='/brigadesBattalionsCompanies/View' />
+            <div className='w-full px-4 mt-8'>
+                <CustomTable columns={columns} Data={TableCellIndividuals} />
             </div>
         </RootLayout>
     );
 };
 export default PageBattalionPersonnel;
+
+const TableCellIndividuals = () => {
+    const router = useRouter();
+    const routes = useRoutes();
+    const { BrigadesId } = routes.query;
+
+    const BattalionMembers = MockDataIndividuals.filter(item => item.BrigadesId === BrigadesId);
+
+    return BattalionMembers.map((item) => (
+        <TableRow key={item.id}
+            className="text-zinc-200 text-xs font-SpaceMono text-center cursor-pointer"
+            onClick={() => router.push(`/individuals/${item.id}`)}>
+            <TableCell># {item.id}</TableCell>
+            <TableCell>{item.name}</TableCell>
+            <TableCell>{item.PhoneNumber}</TableCell>
+        </TableRow>
+    ));
+};

@@ -59,53 +59,58 @@ export const MockDataMembers: DataMembers[] = [
 export const MockDataIndividuals: DataIndividuals[] = [
   {
     id: '1',
-    name: 'Eve Adams',
-    WeaponType: 'Sword',
+    name: 'حواء آدمز',
+    WeaponType: 'سيف',
     BloodType: 'O+',
     Age: 29,
     NationalNumber: '111222333',
     PhoneNumber: '555-1234',
-    Workplace: 'Warrior Guild'
+    Workplace: 'نقابة المحاربين',
+    BrigadesId: '1'
   },
   {
     id: '2',
-    name: 'Frank White',
-    WeaponType: 'Bow',
+    name: 'فرانك وايت',
+    WeaponType: 'قوس',
     BloodType: 'A-',
     Age: 34,
     NationalNumber: '444555666',
     PhoneNumber: '555-5678',
-    Workplace: 'Archer Academy'
+    Workplace: 'أكاديمية الرماة',
+    BrigadesId: '2'
   },
   {
     id: '3',
-    name: 'Grace Green',
-    WeaponType: 'Staff',
+    name: 'غريس غرين',
+    WeaponType: 'عصا',
     BloodType: 'B+',
     Age: 27,
     NationalNumber: '777888999',
     PhoneNumber: '555-8765',
-    Workplace: 'Mage Tower'
+    Workplace: 'برج السحرة',
+    BrigadesId: '3'
   },
   {
     id: '4',
-    name: 'Hank Black',
-    WeaponType: 'Axe',
+    name: 'هانك بلاك',
+    WeaponType: 'فأس',
     BloodType: 'AB-',
     Age: 45,
     NationalNumber: '222333444',
     PhoneNumber: '555-4321',
-    Workplace: 'Berserker Clan'
+    Workplace: 'عشيرة البرسرك',
+    BrigadesId: '4'
   },
   {
     id: '5',
-    name: 'Ivy Blue',
-    WeaponType: 'Dagger',
+    name: 'آيفي بلو',
+    WeaponType: 'خنجر',
     BloodType: 'O-',
     Age: 19,
     NationalNumber: '888999000',
     PhoneNumber: '555-6789',
-    Workplace: 'Thieves Guild'
+    Workplace: 'نقابة اللصوص',
+    BrigadesId: '5'
   }
 ]
 

@@ -34,6 +34,7 @@ declare type DataIndividuals = {
   NationalNumber: string;
   PhoneNumber: string;
   Workplace: string;
+  BrigadesId : string;
 };
 
 declare type DataBrigades = {

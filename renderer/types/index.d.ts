@@ -1,17 +1,23 @@
-declare type SidebarItem = {
-  key: string;
-  name: string;
-  page: undefined;
-  icon: React.FC;
-  isActive: boolean;
-};
-
-declare type SidebarItems = SidebarItem[];
-
 declare type Columns = {
   key: string;
   label: string;
 };
+
+declare type Branch = {
+  title: string;
+  route: string;
+};
+
+export enum blood {
+  "+O" = "+O",
+  "-O" = "-O",
+  "+A" = "+A",
+  "-A" = "-A",
+  "+B" = "+B",
+  "-B" = "-B",
+  "+AB" = "+AB",
+  "-AB" = "-AB",
+}
 
 declare type DataMembers = {
   id: string;
@@ -34,7 +40,7 @@ declare type DataIndividuals = {
   NationalNumber: string;
   PhoneNumber: string;
   Workplace: string;
-  BrigadesId : string;
+  BrigadesId: string;
 };
 
 declare type DataBrigades = {
@@ -43,7 +49,7 @@ declare type DataBrigades = {
   WeaponType: string;
   Mechanisms: string;
   JoiningDate: number;
-  HerPlace:string;
+  HerPlace: string;
   BattalionCommander: string;
 };
 
@@ -54,4 +60,16 @@ declare type DataCourses = {
   EndDate: string;
   StudentsName: string[];
   TeacherName: string;
+};
+
+declare type DataWounded = {
+  id: string;
+  name: string;
+  dateOfBirth: Date;
+  phone: string;
+  bloodType: blood;
+  typeOfInjury: string;
+  injuryLocation: string;
+  injuryDescription: string;
+  dateOfInjury: Date;
 };

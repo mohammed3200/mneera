@@ -30,8 +30,6 @@ const branch:Branch[] = [
 ]
 
 const page = () => {
-    const router = useRouter();
-
     return (
         <RootLayout>
             <HeaderTitle title="التعاون والتواصل" back="/dashboard" />        

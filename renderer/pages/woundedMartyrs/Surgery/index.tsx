@@ -3,21 +3,22 @@ import { Branch } from '@/renderer/types';
 
 const branch: Branch[] = [
     {
-        title: "عرض قائمة الشهداء",
+        title: "عرض قائمة الجرحى",
         route: "/View"
     },
     {
-        title: "تسجيل شهيد",
+        title: "تسجيل جريح",
         route: "/Create"
     },
 ];
+
 const page = () => {
     return (
         <RootLayout>
-            <HeaderTitle title="الشهداء" back="/woundedMartyrs" />
+            <HeaderTitle title="الجرحى" back="/woundedMartyrs" />
             <div className='flex w-full h-[70vh] items-center'>
                 <SectionsList
-                    mainRouter='Martyrs'
+                    mainRouter='woundedMartyrs/Surgery'
                     sections={branch}
                     cols={2}
                 />

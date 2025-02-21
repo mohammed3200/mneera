@@ -4,12 +4,12 @@ import { Branch } from '@/renderer/types';
 
 const branch: Branch[] = [
     {
-        title: "الشهداء",
-        route: "/Martyrs"
-    },
-    {
         title: "الجرحى",
         route: "/Surgery"
+    },
+    {
+        title: "الشهداء",
+        route: "/Martyrs"
     },
 ];
 

@@ -5,9 +5,9 @@ import { useRouter as useRoutes } from 'next/router';
 import { RootLayout, HeaderTitle, CustomTable } from '@/renderer/components';
 import { TableCell, TableRow } from '@/renderer/components/ui/table';
 
-import { MockDataBrigades, MockDataIndividuals } from '@/renderer/store/mock'
+import { MockDataIndividuals } from '@/renderer/store/mock'
+import { Columns } from '@/renderer/types';
 
-type Props = {}
 
 const columns: Columns[] = [
     {
@@ -25,8 +25,6 @@ const columns: Columns[] = [
 ];
 
 const PageBattalionPersonnel = () => {
-    const routes = useRoutes();
-    const { BrigadesId } = routes.query;
     return (
         <RootLayout>
             <HeaderTitle title='أعضاء الكتيبة' back='/brigadesBattalionsCompanies/View' />

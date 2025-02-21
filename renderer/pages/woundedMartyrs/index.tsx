@@ -11,7 +11,7 @@ const branch: Branch[] = [
         title: "الجرحى",
         route: "/Surgery"
     },
-]
+];
 
 const page = () => {
 
@@ -22,7 +22,7 @@ const page = () => {
                 <SectionsList
                     mainRouter='woundedMartyrs'
                     sections={branch}
-                    disabled
+                    cols={2}
                 />
             </div>
         </RootLayout>

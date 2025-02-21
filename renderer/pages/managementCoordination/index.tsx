@@ -24,7 +24,7 @@ const branch: Branch[] = [
         title: "الإمدادات",
         route: "/Supplies"
     },
-]
+];
 
 const page = () => {
     return (

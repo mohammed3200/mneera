@@ -14,6 +14,7 @@ const page = () => {
                 <SectionsList
                     mainRouter='support'
                     sections={branch}
+                    cols={1}
                 />
             </div>
         </RootLayout>

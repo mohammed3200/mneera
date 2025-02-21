@@ -1,19 +1,21 @@
 import { useRouter } from "next/navigation";
 import { Branch } from "../types";
 import { Button } from "./ui/button";
+import { cn } from "../lib/utils";
 
 
 
 interface SectionsListProps {
     sections: Branch[];
     mainRouter: string;
-    disabled?: boolean
+    disabled?: boolean;
+    cols?: number;
 };
 
-export const SectionsList = ({ sections, mainRouter, disabled = false }: SectionsListProps) => {
+export const SectionsList = ({ sections, mainRouter, disabled = false, cols = 3 }: SectionsListProps) => {
     const router = useRouter();
     return (
-        <div className="grid grid-cols-3 w-full gap-x-4 gap-y-6 px-4 items-center ">
+        <div className={cn("grid w-full gap-x-4 gap-y-6 px-4 items-center", `grid-cols-${cols}`)}>
             {sections.length > 0 ?
                 sections.map(item => (
                     <Button

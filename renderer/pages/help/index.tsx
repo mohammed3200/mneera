@@ -2,7 +2,7 @@ import React from 'react';
 import { RootLayout, HeaderTitle, SectionsList } from '@/renderer/components';
 import { Branch } from '@/renderer/types';
 
-const branch:Branch[] = [
+const branch: Branch[] = [
     {
         title: "الوزارات",
         route: "/Ministries"
@@ -27,17 +27,16 @@ const branch:Branch[] = [
         title: "الجيش الشرطة",
         route: "/ArmyPolice"
     }
-]
+];
 
 const page = () => {
     return (
         <RootLayout>
-            <HeaderTitle title="التعاون والتواصل" back="/dashboard" />        
+            <HeaderTitle title="التعاون والتواصل" back="/dashboard" />
             <div className='flex w-full h-[70vh] items-center'>
                 <SectionsList
                     mainRouter='help'
                     sections={branch}
-                    disabled
                 />
             </div>
         </RootLayout>

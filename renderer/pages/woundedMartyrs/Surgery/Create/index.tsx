@@ -2,7 +2,6 @@
 
 import { z } from "zod";
 import React, { useState } from "react";
-import { format } from "date-fns";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 
@@ -35,13 +34,13 @@ const Page = () => {
         resolver: zodResolver(WoundedFormValidation),
         defaultValues: {
             name: "",
-            dateOfBirth: ``,
+            dateOfBirth: "",
             phone: "",
             bloodType: blood["+O"],
             typeOfInjury: "",
             injuryLocation: "",
             injuryDescription: "",
-            dateOfInjury: ``,
+            dateOfInjury: "",
         },
     });
 

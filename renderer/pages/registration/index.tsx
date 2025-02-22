@@ -2,9 +2,12 @@
 
 import React, { useState } from "react";
 import { z } from "zod";
+import { format } from "date-fns";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
+
 import { RootLayout } from "@/renderer/components/AppLayout";
+
 import { Input } from "@/renderer/components/ui/input";
 import {
   Form,
@@ -16,7 +19,6 @@ import {
 } from "@/renderer/components/ui/form";
 import { UserFormValidation } from "@/renderer/lib/validation";
 import FileUploader from "@/renderer/components/FileUploader";
-import { format } from "date-fns";
 import {
   Select,
   SelectContent,
@@ -44,7 +46,7 @@ const Page = (props: Props) => {
       nationalNumber: "",
       battalionName: "",
       nationality: "ليبي",
-      birthDate: `${format(new Date(),"yyyy-MM-dd")}`,
+      birthDate: "",
       PlaceOfBirth: "",
       phone: "",
       TypeOfDefinition: "ID card",

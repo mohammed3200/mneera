@@ -1,7 +1,6 @@
 import { z } from "zod";
 import { blood } from "../types/constants";
 
-
 export const UserFormValidation = z.object({
   fullName: z.string().min(3, "اسم قصير جدا"),
   nationalNumber: z
@@ -76,4 +75,14 @@ export const WoundedFormValidation = z.object({
     const year = new Date(parsedDate).getFullYear();
     return !isNaN(parsedDate) && year >= 1900 && year <= 2500;
   }, "تاريخ غير صالح"),
+});
+
+export const MartyrFormValidation = z.object({
+  name: z.string().min(1, "مطلوب"),
+  dateOfMartyrdom: z.string().refine((date) => {
+    const parsedDate = Date.parse(date);
+    const year = new Date(parsedDate).getFullYear();
+    return !isNaN(parsedDate) && year >= 1900 && year <= 2500;
+  }, "تاريخ غير صالح"),
+  locationMartyrdom: z.string().optional(),
 });

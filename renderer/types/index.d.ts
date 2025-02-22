@@ -73,3 +73,10 @@ declare type DataWounded = {
   injuryDescription: string;
   dateOfInjury: Date;
 };
+
+declare type DateMartyr = {
+  id: string;
+  name: string;
+  dateOfMartyrdom: Date;
+  locationOfMartyrdom: Date;
+}

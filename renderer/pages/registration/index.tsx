@@ -30,10 +30,12 @@ import { blood, TypeOfDefinition } from "@/renderer/constants";
 import { HeaderTitle, InputPhone } from "@/renderer/components";
 import { Button } from "@/renderer/components/ui/button";
 import { InputDate } from "@/renderer/components/InputDate";
+import { useRouter } from "next/router";
 
 type Props = {};
 
 const Page = (props: Props) => {
+  const router = useRouter();
   const [isLoading, setIsLoading] = useState(false);
   const [typeOfDefinition, setTypeOfDefinition] = useState<
     "ID card" | "passport"
@@ -42,9 +44,9 @@ const Page = (props: Props) => {
   const form = useForm<z.infer<typeof UserFormValidation>>({
     resolver: zodResolver(UserFormValidation),
     defaultValues: {
-      fullName: "",
+      name: "",
       nationalNumber: "",
-      battalionName: "",
+      battalion: "",
       nationality: "ليبي",
       birthDate: "",
       PlaceOfBirth: "",
@@ -60,11 +62,32 @@ const Page = (props: Props) => {
     },
   });
 
-  const onSubmit = (values: z.infer<typeof UserFormValidation>) => {
-    console.log("done !");
+  const onSubmit = async (values: z.infer<typeof UserFormValidation>) => {
     setIsLoading(true);
     try {
-      console.log({ json: values });
+      const res = await fetch("/api/registration", {
+        method: "POST",
+
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          name: values.name,
+          nationalNumber: values.nationalNumber,
+          birthDate: values.birthDate,
+          idNumber:
+            typeOfDefinition === "ID card" ? values.IDCard : values.passport,
+          address: values.address,
+          placeOfBirth: values.PlaceOfBirth,
+          battalion: values.battalion,
+          phoneNumber: values.phone,
+          nationality: values.nationality,
+          bloodType: values.blood,
+          academicQualification: values.academic,
+          weaponType: values.weapon,
+        }),
+      });
+      router.push("/individuals");
     } catch (error) {
       console.error(error);
     } finally {
@@ -89,7 +112,7 @@ const Page = (props: Props) => {
               {/* Name && National Number && phone number */}
               <div className="h-full flex flex-col gap-y-2">
                 <FormField
-                  name="fullName"
+                  name="name"
                   control={form.control}
                   render={({ field }) => (
                     <FormItem>
@@ -258,7 +281,7 @@ const Page = (props: Props) => {
                 />
               </div>
               <FormField
-                name="battalionName"
+                name="battalion"
                 control={form.control}
                 render={({ field }) => (
                   <FormItem>

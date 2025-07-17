@@ -2,7 +2,7 @@ import { z } from "zod";
 import { blood } from "../types/constants";
 
 export const UserFormValidation = z.object({
-  fullName: z.string().min(3, "اسم قصير جدا"),
+  name: z.string().min(3, "اسم قصير جدا"),
   nationalNumber: z
     .string()
     .min(12, "هذا ليس رقم وطني")
@@ -13,7 +13,7 @@ export const UserFormValidation = z.object({
   phone: z
     .string()
     .refine((phone) => /^\d{3}-\d{6,10}$/.test(phone), "ليس رقم هاتف"),
-  battalionName: z.string().min(1, "هذا قصير جدا").max(40, "الاسم طويل جدا"),
+  battalion: z.string().min(1, "هذا قصير جدا").max(40, "الاسم طويل جدا"),
   TypeOfDefinition: z.enum(["ID card", "Passport"]),
   battalionNumber: z.string().optional(),
   IDCard: z

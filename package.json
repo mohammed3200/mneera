@@ -11,7 +11,7 @@
     "pack": "electron-builder --dir",
     "electron": "tsc && electron dist/main/background.js",
     "dist": "electron-builder",
-    "dist:win": "electron-builder --win --x64 --debug",
+    "dist:win": "electron-builder --win --x64 --publish never",
     "postinstall": "electron-builder install-app-deps",
     "db:generate": "drizzle-kit generate",
     "db:push": "drizzle-kit push:sqlite",

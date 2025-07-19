@@ -128,13 +128,3 @@
   font-style: normal;
   /* Specify the font style if applicable */
 }
-
-
-@layer utilities {
-  /* ===== UTILITIES */
-  /* =====  REACT PHONE NUMBER INPUT OVERRIDES */
-  .input-phone {
-    @apply  flex flex-row-reverse gap-2 mt-2 h-11 rounded-md px-3 text-sm border bg-transparent placeholder:text-gray-600 font-din-regular placeholder:font-din-regular placeholder:text-left !important;
-    /* direction: ltr !important; */
-  }
-}

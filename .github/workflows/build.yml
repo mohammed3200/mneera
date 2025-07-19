@@ -17,19 +17,34 @@ jobs:
       uses: actions/setup-node@v4
       with:
         node-version: 20
-        cache: 'bun'
         
     - name: Install Bun
       run: |
         npm install -g bun@1.2.14
         bun --version
         
+    - name: Cache Bun dependencies
+      uses: actions/cache@v4
+      id: bun-cache
+      with:
+        path: |
+          ~/.bun
+          node_modules
+        key: ${{ runner.os }}-bun-${{ hashFiles('**/bun.lockb') }}
+        restore-keys: |
+          ${{ runner.os }}-bun-
+      
     - name: Install dependencies
       run: bun install --frozen-lockfile
       
     - name: Build app
       run: bun run build
       
+    - name: Install build tools
+      run: |
+        npm install --global windows-build-tools
+        bun run electron-builder install-app-deps
+        
     - name: Create executable
       run: npx electron-builder --win --x64
       

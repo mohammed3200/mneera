@@ -1,7 +1,8 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   // Removed output: "export" to enable server features
-  //output: "export",
+  output: "export", // Uncommented and required for Electron
+  // eslint-disable-next-line no-undef
   distDir: process.env.NODE_ENV === "production" ? "../app" : ".next",
   trailingSlash: true,
   images: {
@@ -25,4 +26,5 @@ const nextConfig = {
   },
 };
 
+// eslint-disable-next-line no-undef
 module.exports = nextConfig;

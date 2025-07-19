@@ -1,44 +1,43 @@
-import React from "react";
-
+import React, { useEffect, useState } from "react";
 import { HeaderTitle, RootLayout, CustomTable } from "@/renderer/components";
 import { TableCell, TableRow } from "@/renderer/components/ui/table";
-
 import { Columns } from "@/renderer/types";
 import { Individual } from "@/db/schema-types";
-import { individuals } from "@/db/schema";
-import { db } from "@/db";
 
 const columns: Columns[] = [
-  {
-    key: "id",
-    label: "ID",
-  },
-  {
-    key: "name",
-    label: "الاسم",
-  },
-  {
-    key: "PhoneNumber",
-    label: "رقم الهاتف",
-  },
+  { key: "id", label: "ID" },
+  { key: "name", label: "الاسم" },
+  { key: "phoneNumber", label: "رقم الهاتف" },
 ];
 
-export async function getServerSideProps() {
-  const data = await db.select().from(individuals);
+export default function Page() {
+  const [data, setData] = useState<Individual[]>([]);
+  const [loading, setLoading] = useState(true);
 
-  const serializableData = data.map((item) => ({
-    ...item,
-    createdAt: "2025-01-01T00:00:00Z",
-  }));
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const response = await window.ipc.invoke("get-individuals");
+        setData(response);
+      } catch (error) {
+        console.error("Failed to fetch individuals:", error);
+      } finally {
+        setLoading(false);
+      }
+    };
 
-  return {
-    props: {
-      data: serializableData,
-    },
-  };
-}
+    fetchData();
+  }, []);
 
-export default function Page({ data }: { data: Individual[] }) {
+  if (loading) {
+    return (
+      <RootLayout>
+        <HeaderTitle title="الأفراد" back="dashboard" />
+        <div className="w-full px-4 mt-8">Loading...</div>
+      </RootLayout>
+    );
+  }
+
   return (
     <RootLayout>
       <HeaderTitle title="الأفراد" back="dashboard" />

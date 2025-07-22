@@ -3,7 +3,7 @@
   "name": "my-nextron-app",
   "description": "My application description",
   "version": "1.0.0",
-  "author": "Mohammed Jaba <>",
+  "author": "<>",
   "main": "app/background.js",
   "scripts": {
     "dev": "nextron",
@@ -78,6 +78,7 @@
     "react-phone-number-input": "^3.4.12",
     "tailwind-merge": "^2.6.0",
     "tailwindcss-animate": "^1.0.7",
+    "uuid": "^11.1.0",
     "zod": "^3.25.76"
   },
   "devDependencies": {

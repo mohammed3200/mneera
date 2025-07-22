@@ -2,7 +2,6 @@
 
 import React, { useState } from "react";
 import { z } from "zod";
-import { format } from "date-fns";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 
@@ -31,6 +30,7 @@ import { HeaderTitle, InputPhone } from "@/renderer/components";
 import { Button } from "@/renderer/components/ui/button";
 import { InputDate } from "@/renderer/components/InputDate";
 import { useRouter } from "next/router";
+import { ipcRenderer } from "electron";
 
 type Props = {};
 
@@ -64,32 +64,39 @@ const Page = (props: Props) => {
 
   const onSubmit = async (values: z.infer<typeof UserFormValidation>) => {
     setIsLoading(true);
-    try {
-      const res = await fetch("/api/registration", {
-        method: "POST",
 
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          name: values.name,
-          nationalNumber: values.nationalNumber,
-          birthDate: values.birthDate,
-          idNumber:
-            typeOfDefinition === "ID card" ? values.IDCard : values.passport,
-          address: values.address,
-          placeOfBirth: values.PlaceOfBirth,
-          battalion: values.battalion,
-          phoneNumber: values.phone,
-          nationality: values.nationality,
-          bloodType: values.blood,
-          academicQualification: values.academic,
-          weaponType: values.weapon,
-        }),
-      });
-      router.push("/individuals");
+    console.log("values ", values);
+    try {
+      const individualData = {
+        name: values.name,
+        nationalNumber: values.nationalNumber,
+        birthDate: values.birthDate,
+        idNumber:
+          typeOfDefinition === "ID card" ? values.IDCard : values.passport,
+        address: values.address,
+        placeOfBirth: values.PlaceOfBirth,
+        battalion: values.battalion,
+        phoneNumber: values.phone,
+        nationality: values.nationality,
+        bloodType: values.blood,
+        academicQualification: values.academic,
+        weaponType: values.weapon,
+        image: values.image,
+      };
+
+      // Use ipcRenderer to add individual
+      const response = await ipcRenderer.invoke(
+        "add-individual",
+        individualData
+      );
+      if (response.success) {
+        console.log("Individual added successfully!");
+        //router.push("/individuals");
+      } else {
+        console.error("Failed to add individual");
+      }
     } catch (error) {
-      console.error(error);
+      console.error("Error adding individual:", error);
     } finally {
       setIsLoading(false);
     }
@@ -153,16 +160,13 @@ const Page = (props: Props) => {
               </div>
               <div className="h-full flex-1">
                 <FormField
-                  name="selfie"
+                  name="image"
                   control={form.control}
                   render={({ field }) => (
                     <FormItem className="h-full">
                       <FormLabel>الصورة الشخصية</FormLabel>
                       <FormControl>
-                        <FileUploader
-                          files={field.value}
-                          onChange={field.onChange}
-                        />
+                        <FileUploader onChange={field.onChange} />
                       </FormControl>
                       <FormMessage />
                     </FormItem>

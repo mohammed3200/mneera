@@ -28,7 +28,7 @@ if (isProd) {
     await mainWindow.loadURL("app://./home");
   } else {
     const port = process.argv[2];
-    await mainWindow.loadURL(`http://localhost:${port}/home`);
+    await mainWindow.loadURL(`http://localhost:${8888}/home`);
     mainWindow.webContents.openDevTools();
   }
 })();
@@ -40,6 +40,16 @@ app.on("window-all-closed", () => {
 ipcMain.handle("get-individuals", async () => {
   const data = await db.select().from(individuals);
   return data;
+});
+
+ipcMain.handle("add-individual", async (event, individualData) => {
+  try {
+    await db.insert(individuals).values(individualData);
+    return { success: true }; // Acknowledge success
+  } catch (error) {
+    console.error("Error adding individual:", error);
+    throw error;
+  }
 });
 
 ipcMain.on("message", async (event, arg) => {

@@ -1,6 +1,5 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-  // Removed output: "export" to enable server features
   output: "export", // Uncommented and required for Electron
   // eslint-disable-next-line no-undef
   distDir: process.env.NODE_ENV === "production" ? "../app" : ".next",
@@ -15,6 +14,7 @@ const nextConfig = {
   },
   webpack: (config, { isServer }) => {
     if (isServer) {
+      config.externals = [...config.externals, "better-sqlite3"];
       config.resolve.fallback = {
         fs: false,
         path: false,

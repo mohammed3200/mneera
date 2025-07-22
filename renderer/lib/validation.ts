@@ -1,5 +1,6 @@
 import { z } from "zod";
 import { blood } from "../types/constants";
+import { Image } from "@/db/schema-types";
 
 export const UserFormValidation = z.object({
   name: z.string().min(3, "اسم قصير جدا"),
@@ -31,15 +32,7 @@ export const UserFormValidation = z.object({
   weapon: z.string(),
   blood: z.enum(["+O", "-O", "+A", "-A", "+B", "-B", "+AB", "-AB"]),
   address: z.string().min(2, "العنوان قصير جدا"),
-  selfie: z
-    .custom<File[]>((value) => Array.isArray(value), "يجب أن يكون مصفوفة")
-    .default(() => [
-      new File([""], "logo.png", {
-        type: "image/png",
-        lastModified: Date.now(),
-      }),
-    ])
-    .optional(),
+  image: z.custom<File[]>(),
 });
 
 export const AdminFormValidation = z.object({

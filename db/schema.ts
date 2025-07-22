@@ -15,7 +15,7 @@ export const individuals = sqliteTable("individuals", {
   nationalNumber: text("national_number").notNull().unique(),
   birthDate: integer("birth_date", { mode: "number" }).notNull(),
   idNumber: text("id_number").unique(),
-  passportNumber : text("passport_number").unique(),
+  passportNumber: text("passport_number").unique(),
   address: text("address").notNull(),
   placeOfBirth: text("place_of_birth").notNull(),
   battalion: text("battalion").notNull(),
@@ -29,12 +29,15 @@ export const individuals = sqliteTable("individuals", {
     .default(sql`CURRENT_TIMESTAMP`),
 });
 
-export const images = sqliteTable('Image', {
-  id: integer('id').primaryKey(),      // use cuid() in your application for default
-  data: blob('data'),                // BLOB in SQLite
-  type: text('type'),                // MIME type or custom type string
-  size: integer('size'),             // file size in bytes
-  createdAt: integer('created_at', { mode: "timestamp" }).default(sql`CURRENT_TIMESTAMP`),
-  updatedAt: integer('updated_at', { mode: "timestamp" }).default(sql`CURRENT_TIMESTAMP`),
+export const images = sqliteTable("Image", {
+  id: text("id").primaryKey(), // use cuid() in your application for default
+  data: blob("data"), // BLOB in SQLite
+  type: text("type"), // MIME type or custom type string
+  size: integer("size"), // file size in bytes
+  createdAt: integer("created_at", { mode: "timestamp" }).default(
+    sql`CURRENT_TIMESTAMP`
+  ),
+  updatedAt: integer("updated_at", { mode: "timestamp" }).default(
+    sql`CURRENT_TIMESTAMP`
+  ),
 });
-

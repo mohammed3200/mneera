@@ -25,7 +25,7 @@ jobs:
         bun --version
 
     - name: Install dependencies
-      run: bun install --frozen-lockfile
+      run: bun install  # Remove "--frozen-lockfile"
 
     - name: Build app
       run: bun run build

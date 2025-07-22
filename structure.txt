@@ -1,0 +1,229 @@
+📦renderer
+ ┣ 📂.next
+ ┃ ┣ 📂cache
+ ┃ ┃ ┣ 📂swc
+ ┃ ┃ ┃ ┗ 📂plugins
+ ┃ ┃ ┃ ┃ ┗ 📂v7_windows_x86_64_0.106.15
+ ┃ ┃ ┣ 📂webpack
+ ┃ ┃ ┃ ┣ 📂client-development
+ ┃ ┃ ┃ ┃ ┣ 📜0.pack.gz
+ ┃ ┃ ┃ ┃ ┣ 📜1.pack.gz
+ ┃ ┃ ┃ ┃ ┣ 📜10.pack.gz
+ ┃ ┃ ┃ ┃ ┣ 📜11.pack.gz
+ ┃ ┃ ┃ ┃ ┣ 📜12.pack.gz
+ ┃ ┃ ┃ ┃ ┣ 📜13.pack.gz
+ ┃ ┃ ┃ ┃ ┣ 📜14.pack.gz
+ ┃ ┃ ┃ ┃ ┣ 📜15.pack.gz
+ ┃ ┃ ┃ ┃ ┣ 📜2.pack.gz
+ ┃ ┃ ┃ ┃ ┣ 📜3.pack.gz
+ ┃ ┃ ┃ ┃ ┣ 📜4.pack.gz
+ ┃ ┃ ┃ ┃ ┣ 📜5.pack.gz
+ ┃ ┃ ┃ ┃ ┣ 📜6.pack.gz
+ ┃ ┃ ┃ ┃ ┣ 📜7.pack.gz
+ ┃ ┃ ┃ ┃ ┣ 📜8.pack.gz
+ ┃ ┃ ┃ ┃ ┣ 📜9.pack.gz
+ ┃ ┃ ┃ ┃ ┣ 📜index.pack.gz
+ ┃ ┃ ┃ ┃ ┗ 📜index.pack.gz.old
+ ┃ ┃ ┃ ┣ 📂client-development-fallback
+ ┃ ┃ ┃ ┃ ┣ 📜0.pack.gz
+ ┃ ┃ ┃ ┃ ┣ 📜index.pack.gz
+ ┃ ┃ ┃ ┃ ┗ 📜index.pack.gz.old
+ ┃ ┃ ┃ ┗ 📂server-development
+ ┃ ┃ ┃ ┃ ┣ 📜0.pack.gz
+ ┃ ┃ ┃ ┃ ┣ 📜1.pack.gz
+ ┃ ┃ ┃ ┃ ┣ 📜10.pack.gz
+ ┃ ┃ ┃ ┃ ┣ 📜11.pack.gz
+ ┃ ┃ ┃ ┃ ┣ 📜12.pack.gz
+ ┃ ┃ ┃ ┃ ┣ 📜13.pack.gz
+ ┃ ┃ ┃ ┃ ┣ 📜14.pack.gz
+ ┃ ┃ ┃ ┃ ┣ 📜15.pack.gz
+ ┃ ┃ ┃ ┃ ┣ 📜2.pack.gz
+ ┃ ┃ ┃ ┃ ┣ 📜3.pack.gz
+ ┃ ┃ ┃ ┃ ┣ 📜4.pack.gz
+ ┃ ┃ ┃ ┃ ┣ 📜5.pack.gz
+ ┃ ┃ ┃ ┃ ┣ 📜6.pack.gz
+ ┃ ┃ ┃ ┃ ┣ 📜7.pack.gz
+ ┃ ┃ ┃ ┃ ┣ 📜8.pack.gz
+ ┃ ┃ ┃ ┃ ┣ 📜9.pack.gz
+ ┃ ┃ ┃ ┃ ┣ 📜index.pack.gz
+ ┃ ┃ ┃ ┃ ┗ 📜index.pack.gz.old
+ ┃ ┃ ┗ 📜.tsbuildinfo
+ ┃ ┣ 📂server
+ ┃ ┃ ┣ 📜interception-route-rewrite-manifest.js
+ ┃ ┃ ┣ 📜middleware-build-manifest.js
+ ┃ ┃ ┣ 📜middleware-manifest.json
+ ┃ ┃ ┣ 📜middleware-react-loadable-manifest.js
+ ┃ ┃ ┣ 📜next-font-manifest.js
+ ┃ ┃ ┣ 📜next-font-manifest.json
+ ┃ ┃ ┗ 📜pages-manifest.json
+ ┃ ┣ 📂static
+ ┃ ┃ ┣ 📂chunks
+ ┃ ┃ ┃ ┗ 📜polyfills.js
+ ┃ ┃ ┗ 📂development
+ ┃ ┃ ┃ ┣ 📜_buildManifest.js
+ ┃ ┃ ┃ ┗ 📜_ssgManifest.js
+ ┃ ┣ 📜build-manifest.json
+ ┃ ┣ 📜package.json
+ ┃ ┣ 📜react-loadable-manifest.json
+ ┃ ┗ 📜trace
+ ┣ 📂components
+ ┃ ┣ 📂ui
+ ┃ ┃ ┣ 📜button.tsx
+ ┃ ┃ ┣ 📜card.tsx
+ ┃ ┃ ┣ 📜form.tsx
+ ┃ ┃ ┣ 📜input.tsx
+ ┃ ┃ ┣ 📜label.tsx
+ ┃ ┃ ┣ 📜popover.tsx
+ ┃ ┃ ┣ 📜select.tsx
+ ┃ ┃ ┣ 📜table.tsx
+ ┃ ┃ ┗ 📜textarea.tsx
+ ┃ ┣ 📜AppLayout.tsx
+ ┃ ┣ 📜ButtonNavigation.tsx
+ ┃ ┣ 📜CourseCard.tsx
+ ┃ ┣ 📜CreateButton.tsx
+ ┃ ┣ 📜CustomTable.tsx
+ ┃ ┣ 📜FileUploader.tsx
+ ┃ ┣ 📜Footer.tsx
+ ┃ ┣ 📜Header.tsx
+ ┃ ┣ 📜HeaderTitle.tsx
+ ┃ ┣ 📜index.ts
+ ┃ ┣ 📜InputDate.tsx
+ ┃ ┣ 📜inputPhone.tsx
+ ┃ ┣ 📜SectionsList.tsx
+ ┃ ┗ 📜SubmitButton.tsx
+ ┣ 📂constants
+ ┃ ┗ 📜index.ts
+ ┣ 📂lib
+ ┃ ┣ 📂api
+ ┃ ┃ ┗ 📜registration.ts
+ ┃ ┣ 📜index.ts
+ ┃ ┣ 📜utils.ts
+ ┃ ┗ 📜validation.ts
+ ┣ 📂pages
+ ┃ ┣ 📂brigadesBattalionsCompanies
+ ┃ ┃ ┣ 📂Create
+ ┃ ┃ ┃ ┗ 📜index.tsx
+ ┃ ┃ ┣ 📂View
+ ┃ ┃ ┃ ┣ 📂BattalionPersonnel
+ ┃ ┃ ┃ ┃ ┗ 📂[BrigadesId]
+ ┃ ┃ ┃ ┃ ┃ ┗ 📜index.tsx
+ ┃ ┃ ┃ ┗ 📜index.tsx
+ ┃ ┃ ┗ 📜index.tsx
+ ┃ ┣ 📂dashboard
+ ┃ ┃ ┣ 📜index.tsx
+ ┃ ┃ ┗ 📜layout.tsx
+ ┃ ┣ 📂DocumentationInformation
+ ┃ ┃ ┣ 📂release
+ ┃ ┃ ┃ ┗ 📜index.tsx
+ ┃ ┃ ┗ 📜index.tsx
+ ┃ ┣ 📂help
+ ┃ ┃ ┣ 📂ArmyPolice
+ ┃ ┃ ┃ ┗ 📜index.tsx
+ ┃ ┃ ┣ 📂Cities
+ ┃ ┃ ┃ ┗ 📜index.tsx
+ ┃ ┃ ┣ 📂CivilSociety
+ ┃ ┃ ┃ ┗ 📜index.tsx
+ ┃ ┃ ┣ 📂Ministries
+ ┃ ┃ ┃ ┗ 📜index.tsx
+ ┃ ┃ ┣ 📂Municipality
+ ┃ ┃ ┃ ┗ 📜index.tsx
+ ┃ ┃ ┣ 📂Notables
+ ┃ ┃ ┃ ┗ 📜index.tsx
+ ┃ ┃ ┗ 📜index.tsx
+ ┃ ┣ 📂individuals
+ ┃ ┃ ┣ 📂[id]
+ ┃ ┃ ┃ ┗ 📜index.tsx
+ ┃ ┃ ┗ 📜index.tsx
+ ┃ ┣ 📂logoIn
+ ┃ ┃ ┗ 📜index.tsx
+ ┃ ┣ 📂managementCoordination
+ ┃ ┃ ┗ 📜index.tsx
+ ┃ ┣ 📂media
+ ┃ ┃ ┣ 📂AudiovisualMedia
+ ┃ ┃ ┃ ┗ 📜index.tsx
+ ┃ ┃ ┣ 📂OfficialSpokesperson
+ ┃ ┃ ┃ ┗ 📜index.tsx
+ ┃ ┃ ┣ 📂SocialCommunication
+ ┃ ┃ ┃ ┗ 📜index.tsx
+ ┃ ┃ ┗ 📜index.tsx
+ ┃ ┣ 📂registration
+ ┃ ┃ ┗ 📜index.tsx
+ ┃ ┣ 📂support
+ ┃ ┃ ┗ 📜index.tsx
+ ┃ ┣ 📂trainingDevelopment
+ ┃ ┃ ┣ 📂courses
+ ┃ ┃ ┃ ┣ 📂studentList
+ ┃ ┃ ┃ ┃ ┗ 📂[id]
+ ┃ ┃ ┃ ┃ ┃ ┗ 📜index.tsx
+ ┃ ┃ ┃ ┗ 📂[id]
+ ┃ ┃ ┃ ┃ ┗ 📜index.tsx
+ ┃ ┃ ┗ 📜index.tsx
+ ┃ ┣ 📂woundedMartyrs
+ ┃ ┃ ┣ 📂Martyrs
+ ┃ ┃ ┃ ┣ 📂Create
+ ┃ ┃ ┃ ┃ ┗ 📜index.tsx
+ ┃ ┃ ┃ ┣ 📂View
+ ┃ ┃ ┃ ┃ ┗ 📜index.tsx
+ ┃ ┃ ┃ ┗ 📜index.tsx
+ ┃ ┃ ┣ 📂Surgery
+ ┃ ┃ ┃ ┣ 📂Create
+ ┃ ┃ ┃ ┃ ┗ 📜index.tsx
+ ┃ ┃ ┃ ┣ 📂View
+ ┃ ┃ ┃ ┃ ┗ 📜index.tsx
+ ┃ ┃ ┃ ┗ 📜index.tsx
+ ┃ ┃ ┗ 📜index.tsx
+ ┃ ┣ 📜home.tsx
+ ┃ ┗ 📜_app.tsx
+ ┣ 📂public
+ ┃ ┣ 📂assets
+ ┃ ┃ ┣ 📜Almadar.png
+ ┃ ┃ ┣ 📜Libyana.png
+ ┃ ┃ ┣ 📜logo.png
+ ┃ ┃ ┗ 📜MyTLL.png
+ ┃ ┣ 📂fonts
+ ┃ ┃ ┣ 📜DINNextLTArabic-Bold-4.ttf
+ ┃ ┃ ┣ 📜DINNEXTLTARABIC-LIGHT-2-2.ttf
+ ┃ ┃ ┣ 📜DINNextLTArabic-Regular-4.ttf
+ ┃ ┃ ┗ 📜SpaceMono-Regular.ttf
+ ┃ ┗ 📂images
+ ┃ ┃ ┗ 📜logo.png
+ ┣ 📂store
+ ┃ ┣ 📂mock
+ ┃ ┃ ┗ 📜index.ts
+ ┃ ┗ 📜index.ts
+ ┣ 📂styles
+ ┃ ┗ 📜globals.css
+ ┣ 📂types
+ ┃ ┣ 📜constants.ts
+ ┃ ┗ 📜index.d.ts
+ ┣ 📜next-env.d.ts
+ ┣ 📜next.config.js
+ ┣ 📜postcss.config.js
+ ┣ 📜preload.d.ts
+ ┣ 📜tailwind.config.js
+ ┗ 📜tsconfig.json
+
+📦main
+ ┣ 📂helpers
+ ┃ ┣ 📜create-window.ts
+ ┃ ┗ 📜index.ts
+ ┣ 📜background.ts
+ ┗ 📜preload.ts
+
+📦db
+ ┣ 📂drizzle
+ ┃ ┣ 📂meta
+ ┃ ┃ ┣ 📜0000_snapshot.json
+ ┃ ┃ ┣ 📜0001_snapshot.json
+ ┃ ┃ ┗ 📜_journal.json
+ ┃ ┣ 📜0000_lyrical_lester.sql
+ ┃ ┗ 📜0001_late_dexter_bennett.sql
+ ┣ 📜drizzle.config.ts
+ ┣ 📜index.ts
+ ┣ 📜schema-types.d.ts
+ ┣ 📜schema.ts
+ ┗ 📜sqlite.db
+
+📦app
+ ┣ 📜background.js
+ ┗ 📜preload.js

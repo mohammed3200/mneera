@@ -9,7 +9,8 @@ const nextConfig = {
     unoptimized: true,
   },
   experimental: {
-    serverActions: true,
+    // REMOVE THIS LINE - serverActions are enabled by default
+    // serverActions: true,
     serverComponentsExternalPackages: ["better-sqlite3"],
   },
   webpack: (config, { isServer }) => {
@@ -20,6 +21,7 @@ const nextConfig = {
         path: false,
         net: false,
         tls: false,
+        electron: false
       };
     }
     return config;

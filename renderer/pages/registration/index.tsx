@@ -30,18 +30,17 @@ import { HeaderTitle, InputPhone } from "@/renderer/components";
 import { Button } from "@/renderer/components/ui/button";
 import { InputDate } from "@/renderer/components/InputDate";
 import { useRouter } from "next/router";
-import { ipcRenderer } from "electron";
 
 type Props = {};
 
+
 const Page = (props: Props) => {
-  const router = useRouter();
   const [isLoading, setIsLoading] = useState(false);
   const [typeOfDefinition, setTypeOfDefinition] = useState<
     "ID card" | "passport"
-  >("ID card");
-
-  const form = useForm<z.infer<typeof UserFormValidation>>({
+    >("ID card");
+    
+    const form = useForm<z.infer<typeof UserFormValidation>>({
     resolver: zodResolver(UserFormValidation),
     defaultValues: {
       name: "",
@@ -61,10 +60,10 @@ const Page = (props: Props) => {
       address: "",
     },
   });
-
+  
   const onSubmit = async (values: z.infer<typeof UserFormValidation>) => {
     setIsLoading(true);
-
+    
     console.log("values ", values);
     try {
       const individualData = {
@@ -72,7 +71,7 @@ const Page = (props: Props) => {
         nationalNumber: values.nationalNumber,
         birthDate: values.birthDate,
         idNumber:
-          typeOfDefinition === "ID card" ? values.IDCard : values.passport,
+        typeOfDefinition === "ID card" ? values.IDCard : values.passport,
         address: values.address,
         placeOfBirth: values.PlaceOfBirth,
         battalion: values.battalion,
@@ -83,15 +82,16 @@ const Page = (props: Props) => {
         weaponType: values.weapon,
         image: values.image,
       };
-
-      // Use ipcRenderer to add individual
-      const response = await ipcRenderer.invoke(
+      
+      
+      // In your onSubmit function:
+      const response = await window.ipc.invoke(
         "add-individual",
         individualData
       );
       if (response.success) {
         console.log("Individual added successfully!");
-        //router.push("/individuals");
+        router.push("/individuals");
       } else {
         console.error("Failed to add individual");
       }

@@ -1,7 +1,13 @@
-import { drizzle } from "drizzle-orm/better-sqlite3";
+import { app } from "electron";
+import path from "path";
 import Database from "better-sqlite3";
-import * as schema from "./schema";
+import { drizzle } from 'drizzle-orm/better-sqlite3';
 
-const dbPath = "./sqlite.db";
+
+let dbPath = "sqlite.db";
+if (app) {
+  dbPath = path.join(app.getPath("userData"), "sqlite.db");
+}
+
 const sqlite = new Database(dbPath);
-export const db = drizzle(sqlite, { schema });
+export const db = drizzle(sqlite);

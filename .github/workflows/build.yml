@@ -27,11 +27,17 @@ jobs:
     - name: Install dependencies
       run: bun install  # Remove "--frozen-lockfile"
 
-    - name: Build app
-      run: bun run build
+     - name: Build main process
+      run: bun run build:main
+
+    - name: Build renderer
+      run: bun run build:renderer
 
     - name: Create executable
-      run: npx electron-builder --win --x64 --publish never
+      run: bun run dist:win
+
+    - name: Create executable
+      run: bunx electron-builder --win --x64 --publish never
 
     - name: Upload artifact
       uses: actions/upload-artifact@v4

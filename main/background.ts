@@ -4,6 +4,7 @@ import serve from "electron-serve";
 import { createWindow } from "./helpers";
 import { db } from "@/db";
 import { individuals } from "@/db/schema";
+import { saveImage,getImage } from "@/db/image-service";
 
 const isProd = process.env.NODE_ENV === "production";
 
@@ -20,14 +21,14 @@ if (isProd) {
     width: 1000,
     height: 600,
     webPreferences: {
-      nodeIntegration: true,
-      contextIsolation: false,
+      nodeIntegration: false,
+      contextIsolation: true,
       preload: path.join(__dirname, "preload.js"),
     },
   });
 
   if (isProd) {
-    await mainWindow.loadURL("app://./home");
+    await mainWindow.loadURL(`file://${path.join(__dirname, 'home.html')}`);
   } else {
     const port = process.argv[2];
     await mainWindow.loadURL(`http://localhost:${port}/home`);
@@ -39,18 +40,43 @@ app.on("window-all-closed", () => {
   app.quit();
 });
 
+ipcMain.handle("get-image", async (event, imageId: string) => {
+  try {
+    const imageData = await getImage(imageId);
+    return imageData?.toString("base64");
+  } catch (error) {
+    console.error("Error fetching image:", error);
+    return null;
+  }
+});
+
+
 ipcMain.handle("get-individuals", async () => {
   const data = await db.select().from(individuals);
   return data;
 });
 
+
 ipcMain.handle("add-individual", async (event, individualData) => {
   try {
-    await db.insert(individuals).values(individualData);
-    return { success: true }; // Acknowledge success
+    // Handle image upload
+    let imageId: string | null = null;
+    if (individualData.image) {
+      imageId = await saveImage(individualData.image);
+    }
+
+    // Prepare individual data
+    const individual = {
+      ...individualData,
+      image: imageId,
+      birthDate: new Date(individualData.birthDate).getTime(),
+    };
+
+    await db.insert(individuals).values(individual);
+    return { success: true };
   } catch (error) {
     console.error("Error adding individual:", error);
-    throw error;
+    return { success: false, error: error.message };
   }
 });
 

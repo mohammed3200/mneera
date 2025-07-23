@@ -7,8 +7,6 @@ jobs:
     runs-on: windows-latest
     permissions:
       contents: read
-    env:
-      GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
     steps:
     - name: Checkout repository
@@ -25,19 +23,23 @@ jobs:
         bun --version
 
     - name: Install dependencies
-      run: bun install  # Remove "--frozen-lockfile"
+      run: bun install
 
-     - name: Build main process
+    - name: Build main process
       run: bun run build:main
 
     - name: Build renderer
       run: bun run build:renderer
 
-    - name: Create executable
+    - name: Create executable (dist:win)
       run: bun run dist:win
+      env:
+        GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
-    - name: Create executable
+    - name: Create executable (electron-builder)
       run: bunx electron-builder --win --x64 --publish never
+      env:
+        GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
     - name: Upload artifact
       uses: actions/upload-artifact@v4

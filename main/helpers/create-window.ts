@@ -73,11 +73,11 @@ export const createWindow = (
   const win = new BrowserWindow({
     ...state,
     ...options,
-    webPreferences: {
-      nodeIntegration: false,
-      contextIsolation: true,
-      ...options.webPreferences,
-    },
+    // webPreferences: {
+    //   nodeIntegration: false,
+    //   contextIsolation: true,
+    //   ...options.webPreferences,
+    // },
   })
 
   win.on('close', saveState)

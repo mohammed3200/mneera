@@ -22,8 +22,14 @@ jobs:
         npm install -g bun@1.2.14
         bun --version
 
+    - name: Install Windows Build Tools
+      run: |
+        npm install --global windows-build-tools
+        
     - name: Install dependencies
       run: bun install
+      env:
+        npm_config_build_from_source: true
 
     - name: Build main process
       run: bun run build:main

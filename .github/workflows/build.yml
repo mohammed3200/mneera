@@ -9,42 +9,48 @@ jobs:
       contents: read
 
     steps:
-      - name: Checkout repository
-        uses: actions/checkout@v4
+    - name: Checkout repository
+      uses: actions/checkout@v4
 
-      - name: Setup Node.js
-        uses: actions/setup-node@v4
-        with:
-          node-version: 20
+    - name: Setup Node.js
+      uses: actions/setup-node@v4
+      with:
+        node-version: 20
 
-      - name: Install Bun
-        run: |
-          npm install -g bun@1.2.14
-          bun --version
+    - name: Install Bun
+      run: |
+        npm install -g bun@1.2.14
+        bun --version
 
-      - name: Install dependencies
-        # no need for npm_config_build_from_source unless you have a specific native addon
-        run: bun install
+    - name: Install build tools
+      run: |
+        # Install required build tools for native modules
+        npm install --global node-gyp
+        npm config set msvs_version 2022
+        npm config set python python3
+        
+    - name: Install dependencies
+      run: bun install
 
-      - name: Build main process
-        run: bun run build:main
+    - name: Build main process
+      run: bun run build:main
 
-      - name: Build renderer
-        run: bun run build:renderer
+    - name: Build renderer
+      run: bun run build:renderer
 
-      - name: Create executable (bun dist)
-        run: bun run dist:win
-        env:
-          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+    - name: Create executable (dist:win)
+      run: bun run dist:win
+      env:
+        GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
-      - name: Create executable (electron-builder)
-        run: bunx electron-builder --win --x64 --publish never
-        env:
-          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+    - name: Create executable (electron-builder)
+      run: bunx electron-builder --win --x64 --publish never
+      env:
+        GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
-      - name: Upload artifact
-        uses: actions/upload-artifact@v4
-        with:
-          name: MyElectronApp
-          path: dist/*.exe
-          retention-days: 5
+    - name: Upload artifact
+      uses: actions/upload-artifact@v4
+      with:
+        name: MyElectronApp
+        path: dist/*.exe
+        retention-days: 5

@@ -3,9 +3,13 @@
 import React, { useState } from "react";
 import { z } from "zod";
 import { useForm } from "react-hook-form";
+import { useRouter } from "next/navigation";
 import { zodResolver } from "@hookform/resolvers/zod";
 
 import { RootLayout } from "@/renderer/components/AppLayout";
+
+import { UserFormValidation } from "@/renderer/lib/validation";
+import { blood, TypeOfDefinition } from "@/renderer/constants";
 
 import { Input } from "@/renderer/components/ui/input";
 import {
@@ -16,8 +20,6 @@ import {
   FormLabel,
   FormMessage,
 } from "@/renderer/components/ui/form";
-import { UserFormValidation } from "@/renderer/lib/validation";
-import FileUploader from "@/renderer/components/FileUploader";
 import {
   Select,
   SelectContent,
@@ -25,22 +27,23 @@ import {
   SelectItem,
   SelectTrigger,
 } from "@/renderer/components/ui/select";
-import { blood, TypeOfDefinition } from "@/renderer/constants";
-import { HeaderTitle, InputPhone } from "@/renderer/components";
 import { Button } from "@/renderer/components/ui/button";
+
+import FileUploader from "@/renderer/components/FileUploader";
+import { HeaderTitle, InputPhone } from "@/renderer/components";
 import { InputDate } from "@/renderer/components/InputDate";
-import { useRouter } from "next/router";
+import { Spinner } from "@/renderer/components/Spinner";
 
 type Props = {};
 
-
 const Page = (props: Props) => {
+  const router = useRouter();
   const [isLoading, setIsLoading] = useState(false);
   const [typeOfDefinition, setTypeOfDefinition] = useState<
     "ID card" | "passport"
-    >("ID card");
-    
-    const form = useForm<z.infer<typeof UserFormValidation>>({
+  >("ID card");
+
+  const form = useForm<z.infer<typeof UserFormValidation>>({
     resolver: zodResolver(UserFormValidation),
     defaultValues: {
       name: "",
@@ -58,42 +61,57 @@ const Page = (props: Props) => {
       weapon: "",
       blood: "+O",
       address: "",
+      image: null, // Initialize image as null
     },
   });
-  
+
   const onSubmit = async (values: z.infer<typeof UserFormValidation>) => {
     setIsLoading(true);
-    
-    console.log("values ", values);
+    console.log("Form Values:", values);
     try {
+      // Convert file to ArrayBuffer
+      // Convert file to ArrayBuffer if exists
+      let imageBuffer: number[] | null = null;
+      let imageType: string | null = null;
+
+      if (values.image) {
+        const buffer = await values.image.arrayBuffer();
+        imageBuffer = Array.from(new Uint8Array(buffer));
+        imageType = values.image.type;
+      }
       const individualData = {
         name: values.name,
         nationalNumber: values.nationalNumber,
-        birthDate: values.birthDate,
-        idNumber:
-        typeOfDefinition === "ID card" ? values.IDCard : values.passport,
+        birthDate: new Date(values.birthDate).toISOString(),
         address: values.address,
         placeOfBirth: values.PlaceOfBirth,
         battalion: values.battalion,
-        phoneNumber: values.phone,
+        phoneNumber: values.phone, // Changed from phone to phoneNumber
         nationality: values.nationality,
-        bloodType: values.blood,
-        academicQualification: values.academic,
-        weaponType: values.weapon,
-        image: values.image,
+        bloodType: values.blood, // Changed from blood to bloodType
+        academicQualification: values.academic, // Changed to academicQualification
+        weaponType: values.weapon, // Changed to weaponType
+        // Identification fields
+        idNumber: typeOfDefinition === "ID card" ? values.IDCard : undefined,
+        passportNumber:
+          typeOfDefinition === "passport" ? values.passport : undefined,
+        image: values.image
+          ? {
+              buffer: imageBuffer,
+              type: imageType,
+              name: values.image.name,
+            }
+          : null,
       };
-      
-      
-      // In your onSubmit function:
+
       const response = await window.ipc.invoke(
         "add-individual",
         individualData
       );
       if (response.success) {
-        console.log("Individual added successfully!");
         router.push("/individuals");
       } else {
-        console.error("Failed to add individual");
+        console.error("Failed to add individual:", response.error);
       }
     } catch (error) {
       console.error("Error adding individual:", error);
@@ -166,7 +184,9 @@ const Page = (props: Props) => {
                     <FormItem className="h-full">
                       <FormLabel>الصورة الشخصية</FormLabel>
                       <FormControl>
-                        <FileUploader onChange={field.onChange} />
+                        <FileUploader
+                          onChange={(file) => field.onChange(file)}
+                        />
                       </FormControl>
                       <FormMessage />
                     </FormItem>
@@ -426,10 +446,13 @@ const Page = (props: Props) => {
               onClick={() => onSubmit(form.getValues())}
               className="w-full border border-gray-200 text-gray-300 rounded-full bg-transparent hover:bg-blue-700 hover:border-none items-center justify-center py-6 mt-5 justify-self-center self-center duration-500 transition-all ease-out"
             >
-              <p className="font-din-bold text-md text-right">
-                {" "}
-                تسجيل عضو جديد
-              </p>
+              {isLoading ? (
+                <Spinner className="mr-2" />
+              ) : (
+                <p className="font-din-bold text-md text-right">
+                  تسجيل عضو جديد
+                </p>
+              )}
             </Button>
           </form>
         </Form>

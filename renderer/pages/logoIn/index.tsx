@@ -8,7 +8,7 @@ import { Header, RootLayout, SubmitButton } from '@/renderer/components'
 import { LogIn } from '@/renderer/lib'
 import { zodResolver } from '@hookform/resolvers/zod';
 import { AdminFormValidation } from '@/renderer/lib/validation';
-import { useRouter } from 'next/navigation'
+import { useRouter } from 'next/navigation';
 
 import React, { useState } from 'react'
 import { z } from "zod";

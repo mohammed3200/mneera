@@ -67,7 +67,6 @@ const Page = (props: Props) => {
 
   const onSubmit = async (values: z.infer<typeof UserFormValidation>) => {
     setIsLoading(true);
-    console.log("Form Values:", values);
     try {
       // Convert file to ArrayBuffer
       // Convert file to ArrayBuffer if exists

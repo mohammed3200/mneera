@@ -2,9 +2,9 @@ import path from "path";
 import { app, ipcMain } from "electron";
 import serve from "electron-serve";
 import { createWindow } from "./helpers";
-import { db } from "@/db";
-import { individuals } from "@/db/schema";
-import { saveImage, getImage } from "@/db/image-service";
+import { db } from "@/main/db";
+import { individuals } from "@/main/db/schema";
+import { saveImage, getImage } from "@/main/db/image-service";
 
 const isProd = process.env.NODE_ENV === "production";
 
@@ -56,6 +56,7 @@ ipcMain.handle("get-individuals", async () => {
 });
 
 ipcMain.handle("add-individual", async (event, individualData) => {
+  console.log("Received individual data:", individualData);
   try {
     let imageId: string | null = null;
     if (individualData.image) {

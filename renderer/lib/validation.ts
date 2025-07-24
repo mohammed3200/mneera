@@ -1,6 +1,6 @@
 import { z } from "zod";
 import { blood } from "../types/constants";
-import { Image } from "@/db/schema-types";
+import { Image } from "@/main/db/schema-types";
 
 export const UserFormValidation = z.object({
   name: z.string().min(3, "اسم قصير جدا"),
@@ -34,10 +34,7 @@ export const UserFormValidation = z.object({
   address: z.string().min(2, "العنوان قصير جدا"),
   image: z
     .custom<File | null>()
-    .refine(
-      (file) => !file || file.size <= 5_000_000,
-      "حجم الملف كبير جدا"
-    )
+    .refine((file) => !file || file.size <= 5_000_000, "حجم الملف كبير جدا")
     .refine(
       (file) =>
         !file ||

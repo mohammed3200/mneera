@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { HeaderTitle, RootLayout, CustomTable } from "@/renderer/components";
 import { TableCell, TableRow } from "@/renderer/components/ui/table";
 import { Columns } from "@/renderer/types";
-import { Individual } from "@/db/schema-types";
+import { Individual } from "@/main/db/schema-types";
 
 const columns: Columns[] = [
   { key: "id", label: "ID" },

@@ -8,6 +8,8 @@
   "scripts": {
     "dev": "nextron",
     "build": "nextron build",
+    "build:main": "tsc -p main/tsconfig.json",
+    "build:renderer": "next build renderer",
     "pack": "electron-builder --dir",
     "electron": "tsc && electron dist/main/background.js",
     "dist": "electron-builder",

@@ -1,3 +1,5 @@
+// db/schema.ts
+
 import { sql } from "drizzle-orm";
 import { sqliteTable, text, integer, blob } from "drizzle-orm/sqlite-core";
 
@@ -11,11 +13,11 @@ export const users = sqliteTable("users", {
 export const individuals = sqliteTable("individuals", {
   id: integer("id").primaryKey(),
   name: text("name").notNull(),
-  image: text("image_id").notNull(),
+  image: text("image_id"),
   nationalNumber: text("national_number").notNull().unique(),
   birthDate: integer("birth_date", { mode: "number" }).notNull(),
-  idNumber: text("id_number").unique(),
-  passportNumber: text("passport_number").unique(),
+  idNumber: text("id_number").unique(),  // Nullable
+  passportNumber: text("passport_number").unique(),  // Nullable
   address: text("address").notNull(),
   placeOfBirth: text("place_of_birth").notNull(),
   battalion: text("battalion").notNull(),
@@ -29,11 +31,11 @@ export const individuals = sqliteTable("individuals", {
     .default(sql`CURRENT_TIMESTAMP`),
 });
 
-export const images = sqliteTable("Image", {
-  id: text("id").primaryKey(), // use cuid() in your application for default
-  data: blob("data"), // BLOB in SQLite
-  type: text("type"), // MIME type or custom type string
-  size: integer("size"), // file size in bytes
+export const images = sqliteTable("images", {  // Changed to lowercase
+  id: text("id").primaryKey(),
+  data: blob("data"),
+  type: text("type"),
+  size: integer("size"),
   createdAt: integer("created_at", { mode: "timestamp" }).default(
     sql`CURRENT_TIMESTAMP`
   ),

@@ -14,14 +14,12 @@ CREATE TABLE `individuals` (
 	`weapon_type` text NOT NULL,
 	`created_at` integer DEFAULT CURRENT_TIMESTAMP NOT NULL
 );
---> statement-breakpoint
-CREATE UNIQUE INDEX `individuals_national_number_unique` ON `individuals` (`national_number`);--> statement-breakpoint
-CREATE UNIQUE INDEX `individuals_id_number_unique` ON `individuals` (`id_number`);--> statement-breakpoint
+
 CREATE TABLE `users` (
 	`id` integer PRIMARY KEY NOT NULL,
 	`name` text NOT NULL,
 	`username` text NOT NULL,
 	`created_at` integer NOT NULL
 );
---> statement-breakpoint
+
 CREATE UNIQUE INDEX `users_username_unique` ON `users` (`username`);

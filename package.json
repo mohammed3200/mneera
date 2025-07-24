@@ -13,9 +13,10 @@
     "dist": "electron-builder",
     "dist:win": "electron-builder --win --x64 --publish never",
     "postinstall": "electron-builder install-app-deps",
-    "db:generate": "drizzle-kit generate",
+    "db:generate": "drizzle-kit generate --config=db/drizzle.config.ts",
     "db:push": "drizzle-kit push:sqlite",
-    "db:studio": "drizzle-kit studio"
+    "db:migrate": "drizzle-kit migrate --config=db/drizzle.config.ts",
+    "db:studio": "drizzle-kit studio --config=db/drizzle.config.ts"
   },
   "build": {
     "asarUnpack": [
@@ -33,11 +34,16 @@
     "win": {
       "target": "nsis",
       "icon": "build/icon.ico",
-      "extraResources": [
-        {
-          "from": "db/migrations",
-          "to": "db/migrations"
-        }
+        "extraResources": [
+            {
+              "from": "db/drizzle",
+              "to": "db/drizzle",
+              "filter": ["**/*"]
+            },
+            {
+              "from": "db/sqlite.db",
+              "to": "db/sqlite.db"
+            }
       ]
     },
     "nsis": {

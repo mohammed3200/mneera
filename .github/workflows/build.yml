@@ -22,13 +22,6 @@ jobs:
         npm install -g bun@1.2.14
         bun --version
 
-    - name: Install build tools
-      run: |
-        # Install required build tools for native modules
-        npm install --global node-gyp
-        npm config set msvs_version 2022
-        npm config set python python3
-        
     - name: Install dependencies
       run: bun install
 

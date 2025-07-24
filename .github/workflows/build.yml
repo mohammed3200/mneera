@@ -40,7 +40,7 @@ jobs:
       - name: Build renderer
         run: bun run build:renderer
 
-      - name: Create executable (electron-builder)
+      - name: Create executable
         run: bun run dist:win
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}

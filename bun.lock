@@ -13,7 +13,6 @@
         "@radix-ui/react-slot": "^1.2.3",
         "@types/react-helmet": "^6.1.11",
         "better-sqlite3": "^12.2.0",
-        "better-sqlite3-with-prebuilds": "^7.4.3",
         "class-variance-authority": "^0.7.1",
         "clsx": "^2.1.1",
         "date-fns": "^4.1.0",
@@ -470,8 +469,6 @@
 
     "@types/http-cache-semantics": ["@types/http-cache-semantics@4.0.4", "", {}, ""],
 
-    "@types/integer": ["@types/integer@4.0.3", "", {}, "sha512-79TuNOotyLWioEzmKPT5m3jxZ3fm5336D0mqrho6oedAR93QxDfIEAgSq5UoNErgt45w0Kpwv0Hv9i/rq7UV6A=="],
-
     "@types/json-schema": ["@types/json-schema@7.0.15", "", {}, ""],
 
     "@types/json5": ["@types/json5@0.0.29", "", {}, ""],
@@ -632,8 +629,6 @@
 
     "better-sqlite3": ["better-sqlite3@12.2.0", "", { "dependencies": { "bindings": "^1.5.0", "prebuild-install": "^7.1.1" } }, "sha512-eGbYq2CT+tos1fBwLQ/tkBt9J5M3JEHjku4hbvQUePCckkvVf14xWj+1m7dGoK81M/fOjFT7yM9UMeKT/+vFLQ=="],
 
-    "better-sqlite3-with-prebuilds": ["better-sqlite3-with-prebuilds@7.4.3", "", { "dependencies": { "@types/integer": "latest", "bindings": "^1.5.0", "prebuild-install": "^6.0.1", "tar": "^6.1.0" } }, ""],
-
     "binary-extensions": ["binary-extensions@2.3.0", "", {}, ""],
 
     "bindings": ["bindings@1.5.0", "", { "dependencies": { "file-uri-to-path": "1.0.0" } }, ""],
@@ -717,8 +712,6 @@
     "clone-response": ["clone-response@1.0.3", "", { "dependencies": { "mimic-response": "^1.0.0" } }, ""],
 
     "clsx": ["clsx@2.1.1", "", {}, ""],
-
-    "code-point-at": ["code-point-at@1.1.0", "", {}, ""],
 
     "color-convert": ["color-convert@2.0.1", "", { "dependencies": { "color-name": "~1.1.4" } }, ""],
 
@@ -1350,8 +1343,6 @@
 
     "npmlog": ["npmlog@6.0.2", "", { "dependencies": { "are-we-there-yet": "^3.0.0", "console-control-strings": "^1.1.0", "gauge": "^4.0.3", "set-blocking": "^2.0.0" } }, ""],
 
-    "number-is-nan": ["number-is-nan@1.0.1", "", {}, ""],
-
     "object-assign": ["object-assign@4.1.1", "", {}, ""],
 
     "object-hash": ["object-hash@3.0.0", "", {}, ""],
@@ -1882,8 +1873,6 @@
 
     "babel-plugin-polyfill-corejs2/semver": ["semver@6.3.1", "", { "bin": "bin/semver.js" }, ""],
 
-    "better-sqlite3-with-prebuilds/prebuild-install": ["prebuild-install@6.1.4", "", { "dependencies": { "detect-libc": "^1.0.3", "expand-template": "^2.0.3", "github-from-package": "0.0.0", "minimist": "^1.2.3", "mkdirp-classic": "^0.5.3", "napi-build-utils": "^1.0.1", "node-abi": "^2.21.0", "npmlog": "^4.0.1", "pump": "^3.0.0", "rc": "^1.2.7", "simple-get": "^3.0.3", "tar-fs": "^2.0.0", "tunnel-agent": "^0.6.0" }, "bin": "bin.js" }, ""],
-
     "cacache/glob": ["glob@8.1.0", "", { "dependencies": { "fs.realpath": "^1.0.0", "inflight": "^1.0.4", "inherits": "2", "minimatch": "^5.0.1", "once": "^1.3.0" } }, ""],
 
     "cacache/lru-cache": ["lru-cache@7.18.3", "", {}, ""],
@@ -2040,16 +2029,6 @@
 
     "archiver-utils/readable-stream/string_decoder": ["string_decoder@1.1.1", "", { "dependencies": { "safe-buffer": "~5.1.0" } }, "sha512-n/ShnvDi6FHbbVfviro+WojiFzv+s8MPMHBczVePfUpDJLwoLT0ht1l4YwBCbi8pJAveEEdnkHyPyTP/mzRfwg=="],
 
-    "better-sqlite3-with-prebuilds/prebuild-install/detect-libc": ["detect-libc@1.0.3", "", { "bin": "bin/detect-libc.js" }, ""],
-
-    "better-sqlite3-with-prebuilds/prebuild-install/napi-build-utils": ["napi-build-utils@1.0.2", "", {}, ""],
-
-    "better-sqlite3-with-prebuilds/prebuild-install/node-abi": ["node-abi@2.30.1", "", { "dependencies": { "semver": "^5.4.1" } }, ""],
-
-    "better-sqlite3-with-prebuilds/prebuild-install/npmlog": ["npmlog@4.1.2", "", { "dependencies": { "are-we-there-yet": "~1.1.2", "console-control-strings": "~1.1.0", "gauge": "~2.7.3", "set-blocking": "~2.0.0" } }, ""],
-
-    "better-sqlite3-with-prebuilds/prebuild-install/simple-get": ["simple-get@3.1.1", "", { "dependencies": { "decompress-response": "^4.2.0", "once": "^1.3.1", "simple-concat": "^1.0.0" } }, ""],
-
     "cacache/glob/minimatch": ["minimatch@5.1.6", "", { "dependencies": { "brace-expansion": "^2.0.1" } }, ""],
 
     "conf/ajv/json-schema-traverse": ["json-schema-traverse@1.0.0", "", {}, ""],
@@ -2086,14 +2065,6 @@
 
     "webpack/terser-webpack-plugin/schema-utils": ["schema-utils@4.3.2", "", { "dependencies": { "@types/json-schema": "^7.0.9", "ajv": "^8.9.0", "ajv-formats": "^2.1.1", "ajv-keywords": "^5.1.0" } }, ""],
 
-    "better-sqlite3-with-prebuilds/prebuild-install/node-abi/semver": ["semver@5.7.2", "", { "bin": "bin/semver" }, ""],
-
-    "better-sqlite3-with-prebuilds/prebuild-install/npmlog/are-we-there-yet": ["are-we-there-yet@1.1.7", "", { "dependencies": { "delegates": "^1.0.0", "readable-stream": "^2.0.6" } }, ""],
-
-    "better-sqlite3-with-prebuilds/prebuild-install/npmlog/gauge": ["gauge@2.7.4", "", { "dependencies": { "aproba": "^1.0.3", "console-control-strings": "^1.0.0", "has-unicode": "^2.0.0", "object-assign": "^4.1.0", "signal-exit": "^3.0.0", "string-width": "^1.0.1", "strip-ansi": "^3.0.1", "wide-align": "^1.1.0" } }, ""],
-
-    "better-sqlite3-with-prebuilds/prebuild-install/simple-get/decompress-response": ["decompress-response@4.2.1", "", { "dependencies": { "mimic-response": "^2.0.0" } }, ""],
-
     "cacache/glob/minimatch/brace-expansion": ["brace-expansion@2.0.2", "", { "dependencies": { "balanced-match": "^1.0.0" } }, ""],
 
     "config-file-ts/glob/minimatch/brace-expansion": ["brace-expansion@2.0.2", "", { "dependencies": { "balanced-match": "^1.0.0" } }, ""],
@@ -2110,31 +2081,11 @@
 
     "webpack/terser-webpack-plugin/schema-utils/ajv-keywords": ["ajv-keywords@5.1.0", "", { "dependencies": { "fast-deep-equal": "^3.1.3" }, "peerDependencies": { "ajv": "^8.8.2" } }, ""],
 
-    "better-sqlite3-with-prebuilds/prebuild-install/npmlog/are-we-there-yet/readable-stream": ["readable-stream@2.3.8", "", { "dependencies": { "core-util-is": "~1.0.0", "inherits": "~2.0.3", "isarray": "~1.0.0", "process-nextick-args": "~2.0.0", "safe-buffer": "~5.1.1", "string_decoder": "~1.1.1", "util-deprecate": "~1.0.1" } }, "sha512-8p0AUk4XODgIewSi0l8Epjs+EVnWiK7NoDIEGU0HhE7+ZyY8D1IMY7odu5lRrFXGg71L15KG8QrPmum45RTtdA=="],
-
-    "better-sqlite3-with-prebuilds/prebuild-install/npmlog/gauge/aproba": ["aproba@1.2.0", "", {}, ""],
-
-    "better-sqlite3-with-prebuilds/prebuild-install/npmlog/gauge/string-width": ["string-width@1.0.2", "", { "dependencies": { "code-point-at": "^1.0.0", "is-fullwidth-code-point": "^1.0.0", "strip-ansi": "^3.0.0" } }, ""],
-
-    "better-sqlite3-with-prebuilds/prebuild-install/npmlog/gauge/strip-ansi": ["strip-ansi@3.0.1", "", { "dependencies": { "ansi-regex": "^2.0.0" } }, ""],
-
-    "better-sqlite3-with-prebuilds/prebuild-install/simple-get/decompress-response/mimic-response": ["mimic-response@2.1.0", "", {}, ""],
-
     "pkg-dir/find-up/locate-path/p-locate/p-limit": ["p-limit@4.0.0", "", { "dependencies": { "yocto-queue": "^1.0.0" } }, ""],
 
     "pkg-up/find-up/locate-path/p-locate/p-limit": ["p-limit@2.3.0", "", { "dependencies": { "p-try": "^2.0.0" } }, ""],
 
     "webpack/terser-webpack-plugin/schema-utils/ajv/json-schema-traverse": ["json-schema-traverse@1.0.0", "", {}, ""],
-
-    "better-sqlite3-with-prebuilds/prebuild-install/npmlog/are-we-there-yet/readable-stream/isarray": ["isarray@1.0.0", "", {}, "sha512-VLghIWNM6ELQzo7zwmcg0NmTVyWKYjvIeM83yjp0wRDTmUnrM678fQbcKBo6n2CJEF0szoG//ytg+TKla89ALQ=="],
-
-    "better-sqlite3-with-prebuilds/prebuild-install/npmlog/are-we-there-yet/readable-stream/safe-buffer": ["safe-buffer@5.1.2", "", {}, "sha512-Gd2UZBJDkXlY7GbJxfsE8/nvKkUEU1G38c1siN6QP6a9PT9MmHB8GnpscSmMJSoF8LOIrt8ud/wPtojys4G6+g=="],
-
-    "better-sqlite3-with-prebuilds/prebuild-install/npmlog/are-we-there-yet/readable-stream/string_decoder": ["string_decoder@1.1.1", "", { "dependencies": { "safe-buffer": "~5.1.0" } }, "sha512-n/ShnvDi6FHbbVfviro+WojiFzv+s8MPMHBczVePfUpDJLwoLT0ht1l4YwBCbi8pJAveEEdnkHyPyTP/mzRfwg=="],
-
-    "better-sqlite3-with-prebuilds/prebuild-install/npmlog/gauge/string-width/is-fullwidth-code-point": ["is-fullwidth-code-point@1.0.0", "", { "dependencies": { "number-is-nan": "^1.0.0" } }, ""],
-
-    "better-sqlite3-with-prebuilds/prebuild-install/npmlog/gauge/strip-ansi/ansi-regex": ["ansi-regex@2.1.1", "", {}, ""],
 
     "pkg-dir/find-up/locate-path/p-locate/p-limit/yocto-queue": ["yocto-queue@1.2.1", "", {}, ""],
   }

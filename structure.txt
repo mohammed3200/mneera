@@ -1,71 +1,24 @@
+📦mneera
+ ┣ 📂.github
+ ┣ 📂.vscode
+ ┣ 📂app
+ ┣ 📂db
+ ┣ 📂dist
+ ┣ 📂main
+ ┣ 📂renderer
+ ┣ 📂resources
+ ┣ 📜.env
+ ┣ 📜.gitignore
+ ┣ 📜bun.lock
+ ┣ 📜electron-builder.yml
+ ┣ 📜eslint.config.js
+ ┣ 📜package.json
+ ┣ 📜README.md
+ ┣ 📜structure.txt
+ ┣ 📜tsconfig.json
+ ┣ 📜tsconfig.tsbuildinfo
+
 📦renderer
- ┣ 📂.next
- ┃ ┣ 📂cache
- ┃ ┃ ┣ 📂swc
- ┃ ┃ ┃ ┗ 📂plugins
- ┃ ┃ ┃ ┃ ┗ 📂v7_windows_x86_64_0.106.15
- ┃ ┃ ┣ 📂webpack
- ┃ ┃ ┃ ┣ 📂client-development
- ┃ ┃ ┃ ┃ ┣ 📜0.pack.gz
- ┃ ┃ ┃ ┃ ┣ 📜1.pack.gz
- ┃ ┃ ┃ ┃ ┣ 📜10.pack.gz
- ┃ ┃ ┃ ┃ ┣ 📜11.pack.gz
- ┃ ┃ ┃ ┃ ┣ 📜12.pack.gz
- ┃ ┃ ┃ ┃ ┣ 📜13.pack.gz
- ┃ ┃ ┃ ┃ ┣ 📜14.pack.gz
- ┃ ┃ ┃ ┃ ┣ 📜15.pack.gz
- ┃ ┃ ┃ ┃ ┣ 📜2.pack.gz
- ┃ ┃ ┃ ┃ ┣ 📜3.pack.gz
- ┃ ┃ ┃ ┃ ┣ 📜4.pack.gz
- ┃ ┃ ┃ ┃ ┣ 📜5.pack.gz
- ┃ ┃ ┃ ┃ ┣ 📜6.pack.gz
- ┃ ┃ ┃ ┃ ┣ 📜7.pack.gz
- ┃ ┃ ┃ ┃ ┣ 📜8.pack.gz
- ┃ ┃ ┃ ┃ ┣ 📜9.pack.gz
- ┃ ┃ ┃ ┃ ┣ 📜index.pack.gz
- ┃ ┃ ┃ ┃ ┗ 📜index.pack.gz.old
- ┃ ┃ ┃ ┣ 📂client-development-fallback
- ┃ ┃ ┃ ┃ ┣ 📜0.pack.gz
- ┃ ┃ ┃ ┃ ┣ 📜index.pack.gz
- ┃ ┃ ┃ ┃ ┗ 📜index.pack.gz.old
- ┃ ┃ ┃ ┗ 📂server-development
- ┃ ┃ ┃ ┃ ┣ 📜0.pack.gz
- ┃ ┃ ┃ ┃ ┣ 📜1.pack.gz
- ┃ ┃ ┃ ┃ ┣ 📜10.pack.gz
- ┃ ┃ ┃ ┃ ┣ 📜11.pack.gz
- ┃ ┃ ┃ ┃ ┣ 📜12.pack.gz
- ┃ ┃ ┃ ┃ ┣ 📜13.pack.gz
- ┃ ┃ ┃ ┃ ┣ 📜14.pack.gz
- ┃ ┃ ┃ ┃ ┣ 📜15.pack.gz
- ┃ ┃ ┃ ┃ ┣ 📜2.pack.gz
- ┃ ┃ ┃ ┃ ┣ 📜3.pack.gz
- ┃ ┃ ┃ ┃ ┣ 📜4.pack.gz
- ┃ ┃ ┃ ┃ ┣ 📜5.pack.gz
- ┃ ┃ ┃ ┃ ┣ 📜6.pack.gz
- ┃ ┃ ┃ ┃ ┣ 📜7.pack.gz
- ┃ ┃ ┃ ┃ ┣ 📜8.pack.gz
- ┃ ┃ ┃ ┃ ┣ 📜9.pack.gz
- ┃ ┃ ┃ ┃ ┣ 📜index.pack.gz
- ┃ ┃ ┃ ┃ ┗ 📜index.pack.gz.old
- ┃ ┃ ┗ 📜.tsbuildinfo
- ┃ ┣ 📂server
- ┃ ┃ ┣ 📜interception-route-rewrite-manifest.js
- ┃ ┃ ┣ 📜middleware-build-manifest.js
- ┃ ┃ ┣ 📜middleware-manifest.json
- ┃ ┃ ┣ 📜middleware-react-loadable-manifest.js
- ┃ ┃ ┣ 📜next-font-manifest.js
- ┃ ┃ ┣ 📜next-font-manifest.json
- ┃ ┃ ┗ 📜pages-manifest.json
- ┃ ┣ 📂static
- ┃ ┃ ┣ 📂chunks
- ┃ ┃ ┃ ┗ 📜polyfills.js
- ┃ ┃ ┗ 📂development
- ┃ ┃ ┃ ┣ 📜_buildManifest.js
- ┃ ┃ ┃ ┗ 📜_ssgManifest.js
- ┃ ┣ 📜build-manifest.json
- ┃ ┣ 📜package.json
- ┃ ┣ 📜react-loadable-manifest.json
- ┃ ┗ 📜trace
  ┣ 📂components
  ┃ ┣ 📂ui
  ┃ ┃ ┣ 📜button.tsx
@@ -227,3 +180,7 @@
 📦app
  ┣ 📜background.js
  ┗ 📜preload.js
+
+ 📦.github
+ ┗ 📂workflows
+ ┃ ┗ 📜build.yml

@@ -1,9 +1,8 @@
-# .github/workflows/windows-build.yml
 name: Build Windows Executable
 
 on:
   push:
-    branches: [main]  # or whichever branch you use
+    branches: [main]
 
 jobs:
   build:
@@ -20,37 +19,29 @@ jobs:
         with:
           node-version: '20'
 
-      - name: Install Bun (optional, for non-native tasks)
+      - name: Install Bun
         run: |
           npm install -g bun@1.2.14
           bun --version
 
-      - name: Install JS dependencies
-        # Use npm to ensure native modules can rebuild
-        run: npm ci
+      - name: Install dependencies with Bun
+        run: bun install
+        env:
+          npm_config_build_from_source: true
 
       - name: Rebuild native modules
         run: |
-          # Ensure better-sqlite3 and friends compile against Electron
-          npm rebuild better-sqlite3 --build-from-source
-          npm rebuild better-sqlite3-with-prebuilds --build-from-source
-
-      - name: Install Electron app deps
-        run: npx electron-builder install-app-deps
+          bun run electron-rebuild
+          bun run electron-builder install-app-deps
 
       - name: Build main process
-        run: npm run build:main
+        run: bun run build:main
 
       - name: Build renderer
-        run: npm run build:renderer
-
-      - name: Package with Bun (optional)
-        run: bun run dist:win
-        env:
-          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: bun run build:renderer
 
       - name: Create executable (electron-builder)
-        run: npx electron-builder --win --x64 --publish never
+        run: bun run dist:win
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 

@@ -5,10 +5,9 @@ import React, { useCallback, useState } from "react";
 import { useDropzone } from "react-dropzone";
 
 import { Upload } from "lucide-react";
-import { set } from "date-fns";
 
 type FileUploaderProps = {
-  onChange: (file: File) => void;
+  onChange: (file: File | null) => void; // Changed to single file or null
 };
 
 const FileUploader = ({ onChange }: FileUploaderProps) => {
@@ -16,9 +15,9 @@ const FileUploader = ({ onChange }: FileUploaderProps) => {
 
   const onDrop = useCallback(
     (acceptedFiles: File[]) => {
-      const file = acceptedFiles[0];
-      setPreview(URL.createObjectURL(file));
-      onChange(file);
+      const file = acceptedFiles[0] || null;
+      setPreview(file ? URL.createObjectURL(file) : null);
+      onChange(file); // Pass single file or null
     },
     [onChange]
   );

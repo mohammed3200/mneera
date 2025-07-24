@@ -32,7 +32,24 @@ export const UserFormValidation = z.object({
   weapon: z.string(),
   blood: z.enum(["+O", "-O", "+A", "-A", "+B", "-B", "+AB", "-AB"]),
   address: z.string().min(2, "العنوان قصير جدا"),
-  image: z.custom<File[]>(),
+  image: z
+    .custom<File | null>()
+    .refine(
+      (file) => !file || file.size <= 5_000_000,
+      "حجم الملف كبير جدا"
+    )
+    .refine(
+      (file) =>
+        !file ||
+        [
+          "image/jpeg",
+          "image/png",
+          "image/webp",
+          "image/jpg",
+          "image/svg",
+        ].includes(file.type),
+      "نوع الصورة غير مدعوم"
+    ),
 });
 
 export const AdminFormValidation = z.object({

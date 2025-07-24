@@ -4,7 +4,7 @@ import serve from "electron-serve";
 import { createWindow } from "./helpers";
 import { db } from "@/db";
 import { individuals } from "@/db/schema";
-import { saveImage,getImage } from "@/db/image-service";
+import { saveImage, getImage } from "@/db/image-service";
 
 const isProd = process.env.NODE_ENV === "production";
 
@@ -28,7 +28,7 @@ if (isProd) {
   });
 
   if (isProd) {
-    await mainWindow.loadURL(`file://${path.join(__dirname, 'home.html')}`);
+    await mainWindow.loadURL(`file://${path.join(__dirname, "home.html")}`);
   } else {
     const port = process.argv[2];
     await mainWindow.loadURL(`http://localhost:${port}/home`);
@@ -43,33 +43,41 @@ app.on("window-all-closed", () => {
 ipcMain.handle("get-image", async (event, imageId: string) => {
   try {
     const imageData = await getImage(imageId);
-    return imageData?.toString("base64");
+    return imageData?.toString();
   } catch (error) {
     console.error("Error fetching image:", error);
     return null;
   }
 });
 
-
 ipcMain.handle("get-individuals", async () => {
   const data = await db.select().from(individuals);
   return data;
 });
 
-
 ipcMain.handle("add-individual", async (event, individualData) => {
   try {
-    // Handle image upload
     let imageId: string | null = null;
     if (individualData.image) {
       imageId = await saveImage(individualData.image);
     }
 
-    // Prepare individual data
+    // Prepare individual data with correct field names
     const individual = {
-      ...individualData,
-      image: imageId,
+      name: individualData.name,
+      nationalNumber: individualData.nationalNumber,
       birthDate: new Date(individualData.birthDate).getTime(),
+      address: individualData.address,
+      placeOfBirth: individualData.placeOfBirth,
+      battalion: individualData.battalion,
+      phoneNumber: individualData.phoneNumber,
+      nationality: individualData.nationality,
+      bloodType: individualData.bloodType,
+      academicQualification: individualData.academicQualification,
+      weaponType: individualData.weaponType,
+      image: imageId,
+      idNumber: individualData.idNumber || null,
+      passportNumber: individualData.passportNumber || null,
     };
 
     await db.insert(individuals).values(individual);

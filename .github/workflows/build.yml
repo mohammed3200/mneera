@@ -1,6 +1,9 @@
+# .github/workflows/windows-build.yml
 name: Build Windows Executable
 
-on: [push]
+on:
+  push:
+    branches: [main]  # or whichever branch you use
 
 jobs:
   build:
@@ -9,41 +12,51 @@ jobs:
       contents: read
 
     steps:
-    - name: Checkout repository
-      uses: actions/checkout@v4
+      - name: Checkout repository
+        uses: actions/checkout@v4
 
-    - name: Setup Node.js
-      uses: actions/setup-node@v4
-      with:
-        node-version: 20
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
 
-    - name: Install Bun
-      run: |
-        npm install -g bun@1.2.14
-        bun --version
+      - name: Install Bun (optional, for non-native tasks)
+        run: |
+          npm install -g bun@1.2.14
+          bun --version
 
-    - name: Install dependencies
-      run: bun install
+      - name: Install JS dependencies
+        # Use npm to ensure native modules can rebuild
+        run: npm ci
 
-    - name: Build main process
-      run: bun run build:main
+      - name: Rebuild native modules
+        run: |
+          # Ensure better-sqlite3 and friends compile against Electron
+          npm rebuild better-sqlite3 --build-from-source
+          npm rebuild better-sqlite3-with-prebuilds --build-from-source
 
-    - name: Build renderer
-      run: bun run build:renderer
+      - name: Install Electron app deps
+        run: npx electron-builder install-app-deps
 
-    - name: Create executable (dist:win)
-      run: bun run dist:win
-      env:
-        GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      - name: Build main process
+        run: npm run build:main
 
-    - name: Create executable (electron-builder)
-      run: bunx electron-builder --win --x64 --publish never
-      env:
-        GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      - name: Build renderer
+        run: npm run build:renderer
 
-    - name: Upload artifact
-      uses: actions/upload-artifact@v4
-      with:
-        name: MyElectronApp
-        path: dist/*.exe
-        retention-days: 5
+      - name: Package with Bun (optional)
+        run: bun run dist:win
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Create executable (electron-builder)
+        run: npx electron-builder --win --x64 --publish never
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Upload Windows executable
+        uses: actions/upload-artifact@v4
+        with:
+          name: MyElectronApp-Windows
+          path: dist/*.exe
+          retention-days: 5

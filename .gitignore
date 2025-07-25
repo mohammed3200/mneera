@@ -5,6 +5,7 @@ node_modules
 *.log
 
 # next.js
+app
 .next
 next-env.d.ts
 

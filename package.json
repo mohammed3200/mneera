@@ -4,7 +4,7 @@
   "description": "My application description",
   "version": "1.0.0",
   "author": "<>",
-    "main": "main/background.js",
+  "main": "main/background.js",
   "scripts": {
     "dev": "nextron",
     "build": "nextron build",
@@ -29,8 +29,8 @@
     "appId": "com.example.myapp",
     "productName": "MyElectronApp",
     "files": [
-      "app/main/**/*",
-      "app/renderer/**/*",
+      "main/**/*",
+      "renderer/**/*",
       "node_modules/**/*",
       "package.json"
     ],

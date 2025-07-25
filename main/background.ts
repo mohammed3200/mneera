@@ -2,9 +2,10 @@ import path from "path";
 import { app, ipcMain } from "electron";
 import serve from "electron-serve";
 import { createWindow } from "./helpers";
-import { db } from "@/db";
-import { individuals } from "@/db/schema";
-import { saveImage, getImage } from "@/db/image-service";
+import { getImage, saveImage } from "./db/image-service";
+import { db } from "./db";
+import { individuals } from "./db/schema";
+
 
 const isProd = process.env.NODE_ENV === "production";
 

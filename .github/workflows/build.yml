@@ -48,6 +48,7 @@ jobs:
       - name: Build renderer
         run: |
            cd renderer
+           bun run clear-cache
            bun run build:renderer
 
       - name: Create executable

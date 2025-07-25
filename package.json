@@ -15,6 +15,7 @@
     "dist": "electron-builder",
     "dist:win": "electron-builder --win --x64 --publish never",
     "postinstall": "electron-builder install-app-deps",
+    "clear-cache": "rm -rf .next/cache",
     "db:generate": "drizzle-kit generate --config=db/drizzle.config.ts",
     "db:push": "drizzle-kit push:sqlite",
     "db:migrate": "drizzle-kit migrate --config=db/drizzle.config.ts",
@@ -111,7 +112,7 @@
     "postcss": "^8.5.6",
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
-    "tailwindcss": "^3.4.17",
+    "tailwindcss": "^4.1.11",
     "typescript": "^5.8.3"
   }
 }

@@ -177,7 +177,8 @@
  ┃ ┣ 📜create-window.ts
  ┃ ┗ 📜index.ts
  ┣ 📜background.ts
- ┗ 📜preload.ts
+ ┣ 📜preload.ts
+ ┗ 📜tsconfig.json
 
 📦app
  ┣ 📂404

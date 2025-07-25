@@ -29,7 +29,7 @@ if (isProd) {
   });
 
   if (isProd) {
-    await mainWindow.loadURL(`file://${path.join(__dirname, "../renderer/home.html")}`);
+    await mainWindow.loadURL(`file://${path.join(__dirname, "../app/renderer/home.html")}`);
   } else {
     const port = process.argv[2];
     await mainWindow.loadURL(`http://localhost:${port}/home`);

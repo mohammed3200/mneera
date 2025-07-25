@@ -29,9 +29,8 @@ if (isProd) {
   });
 
   if (isProd) {
-    await mainWindow.loadURL(`file://${path.join(__dirname, "../app/renderer/home.html")}`);
-    serve({ directory: "app/renderer" });
-  } else {
+  await mainWindow.loadURL(`file://${path.join(__dirname, "../renderer/home.html")}`);
+} else {
     const port = process.argv[2];
     await mainWindow.loadURL(`http://localhost:${port}/home`);
     mainWindow.webContents.openDevTools();

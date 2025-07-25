@@ -4,7 +4,7 @@
   "description": "My application description",
   "version": "1.0.0",
   "author": "<>",
-  "main": "app/background.js",
+    "main": "app/background.js",
   "scripts": {
     "dev": "nextron",
     "build": "nextron build",
@@ -31,7 +31,6 @@
     "files": [
       "app/main/**/*",
       "app/renderer/**/*",
-      ".next/**/*",
       "node_modules/**/*",
       "package.json"
     ],

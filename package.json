@@ -8,7 +8,7 @@
   "scripts": {
     "dev": "nextron",
     "build": "nextron build",
-    "build:main": "tsc -p main/tsconfig.json",
+    "build:main": "cd main && tsc -p tsconfig.json",
     "build:renderer": "next build renderer",
     "pack": "electron-builder --dir",
     "electron": "tsc && electron dist/main/background.js",
@@ -38,12 +38,12 @@
       "icon": "build/icon.ico",
         "extraResources": [
             {
-              "from": "db/drizzle",
+              "from": "main/db/drizzle",
               "to": "db/drizzle",
               "filter": ["**/*"]
             },
             {
-              "from": "db/sqlite.db",
+              "from": "main/db/sqlite.db",
               "to": "db/sqlite.db"
             }
       ]

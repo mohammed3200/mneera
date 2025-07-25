@@ -41,7 +41,9 @@ jobs:
           echo '{"extends": "./tsconfig.json"}' > tsconfig.build.json
 
       - name: Build main process
-        run: bun run build:main
+        run: |
+         cd main
+         bun run build:main
 
       - name: Build renderer
         run: bun run build:renderer

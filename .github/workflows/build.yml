@@ -34,6 +34,12 @@ jobs:
           bun run electron-rebuild
           bun run electron-builder install-app-deps
 
+      # Add this step to fix TS config issues
+      - name: Prepare for build
+        run: |
+          cd main
+          echo '{"extends": "./tsconfig.json"}' > tsconfig.build.json
+
       - name: Build main process
         run: bun run build:main
 

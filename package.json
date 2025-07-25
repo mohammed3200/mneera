@@ -9,7 +9,7 @@
     "dev": "nextron",
     "build": "nextron build",
     "build:main": "cd main && tsc -p tsconfig.json",
-    "build:renderer": "cd renderer && next build",
+    "build:renderer": "cd renderer && next build && cp -R public/fonts ../app/renderer/public/fonts",
     "pack": "electron-builder --dir",
     "electron": "tsc && electron dist/main/background.js",
     "dist": "electron-builder",
@@ -114,7 +114,7 @@
     "postcss": "^8.5.6",
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
-    "tailwindcss": "^4.3.0",
+    "tailwindcss": "^3.4.17",
     "typescript": "^5.8.3"
   }
 }

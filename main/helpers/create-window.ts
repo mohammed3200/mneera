@@ -6,9 +6,13 @@ import {
 } from 'electron'
 import Store from 'electron-store'
 
+// Define type aliases
+type WindowState = Rectangle;
+type Bounds = Rectangle;
+
 export const createWindow = (
   windowName: string,
-  options: BrowserWindowConstructorOptions
+  options: BrowserWindowConstructorOptions & { width: number; height: number }
 ): BrowserWindow => {
   const key = 'window-state'
   const name = `window-state-${windowName}`
@@ -17,11 +21,10 @@ export const createWindow = (
     width: options.width,
     height: options.height,
   }
-  let state = {}
 
-  const restore = () => store.get(key, defaultSize)
+  const restore = (): WindowState => store.get(key, defaultSize as WindowState)
 
-  const getCurrentPosition = () => {
+  const getCurrentPosition = (): WindowState => {
     const position = win.getPosition()
     const size = win.getSize()
     return {
@@ -32,7 +35,7 @@ export const createWindow = (
     }
   }
 
-  const windowWithinBounds = (windowState, bounds) => {
+  const windowWithinBounds = (windowState: WindowState, bounds: Bounds) => {
     return (
       windowState.x >= bounds.x &&
       windowState.y >= bounds.y &&
@@ -41,24 +44,21 @@ export const createWindow = (
     )
   }
 
-  const resetToDefaults = () => {
+  const resetToDefaults = (): WindowState => {
     const bounds = screen.getPrimaryDisplay().bounds
-    return Object.assign({}, defaultSize, {
-      x: (bounds.width - defaultSize.width) / 2,
-      y: (bounds.height - defaultSize.height) / 2,
-    })
+    return {
+      width: defaultSize.width,
+      height: defaultSize.height,
+      x: Math.floor((bounds.width - defaultSize.width) / 2),
+      y: Math.floor((bounds.height - defaultSize.height) / 2),
+    }
   }
 
-  const ensureVisibleOnSomeDisplay = (windowState) => {
+  const ensureVisibleOnSomeDisplay = (windowState: WindowState): WindowState => {
     const visible = screen.getAllDisplays().some((display) => {
       return windowWithinBounds(windowState, display.bounds)
     })
-    if (!visible) {
-      // Window is partially or fully not visible now.
-      // Reset it to safe defaults.
-      return resetToDefaults()
-    }
-    return windowState
+    return visible ? windowState : resetToDefaults()
   }
 
   const saveState = () => {
@@ -68,16 +68,11 @@ export const createWindow = (
     store.set(key, state)
   }
 
-  state = ensureVisibleOnSomeDisplay(restore())
+  let state: WindowState = ensureVisibleOnSomeDisplay(restore())
 
   const win = new BrowserWindow({
     ...state,
     ...options,
-    // webPreferences: {
-    //   nodeIntegration: false,
-    //   contextIsolation: true,
-    //   ...options.webPreferences,
-    // },
   })
 
   win.on('close', saveState)

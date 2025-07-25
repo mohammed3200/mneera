@@ -2,9 +2,9 @@ import path from "path";
 import { app, ipcMain } from "electron";
 import serve from "electron-serve";
 import { createWindow } from "./helpers";
-import { db } from "@/main/db";
-import { individuals } from "@/main/db/schema";
-import { saveImage, getImage } from "@/main/db/image-service";
+import { db } from "@/db";
+import { individuals } from "@/db/schema";
+import { saveImage, getImage } from "@/db/image-service";
 
 const isProd = process.env.NODE_ENV === "production";
 
@@ -85,7 +85,9 @@ ipcMain.handle("add-individual", async (event, individualData) => {
     return { success: true };
   } catch (error) {
     console.error("Error adding individual:", error);
-    return { success: false, error: error.message };
+    // Fix: Safe error message access
+    const errorMessage = error instanceof Error ? error.message : 'Unknown error';
+    return { success: false, error: errorMessage };
   }
 });
 

@@ -1,7 +1,8 @@
 module.exports = {
   plugins: {
     tailwindcss: {
-      config: './renderer/tailwind.config.js',
+      // this path is wrong—PostCSS is already running _inside_ renderer/
+      config: './tailwind.config.js',
     },
     autoprefixer: {},
   },

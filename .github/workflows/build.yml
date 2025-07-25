@@ -46,7 +46,10 @@ jobs:
          bun run build:main
 
       - name: Build renderer
-        run: bun run build:renderer
+        run: |
+           cd renderer
+           bun run build:renderer
+           mv out ../app/renderer
 
       - name: Create executable
         run: bun run dist:win

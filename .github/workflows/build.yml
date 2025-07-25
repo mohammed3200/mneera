@@ -49,7 +49,7 @@ jobs:
         run: |
            cd renderer
            bun run build:renderer
-           mv out ../app/renderer
+           mv ../app/renderer/out ../app/renderer
 
       - name: Create executable
         run: bun run dist:win

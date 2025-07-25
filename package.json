@@ -9,7 +9,7 @@
     "dev": "nextron",
     "build": "nextron build",
     "build:main": "cd main && tsc -p tsconfig.json",
-    "build:renderer": "next build && next export -o ../app/renderer",
+    "build:renderer": "next build && next export -o ../app/renderer/out",
     "pack": "electron-builder --dir",
     "electron": "tsc && electron dist/main/background.js",
     "dist": "electron-builder",

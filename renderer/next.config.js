@@ -2,7 +2,7 @@
 const nextConfig = {
   output: "export", // Uncommented and required for Electron
   // eslint-disable-next-line no-undef
-  distDir: "./out",
+  distDir: process.env.NODE_ENV === "production" ? "../app" : ".next",
   trailingSlash: true,
   images: {
     // Keep unoptimized if you need to export some static images

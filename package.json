@@ -4,7 +4,7 @@
   "description": "My application description",
   "version": "1.0.0",
   "author": "<>",
-  "main": "main/background.ts",
+  "main": "app/background.js",
   "scripts": {
     "dev": "nextron",
     "build": "nextron build",
@@ -16,10 +16,10 @@
     "dist:win": "electron-builder --win --x64 --publish never",
     "postinstall": "electron-builder install-app-deps",
     "clear-cache": "rm -rf .next/cache",
-    "db:generate": "drizzle-kit generate --config=db/drizzle.config.ts",
-    "db:push": "drizzle-kit push:sqlite",
-    "db:migrate": "drizzle-kit migrate --config=db/drizzle.config.ts",
-    "db:studio": "drizzle-kit studio --config=db/drizzle.config.ts"
+    "db:generate": "drizzle-kit generate --config=main/db/drizzle.config.ts",
+    "db:push": "drizzle-kit push --config=main/db/drizzle.config.ts",
+    "db:migrate": "drizzle-kit migrate --config=main/db/drizzle.config.ts",
+    "db:studio": "drizzle-kit studio --config=main/db/drizzle.config.ts"
   },
   "build": {
     "asarUnpack": [
@@ -90,7 +90,8 @@
     "tailwind-merge": "^2.6.0",
     "tailwindcss-animate": "^1.0.7",
     "uuid": "^11.1.0",
-    "zod": "^3.25.76"
+    "zod": "^3.25.76",
+    "zustand": "^5.0.6"
   },
   "devDependencies": {
     "@eslint/js": "^9.31.0",

@@ -5,8 +5,10 @@ directories:
   output: dist
   buildResources: resources
 files:
-  - from: .
+  - from: app
     filter:
+      - main/**
+      - renderer/**
+      - background.js
       - package.json
-      - app
 publish: null

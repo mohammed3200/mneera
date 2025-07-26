@@ -42,6 +42,6 @@ CustomTable.propTypes = {
     PropTypes.exact({
       key: PropTypes.string.isRequired,
       label: PropTypes.string.isRequired,
-    })
+    }).isRequired
   ).isRequired,
 };

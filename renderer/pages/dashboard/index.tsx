@@ -66,8 +66,8 @@ const Dashboard = () => {
           <p className="text-white text-right text-2xl font-din-regular">الأقسام</p>
         </div>
         <div className="space-y-4">
-          {ButtonDashboard.reduce((rows, item, index) => {
-            if (index % 3 === 0) rows.push([]); // Start a new row every 3 items
+          {ButtonDashboard.reduce<JSX.Element[][]>((rows, item, index) => {
+            if (index % 3 === 0) rows.push([]);
             rows[rows.length - 1].push(
               <ButtonNavigation
                 key={index.toString()}

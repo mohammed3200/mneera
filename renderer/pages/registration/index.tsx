@@ -68,7 +68,6 @@ const Page = (props: Props) => {
   const onSubmit = async (values: z.infer<typeof UserFormValidation>) => {
     setIsLoading(true);
     try {
-      // Convert file to ArrayBuffer
       // Convert file to ArrayBuffer if exists
       let imageBuffer: number[] | null = null;
       let imageType: string | null = null;

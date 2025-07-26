@@ -20,7 +20,7 @@ import { Form, FormField, FormLabel, FormItem, FormControl, FormMessage } from '
 const Login = () => {
   const router = useRouter()
   const [isLoading, setIsLoading] = useState(false);
-  const [errorMessage, setErrorMessage] = useState(null);
+  const [errorMessage, setErrorMessage] = useState<string | null>(null);
 
   const form = useForm<z.infer<typeof AdminFormValidation>>({
     resolver: zodResolver(AdminFormValidation),

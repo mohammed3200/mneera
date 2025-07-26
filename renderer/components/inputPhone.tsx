@@ -46,7 +46,7 @@ export const InputPhone = ({ ...field }: Props) => {
                 value={formatPhoneNumber(field.value as string | E164Number)}
                 onChange={(e) => {
                     handlePhoneNumberChange(e.target.value);
-                    field.onChange(e);
+                    field.onChange?.(e);
                 }}
                 className='flex-grow'
             />

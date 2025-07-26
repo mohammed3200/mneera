@@ -8,11 +8,12 @@
   "scripts": {
     "dev": "nextron",
     "build": "nextron build",
+    "rebuild": "electron-rebuild -f -w better-sqlite3",
+    "postinstall": "electron-builder install-app-deps",
     "pack": "electron-builder --dir",
     "electron": "tsc && electron dist/main/background.js",
     "dist": "electron-builder",
     "dist:win": "electron-builder --win --x64 --publish never",
-    "postinstall": "electron-builder install-app-deps",
     "db:generate": "drizzle-kit generate --config=db/drizzle.config.ts",
     "db:push": "drizzle-kit push:sqlite",
     "db:migrate": "drizzle-kit migrate --config=db/drizzle.config.ts",
@@ -34,16 +35,18 @@
     "win": {
       "target": "nsis",
       "icon": "build/icon.ico",
-        "extraResources": [
-            {
-              "from": "db/drizzle",
-              "to": "db/drizzle",
-              "filter": ["**/*"]
-            },
-            {
-              "from": "db/sqlite.db",
-              "to": "db/sqlite.db"
-            }
+      "extraResources": [
+        {
+          "from": "db/drizzle",
+          "to": "db/drizzle",
+          "filter": [
+            "**/*"
+          ]
+        },
+        {
+          "from": "db/sqlite.db",
+          "to": "db/sqlite.db"
+        }
       ]
     },
     "nsis": {
@@ -64,7 +67,6 @@
     "@radix-ui/react-slot": "^1.2.3",
     "@types/react-helmet": "^6.1.11",
     "better-sqlite3": "^12.2.0",
-    "better-sqlite3-with-prebuilds": "^7.4.3",
     "class-variance-authority": "^0.7.1",
     "clsx": "^2.1.1",
     "date-fns": "^4.1.0",

@@ -4,15 +4,16 @@
   "description": "My application description",
   "version": "1.0.0",
   "author": "<>",
-  "main": "app/background.js",
+  "main": "main/background.js",
   "scripts": {
     "dev": "nextron",
-    "build": "next build renderer && tsc -p main",
+    "build": "bun run build:renderer && bun run build:main && bun run copy-db",
     "rebuild": "electron-rebuild -f -w better-sqlite3",
     "build:renderer": "cd renderer && next build",
+    "build:main": "tsc -p main",
+    "copy-db": "bash scripts/copy-db.sh",
     "postinstall": "electron-builder install-app-deps",
     "pack": "electron-builder --dir",
-    "copy-db": "bash scripts/copy-db.sh",
     "electron": "tsc && electron dist/main/background.js",
     "dist": "electron-builder",
     "dist:win": "electron-builder --win --x64 --publish never",
@@ -39,14 +40,14 @@
       "icon": "build/icon.ico",
       "extraResources": [
         {
-          "from": "db/drizzle",
+          "from": "main/db/drizzle",
           "to": "db/drizzle",
           "filter": [
             "**/*"
           ]
         },
         {
-          "from": "db/sqlite.db",
+          "from": "main/db/drizzle",
           "to": "db/sqlite.db"
         }
       ]

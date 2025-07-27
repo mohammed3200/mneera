@@ -47,7 +47,10 @@ jobs:
 
       - name: Build renderer
         run: bun run build:renderer
-
+      
+      - name: Copy database files
+        run: bun run copy-db
+        
       - name: Create executable
         run: bun run dist:win
         env:

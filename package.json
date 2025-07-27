@@ -12,6 +12,7 @@
     "build:renderer": "cd renderer && next build",
     "postinstall": "electron-builder install-app-deps",
     "pack": "electron-builder --dir",
+    "copy-db": "bash scripts/copy-db.sh",
     "electron": "tsc && electron dist/main/background.js",
     "dist": "electron-builder",
     "dist:win": "electron-builder --win --x64 --publish never",

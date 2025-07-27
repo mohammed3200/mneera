@@ -9,6 +9,7 @@
     "dev": "nextron",
     "build": "next build renderer && tsc -p main",
     "rebuild": "electron-rebuild -f -w better-sqlite3",
+    "build:renderer": "cd renderer && next build",
     "postinstall": "electron-builder install-app-deps",
     "pack": "electron-builder --dir",
     "electron": "tsc && electron dist/main/background.js",

@@ -4,24 +4,20 @@
   "description": "My application description",
   "version": "1.0.0",
   "author": "<>",
-  "main": "main/background.ts",
+  "main": "app/background.js",
   "scripts": {
     "dev": "nextron",
-    "build": "nextron build",
-    "build:main": "cd main && tsc -p tsconfig.json",
-    "build:renderer": "cd renderer && next build",
+    "build": "next build renderer && tsc -p main",
+    "rebuild": "electron-rebuild -f -w better-sqlite3",
+    "postinstall": "electron-builder install-app-deps",
     "pack": "electron-builder --dir",
     "electron": "tsc && electron dist/main/background.js",
     "dist": "electron-builder",
     "dist:win": "electron-builder --win --x64 --publish never",
-    "postbuild": "cp -R main/db app/main/db",
-    "copy-db": "bash scripts/copy-db.sh",
-    "postinstall": "electron-builder install-app-deps",
-    "clear-cache": "rm -rf .next/cache",
-    "db:generate": "drizzle-kit generate --config=main/db/drizzle.config.ts",
-    "db:push": "drizzle-kit push --config=main/db/drizzle.config.ts",
-    "db:migrate": "drizzle-kit migrate --config=main/db/drizzle.config.ts",
-    "db:studio": "drizzle-kit studio --config=main/db/drizzle.config.ts"
+    "db:generate": "drizzle-kit generate --config=db/drizzle.config.ts",
+    "db:push": "drizzle-kit push:sqlite",
+    "db:migrate": "drizzle-kit migrate --config=db/drizzle.config.ts",
+    "db:studio": "drizzle-kit studio --config=db/drizzle.config.ts"
   },
   "build": {
     "asarUnpack": [
@@ -31,8 +27,8 @@
     "appId": "com.example.myapp",
     "productName": "MyElectronApp",
     "files": [
-      "main/**/*",
-      "renderer/**/*",
+      "app/**/*",
+      ".next/**/*",
       "node_modules/**/*",
       "package.json"
     ],
@@ -41,14 +37,14 @@
       "icon": "build/icon.ico",
       "extraResources": [
         {
-          "from": "main/db/drizzle",
+          "from": "db/drizzle",
           "to": "db/drizzle",
           "filter": [
             "**/*"
           ]
         },
         {
-          "from": "main/db/sqlite.db",
+          "from": "db/sqlite.db",
           "to": "db/sqlite.db"
         }
       ]
@@ -92,8 +88,7 @@
     "tailwind-merge": "^2.6.0",
     "tailwindcss-animate": "^1.0.7",
     "uuid": "^11.1.0",
-    "zod": "^3.25.76",
-    "zustand": "^5.0.6"
+    "zod": "^3.25.76"
   },
   "devDependencies": {
     "@eslint/js": "^9.31.0",

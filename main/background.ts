@@ -2,7 +2,7 @@ import path from "path";
 import { app, ipcMain } from "electron";
 import serve from "electron-serve";
 import { createWindow } from "./helpers";
-import { getImage, saveImage } from "./db/image-service";
+import { saveImage, getImage } from "./db/image-service";
 import { db } from "./db";
 import { individuals } from "./db/schema";
 
@@ -29,7 +29,7 @@ if (isProd) {
   });
 
   if (isProd) {
-    await mainWindow.loadURL(`file://${path.join(__dirname, "../home.html")}`);
+    await mainWindow.loadURL("app://-/home");
   } else {
     const port = process.argv[2];
     await mainWindow.loadURL(`http://localhost:${port}/home`);

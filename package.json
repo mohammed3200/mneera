@@ -4,7 +4,7 @@
   "description": "My application description",
   "version": "1.0.0",
   "author": "<>",
-  "main": "app/background.js",
+  "main": "app/main/background.js",
   "scripts": {
     "dev": "nextron",
     "build": "nextron build",
@@ -14,6 +14,8 @@
     "electron": "tsc && electron dist/main/background.js",
     "dist": "electron-builder",
     "dist:win": "electron-builder --win --x64 --publish never",
+    "postbuild": "cp -R main/db app/main/db",
+    "copy-db": "bash scripts/copy-db.sh",
     "postinstall": "electron-builder install-app-deps",
     "clear-cache": "rm -rf .next/cache",
     "db:generate": "drizzle-kit generate --config=main/db/drizzle.config.ts",
@@ -29,7 +31,7 @@
     "appId": "com.example.myapp",
     "productName": "MyElectronApp",
     "files": [
-      "main/**/*",
+      "app/**/*",
       "renderer/**/*",
       "node_modules/**/*",
       "package.json"

@@ -4,7 +4,7 @@
   "description": "My application description",
   "version": "1.0.0",
   "author": "<>",
-  "main": "main/background.js",
+  "main": "app/main/background.js",
   "scripts": {
     "dev": "nextron",
     "build": "bun run build:renderer && bun run build:main && bun run copy-db",

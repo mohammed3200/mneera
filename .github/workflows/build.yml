@@ -11,10 +11,16 @@ jobs:
       contents: read
 
     steps:
+      # Fixed checkout action path
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      # Fixed setup-node action path
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
           node-version: '20'
+          cache: 'bun'
 
       - name: Install Bun
         run: |
@@ -31,22 +37,17 @@ jobs:
           bun run electron-rebuild
           bun run electron-builder install-app-deps
 
-      # Add this step to fix TS config issues
-      - name: Prepare for build
+      # Add Windows path fixes
+      - name: Fix Windows paths
         run: |
-          cd main
-          echo '{"extends": "./tsconfig.json"}' > tsconfig.build.json
+          npm config set script-shell "C:\\Program Files\\git\\bin\\bash.exe"
+          git config --global core.autocrlf false
 
       - name: Build main process
-        run: |
-         cd main
-         bun run build:main
+        run: bun run build:main
 
       - name: Build renderer
-        run: |
-           cd renderer
-           bun run clear-cache
-           bun run build:renderer
+        run: bun run build:renderer
 
       - name: Create executable
         run: bun run dist:win
@@ -56,6 +57,6 @@ jobs:
       - name: Upload Windows executable
         uses: actions/upload-artifact@v4
         with:
-          name: MyElectronApp-Windows
+          name: MilitaryCouncilSystem-Windows
           path: dist/*.exe
           retention-days: 5

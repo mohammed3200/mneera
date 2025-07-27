@@ -1,5 +1,6 @@
 import { create } from 'zustand';
-import { Individual, NewIndividual } from '@/main/db/schema-types';
+import { Individual, NewIndividual } from '../../main/db/schema-types';
+
 
 
 

@@ -9,9 +9,10 @@ jobs:
     runs-on: windows-latest
     permissions:
       contents: read
+    env:
+      GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}   # Add this
 
     steps:
-      # Add checkout step first
       - name: Checkout repository
         uses: actions/checkout@v4
 
@@ -27,7 +28,7 @@ jobs:
 
       - name: Install dependencies with Bun
         run: bun install
-        working-directory: ./  # Ensure we're in root directory
+        working-directory: ./ 
         env:
           npm_config_build_from_source: true
 
@@ -36,8 +37,6 @@ jobs:
         
       - name: Create executable
         run: bun run dist:win
-        env:
-          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         
       - name: Upload Windows executable
         uses: actions/upload-artifact@v4

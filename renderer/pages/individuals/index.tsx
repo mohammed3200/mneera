@@ -3,6 +3,10 @@ import { HeaderTitle, RootLayout, CustomTable } from "@/renderer/components";
 import { TableCell, TableRow } from "@/renderer/components/ui/table";
 import { Columns } from "@/renderer/types";
 import { Individual } from "@/main/db/schema-types";
+import { useIndividualStore } from "../../store/individualStore";
+import { TextShimmer } from "@/renderer/components/ui/text-shimmer";
+import { TriangleAlert } from "lucide-react";
+import { useRouter } from "next/navigation";
 
 const columns: Columns[] = [
   { key: "id", label: "ID" },
@@ -11,32 +15,42 @@ const columns: Columns[] = [
 ];
 
 export default function Page() {
-  const [data, setData] = useState<Individual[]>([]);
-  const [loading, setLoading] = useState(true);
+  const { individuals, loading, error, fetchIndividuals } =
+    useIndividualStore();
 
   useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const response = await window.ipc.invoke("get-individuals");
-        setData(response);
-      } catch (error) {
-        console.error("Failed to fetch individuals:", error);
-      } finally {
-        setLoading(false);
-      }
-    };
-
-    fetchData();
+    fetchIndividuals();
   }, []);
 
   if (loading) {
     return (
       <RootLayout>
         <HeaderTitle title="الأفراد" back="dashboard" />
-        <div className="w-full px-4 mt-8">Loading...</div>
+        <div className="w-full h-[80vh] flex-1 flex justify-center items-center">
+          <TextShimmer duration={1.5} className="text-2xl font-din-bold">
+            تحميل ...
+          </TextShimmer>
+        </div>
       </RootLayout>
     );
   }
+  if (error)
+    return (
+      <RootLayout>
+        <HeaderTitle title="الأفراد" back="dashboard" />
+        <div className="w-full h-[80vh] flex-1 flex justify-center items-center">
+          <div className="flex flex-col items-center gap-2">
+            <TriangleAlert color="#FB623C" className="w-16 h-16" />
+            <p className="text-2xl font-din-bold text-zinc-200">
+              خطأ في تحميل البيانات
+            </p>
+            <p className="text-zinc-400 text-sm text-center">
+              Error: {error || "حدث خطأ غير متوقع"}
+            </p>
+          </div>
+        </div>
+      </RootLayout>
+    );
 
   return (
     <RootLayout>
@@ -44,7 +58,7 @@ export default function Page() {
       <div className="w-full px-4 mt-8">
         <CustomTable
           columns={columns}
-          Data={() => TableCellIndividuals(data)}
+          Data={() => TableCellIndividuals(individuals)}
         />
       </div>
     </RootLayout>
@@ -52,14 +66,14 @@ export default function Page() {
 }
 
 function TableCellIndividuals(data: Individual[]) {
+  const router = useRouter();
   return data.map((item) => (
     <TableRow
       key={item.id}
       className="text-zinc-200 text-xs font-SpaceMono text-center cursor-pointer"
+      onClick={() => router.replace(`/individuals/${item.id}`)}
     >
-      <TableCell>
-        <a href={`/individuals/${item.id}`}># {item.id}</a>
-      </TableCell>
+      <TableCell># {item.id}</TableCell>
       <TableCell>{item.name}</TableCell>
       <TableCell>{item.phoneNumber}</TableCell>
     </TableRow>

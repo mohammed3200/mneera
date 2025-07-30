@@ -1,9 +1,8 @@
 📦mneera
  ┣ 📂.github
  ┣ 📂.vscode
- ┣ 📂app
- ┣ 📂db
- ┣ 📂dist
+ ┣ 📂app <-- output
+ ┣ 📂dist <-- output
  ┣ 📂main
  ┣ 📂renderer
  ┣ 📂resources
@@ -18,9 +17,43 @@
  ┣ 📜tsconfig.json
  ┣ 📜tsconfig.tsbuildinfo
 
+📦.github
+ ┗ 📂workflows
+ ┃ ┗ 📜build.yml
+
+📦main
+ ┣ 📂db
+ ┃ ┣ 📂drizzle
+ ┃ ┃ ┣ 📂meta
+ ┃ ┃ ┃ ┣ 📜0000_snapshot.json
+ ┃ ┃ ┃ ┣ 📜0001_snapshot.json
+ ┃ ┃ ┃ ┣ 📜0002_snapshot.json
+ ┃ ┃ ┃ ┗ 📜_journal.json
+ ┃ ┃ ┣ 📜0000_lyrical_lester.sql
+ ┃ ┃ ┣ 📜0001_late_dexter_bennett.sql
+ ┃ ┃ ┗ 📜0002_quiet_master_chief.sql
+ ┃ ┣ 📜drizzle.config.ts
+ ┃ ┣ 📜index.ts
+ ┃ ┣ 📜schema-types.d.ts
+ ┃ ┣ 📜schema.ts
+ ┃ ┗ 📜sqlite.db
+ ┣ 📂helpers
+ ┃ ┣ 📜create-window.ts
+ ┃ ┗ 📜index.ts
+ ┣ 📂repositories
+ ┃ ┣ 📜ImageRepository.ts
+ ┃ ┣ 📜IndividualRepository.ts
+ ┃ ┗ 📜ipc-handlers.ts
+ ┣ 📜background.ts
+ ┣ 📜preload.ts
+ ┗ 📜tsconfig.json
+
 📦renderer
  ┣ 📂components
+ ┃ ┣ 📂individual
+ ┃ ┃ ┗ 📜IndividualDetail.tsx
  ┃ ┣ 📂ui
+ ┃ ┃ ┣ 📜badge.tsx
  ┃ ┃ ┣ 📜button.tsx
  ┃ ┃ ┣ 📜card.tsx
  ┃ ┃ ┣ 📜form.tsx
@@ -29,6 +62,7 @@
  ┃ ┃ ┣ 📜popover.tsx
  ┃ ┃ ┣ 📜select.tsx
  ┃ ┃ ┣ 📜table.tsx
+ ┃ ┃ ┣ 📜text-shimmer.tsx
  ┃ ┃ ┗ 📜textarea.tsx
  ┃ ┣ 📜AppLayout.tsx
  ┃ ┣ 📜ButtonNavigation.tsx
@@ -43,12 +77,11 @@
  ┃ ┣ 📜InputDate.tsx
  ┃ ┣ 📜inputPhone.tsx
  ┃ ┣ 📜SectionsList.tsx
+ ┃ ┣ 📜Spinner.tsx
  ┃ ┗ 📜SubmitButton.tsx
  ┣ 📂constants
  ┃ ┗ 📜index.ts
  ┣ 📂lib
- ┃ ┣ 📂api
- ┃ ┃ ┗ 📜registration.ts
  ┃ ┣ 📜index.ts
  ┃ ┣ 📜utils.ts
  ┃ ┗ 📜validation.ts
@@ -143,7 +176,9 @@
  ┣ 📂store
  ┃ ┣ 📂mock
  ┃ ┃ ┗ 📜index.ts
- ┃ ┗ 📜index.ts
+ ┃ ┣ 📜imageStore.ts
+ ┃ ┣ 📜index.ts
+ ┃ ┗ 📜individualStore.ts
  ┣ 📂styles
  ┃ ┗ 📜globals.css
  ┣ 📂types
@@ -156,251 +191,6 @@
  ┣ 📜tailwind.config.js
  ┗ 📜tsconfig.json
 
-📦main
- ┣ 📂db
- ┃ ┣ 📂drizzle
- ┃ ┃ ┣ 📂meta
- ┃ ┃ ┃ ┣ 📜0000_snapshot.json
- ┃ ┃ ┃ ┣ 📜0001_snapshot.json
- ┃ ┃ ┃ ┣ 📜0002_snapshot.json
- ┃ ┃ ┃ ┗ 📜_journal.json
- ┃ ┃ ┣ 📜0000_lyrical_lester.sql
- ┃ ┃ ┣ 📜0001_late_dexter_bennett.sql
- ┃ ┃ ┗ 📜0002_quiet_master_chief.sql
- ┃ ┣ 📜drizzle.config.ts
- ┃ ┣ 📜image-service.ts
- ┃ ┣ 📜index.ts
- ┃ ┣ 📜schema-types.d.ts
- ┃ ┣ 📜schema.ts
- ┃ ┗ 📜sqlite.db
- ┣ 📂helpers
- ┃ ┣ 📜create-window.ts
- ┃ ┗ 📜index.ts
- ┣ 📜background.ts
- ┣ 📜preload.ts
- ┗ 📜tsconfig.json
-
-📦app
- ┣ 📂404
- ┃ ┗ 📜index.html
- ┣ 📂assets
- ┃ ┣ 📜Almadar.png
- ┃ ┣ 📜Libyana.png
- ┃ ┣ 📜logo.png
- ┃ ┗ 📜MyTLL.png
- ┣ 📂brigadesBattalionsCompanies
- ┃ ┣ 📂Create
- ┃ ┃ ┗ 📜index.html
- ┃ ┣ 📂View
- ┃ ┃ ┣ 📂BattalionPersonnel
- ┃ ┃ ┃ ┗ 📂[BrigadesId]
- ┃ ┃ ┃ ┃ ┗ 📜index.html
- ┃ ┃ ┗ 📜index.html
- ┃ ┗ 📜index.html
- ┣ 📂dashboard
- ┃ ┣ 📂layout
- ┃ ┃ ┗ 📜index.html
- ┃ ┗ 📜index.html
- ┣ 📂DocumentationInformation
- ┃ ┣ 📂release
- ┃ ┃ ┗ 📜index.html
- ┃ ┗ 📜index.html
- ┣ 📂fonts
- ┃ ┣ 📜DINNextLTArabic-Bold-4.ttf
- ┃ ┣ 📜DINNEXTLTARABIC-LIGHT-2-2.ttf
- ┃ ┣ 📜DINNextLTArabic-Regular-4.ttf
- ┃ ┗ 📜SpaceMono-Regular.ttf
- ┣ 📂help
- ┃ ┣ 📂ArmyPolice
- ┃ ┃ ┗ 📜index.html
- ┃ ┣ 📂Cities
- ┃ ┃ ┗ 📜index.html
- ┃ ┣ 📂CivilSociety
- ┃ ┃ ┗ 📜index.html
- ┃ ┣ 📂Ministries
- ┃ ┃ ┗ 📜index.html
- ┃ ┣ 📂Municipality
- ┃ ┃ ┗ 📜index.html
- ┃ ┣ 📂Notables
- ┃ ┃ ┗ 📜index.html
- ┃ ┗ 📜index.html
- ┣ 📂home
- ┃ ┗ 📜index.html
- ┣ 📂images
- ┃ ┗ 📜logo.png
- ┣ 📂individuals
- ┃ ┣ 📂1
- ┃ ┃ ┗ 📜index.html
- ┃ ┣ 📂2
- ┃ ┃ ┗ 📜index.html
- ┃ ┣ 📂3
- ┃ ┃ ┗ 📜index.html
- ┃ ┣ 📂4
- ┃ ┃ ┗ 📜index.html
- ┃ ┣ 📂5
- ┃ ┃ ┗ 📜index.html
- ┃ ┗ 📜index.html
- ┣ 📂logoIn
- ┃ ┗ 📜index.html
- ┣ 📂managementCoordination
- ┃ ┗ 📜index.html
- ┣ 📂media
- ┃ ┣ 📂AudiovisualMedia
- ┃ ┃ ┗ 📜index.html
- ┃ ┣ 📂OfficialSpokesperson
- ┃ ┃ ┗ 📜index.html
- ┃ ┣ 📂SocialCommunication
- ┃ ┃ ┗ 📜index.html
- ┃ ┗ 📜index.html
- ┣ 📂registration
- ┃ ┗ 📜index.html
- ┣ 📂support
- ┃ ┗ 📜index.html
- ┣ 📂trainingDevelopment
- ┃ ┣ 📂courses
- ┃ ┃ ┣ 📂computer
- ┃ ┃ ┃ ┗ 📜index.html
- ┃ ┃ ┣ 📂firstAid
- ┃ ┃ ┃ ┗ 📜index.html
- ┃ ┃ ┣ 📂military
- ┃ ┃ ┃ ┗ 📜index.html
- ┃ ┃ ┗ 📂studentList
- ┃ ┃ ┃ ┣ 📂1
- ┃ ┃ ┃ ┃ ┗ 📜index.html
- ┃ ┃ ┃ ┣ 📂2
- ┃ ┃ ┃ ┃ ┗ 📜index.html
- ┃ ┃ ┃ ┣ 📂3
- ┃ ┃ ┃ ┃ ┗ 📜index.html
- ┃ ┃ ┃ ┣ 📂4
- ┃ ┃ ┃ ┃ ┗ 📜index.html
- ┃ ┃ ┃ ┣ 📂5
- ┃ ┃ ┃ ┃ ┗ 📜index.html
- ┃ ┃ ┃ ┣ 📂6
- ┃ ┃ ┃ ┃ ┗ 📜index.html
- ┃ ┃ ┃ ┣ 📂7
- ┃ ┃ ┃ ┃ ┗ 📜index.html
- ┃ ┃ ┃ ┗ 📂8
- ┃ ┃ ┃ ┃ ┗ 📜index.html
- ┃ ┗ 📜index.html
- ┣ 📂woundedMartyrs
- ┃ ┣ 📂Martyrs
- ┃ ┃ ┣ 📂Create
- ┃ ┃ ┃ ┗ 📜index.html
- ┃ ┃ ┣ 📂View
- ┃ ┃ ┃ ┗ 📜index.html
- ┃ ┃ ┗ 📜index.html
- ┃ ┣ 📂Surgery
- ┃ ┃ ┣ 📂Create
- ┃ ┃ ┃ ┗ 📜index.html
- ┃ ┃ ┣ 📂View
- ┃ ┃ ┃ ┗ 📜index.html
- ┃ ┃ ┗ 📜index.html
- ┃ ┗ 📜index.html
- ┣ 📂_next
- ┃ ┣ 📂2BF3x7kFYwF7JZj1j3VH1
- ┃ ┣ 📂data
- ┃ ┃ ┗ 📂2BF3x7kFYwF7JZj1j3VH1
- ┃ ┃ ┃ ┣ 📂individuals
- ┃ ┃ ┃ ┃ ┣ 📜1.json
- ┃ ┃ ┃ ┃ ┣ 📜2.json
- ┃ ┃ ┃ ┃ ┣ 📜3.json
- ┃ ┃ ┃ ┃ ┣ 📜4.json
- ┃ ┃ ┃ ┃ ┗ 📜5.json
- ┃ ┃ ┃ ┗ 📂trainingDevelopment
- ┃ ┃ ┃ ┃ ┗ 📂courses
- ┃ ┃ ┃ ┃ ┃ ┣ 📂studentList
- ┃ ┃ ┃ ┃ ┃ ┃ ┣ 📜1.json
- ┃ ┃ ┃ ┃ ┃ ┃ ┣ 📜2.json
- ┃ ┃ ┃ ┃ ┃ ┃ ┣ 📜3.json
- ┃ ┃ ┃ ┃ ┃ ┃ ┣ 📜4.json
- ┃ ┃ ┃ ┃ ┃ ┃ ┣ 📜5.json
- ┃ ┃ ┃ ┃ ┃ ┃ ┣ 📜6.json
- ┃ ┃ ┃ ┃ ┃ ┃ ┣ 📜7.json
- ┃ ┃ ┃ ┃ ┃ ┃ ┗ 📜8.json
- ┃ ┃ ┃ ┃ ┃ ┣ 📜computer.json
- ┃ ┃ ┃ ┃ ┃ ┣ 📜firstAid.json
- ┃ ┃ ┃ ┃ ┃ ┗ 📜military.json
- ┃ ┗ 📂static
- ┃ ┃ ┣ 📂2BF3x7kFYwF7JZj1j3VH1
- ┃ ┃ ┃ ┣ 📜_buildManifest.js
- ┃ ┃ ┃ ┗ 📜_ssgManifest.js
- ┃ ┃ ┣ 📂chunks
- ┃ ┃ ┃ ┣ 📂pages
- ┃ ┃ ┃ ┃ ┣ 📂brigadesBattalionsCompanies
- ┃ ┃ ┃ ┃ ┃ ┣ 📂View
- ┃ ┃ ┃ ┃ ┃ ┃ ┗ 📂BattalionPersonnel
- ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┗ 📜[BrigadesId]-27ce52e24d7a43ff.js
- ┃ ┃ ┃ ┃ ┃ ┣ 📜Create-1587c0f438740393.js
- ┃ ┃ ┃ ┃ ┃ ┗ 📜View-232a4bef165af1c5.js
- ┃ ┃ ┃ ┃ ┣ 📂dashboard
- ┃ ┃ ┃ ┃ ┃ ┗ 📜layout-80f1935648957730.js
- ┃ ┃ ┃ ┃ ┣ 📂DocumentationInformation
- ┃ ┃ ┃ ┃ ┃ ┗ 📜release-86e82e63a82f4543.js
- ┃ ┃ ┃ ┃ ┣ 📂help
- ┃ ┃ ┃ ┃ ┃ ┣ 📜ArmyPolice-7489e440399c8dba.js
- ┃ ┃ ┃ ┃ ┃ ┣ 📜Cities-bc912ee2aa3fe14a.js
- ┃ ┃ ┃ ┃ ┃ ┣ 📜CivilSociety-5e301a0ee81651e0.js
- ┃ ┃ ┃ ┃ ┃ ┣ 📜Ministries-bf6fdab0fc132c59.js
- ┃ ┃ ┃ ┃ ┃ ┣ 📜Municipality-539cff32dd3b2a57.js
- ┃ ┃ ┃ ┃ ┃ ┗ 📜Notables-3531d098046612bc.js
- ┃ ┃ ┃ ┃ ┣ 📂individuals
- ┃ ┃ ┃ ┃ ┃ ┗ 📜[id]-0ff9b0a81d72b8a7.js
- ┃ ┃ ┃ ┃ ┣ 📂media
- ┃ ┃ ┃ ┃ ┃ ┣ 📜AudiovisualMedia-92e0a0f0681303a7.js
- ┃ ┃ ┃ ┃ ┃ ┣ 📜OfficialSpokesperson-b03d7f7016e515f1.js
- ┃ ┃ ┃ ┃ ┃ ┗ 📜SocialCommunication-75c39beb00963bcf.js
- ┃ ┃ ┃ ┃ ┣ 📂trainingDevelopment
- ┃ ┃ ┃ ┃ ┃ ┗ 📂courses
- ┃ ┃ ┃ ┃ ┃ ┃ ┣ 📂studentList
- ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┗ 📜[id]-3f0d19f476f2fa4d.js
- ┃ ┃ ┃ ┃ ┃ ┃ ┗ 📜[id]-a09a116c1fb2c37e.js
- ┃ ┃ ┃ ┃ ┣ 📂woundedMartyrs
- ┃ ┃ ┃ ┃ ┃ ┣ 📂Martyrs
- ┃ ┃ ┃ ┃ ┃ ┃ ┣ 📜Create-4256bab827dc667e.js
- ┃ ┃ ┃ ┃ ┃ ┃ ┗ 📜View-9959d4df52236af0.js
- ┃ ┃ ┃ ┃ ┃ ┣ 📂Surgery
- ┃ ┃ ┃ ┃ ┃ ┃ ┣ 📜Create-792e71be05dc98b6.js
- ┃ ┃ ┃ ┃ ┃ ┃ ┗ 📜View-915a26bd44205d73.js
- ┃ ┃ ┃ ┃ ┃ ┣ 📜Martyrs-66f89f41ad7bef1e.js
- ┃ ┃ ┃ ┃ ┃ ┗ 📜Surgery-bb6579d06d3af41f.js
- ┃ ┃ ┃ ┃ ┣ 📜brigadesBattalionsCompanies-43785cba9a065749.js
- ┃ ┃ ┃ ┃ ┣ 📜dashboard-1fe87add9cc1848d.js
- ┃ ┃ ┃ ┃ ┣ 📜DocumentationInformation-cdde8b5c1bf889b4.js
- ┃ ┃ ┃ ┃ ┣ 📜help-d3ea7b2d2df57ff3.js
- ┃ ┃ ┃ ┃ ┣ 📜home-e999641484910407.js
- ┃ ┃ ┃ ┃ ┣ 📜individuals-c0802b8c96bf1241.js
- ┃ ┃ ┃ ┃ ┣ 📜logoIn-1496b5f2eb38fc26.js
- ┃ ┃ ┃ ┃ ┣ 📜managementCoordination-f86f95beaea6122c.js
- ┃ ┃ ┃ ┃ ┣ 📜media-474a2fe7fd178526.js
- ┃ ┃ ┃ ┃ ┣ 📜registration-deaa24cf3781f9e8.js
- ┃ ┃ ┃ ┃ ┣ 📜support-2f32bb1a462f5592.js
- ┃ ┃ ┃ ┃ ┣ 📜trainingDevelopment-72e3e2a4451f0500.js
- ┃ ┃ ┃ ┃ ┣ 📜woundedMartyrs-14c9776c131889ec.js
- ┃ ┃ ┃ ┃ ┣ 📜_app-5445293692012ceb.js
- ┃ ┃ ┃ ┃ ┗ 📜_error-88e38b962650355f.js
- ┃ ┃ ┃ ┣ 📜339-70f5a4ab64b3d4ae.js
- ┃ ┃ ┃ ┣ 📜590-34e42bf1fb6ff286.js
- ┃ ┃ ┃ ┣ 📜669-7147e77111ba5d71.js
- ┃ ┃ ┃ ┣ 📜877-391063888052fe81.js
- ┃ ┃ ┃ ┣ 📜930-de7ec3955cf40898.js
- ┃ ┃ ┃ ┣ 📜969-2bd65a8720738474.js
- ┃ ┃ ┃ ┣ 📜abeda4c9-0b6391afcca5e465.js
- ┃ ┃ ┃ ┣ 📜framework-14efab3c3d1ed63b.js
- ┃ ┃ ┃ ┣ 📜main-4d85f6523da3b7d9.js
- ┃ ┃ ┃ ┣ 📜polyfills-42372ed130431b0a.js
- ┃ ┃ ┃ ┗ 📜webpack-5146130448d8adf7.js
- ┃ ┃ ┣ 📂css
- ┃ ┃ ┃ ┗ 📜afc5594a982b0943.css
- ┃ ┃ ┗ 📂media
- ┃ ┃ ┃ ┣ 📜DINNextLTArabic-Bold-4.3a97aa22.ttf
- ┃ ┃ ┃ ┣ 📜DINNextLTArabic-Regular-4.495c706f.ttf
- ┃ ┃ ┃ ┗ 📜SpaceMono-Regular.5e7ea5cc.ttf
- ┣ 📜404.html
- ┣ 📜background.js
- ┣ 📜background.js.map
- ┣ 📜preload.js
- ┗ 📜preload.js.map
-
- 📦.github
- ┗ 📂workflows
- ┃ ┗ 📜build.yml
+📦resources
+ ┣ 📜icon.icns
+ ┗ 📜icon.ico

@@ -1,8 +1,7 @@
 import { z } from "zod";
 import { blood } from "../types/constants";
-import { Image } from "@/main/db/schema-types";
 
-export const UserFormValidation = z.object({
+export const individualFormValidation = z.object({
   name: z.string().min(3, "اسم قصير جدا"),
   nationalNumber: z
     .string()
@@ -33,7 +32,9 @@ export const UserFormValidation = z.object({
   blood: z.enum(["+O", "-O", "+A", "-A", "+B", "-B", "+AB", "-AB"]),
   address: z.string().min(2, "العنوان قصير جدا"),
   image: z
-    .custom<File | null>()
+    .custom<File>((val) => val instanceof File, {
+      message: "يجب رفع صورة"
+    })
     .refine((file) => !file || file.size <= 5_000_000, "حجم الملف كبير جدا")
     .refine(
       (file) =>

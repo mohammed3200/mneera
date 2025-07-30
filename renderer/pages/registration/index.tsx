@@ -5,10 +5,11 @@ import { z } from "zod";
 import { useForm } from "react-hook-form";
 import { useRouter } from "next/navigation";
 import { zodResolver } from "@hookform/resolvers/zod";
+import { useIndividualStore } from "../../store/individualStore";
 
 import { RootLayout } from "@/renderer/components/AppLayout";
 
-import { UserFormValidation } from "@/renderer/lib/validation";
+import { individualFormValidation } from "@/renderer/lib/validation";
 import { blood, TypeOfDefinition } from "@/renderer/constants";
 
 import { Input } from "@/renderer/components/ui/input";
@@ -42,9 +43,10 @@ const Page = (props: Props) => {
   const [typeOfDefinition, setTypeOfDefinition] = useState<
     "ID card" | "passport"
   >("ID card");
+  const addIndividual = useIndividualStore((state) => state.addIndividual);
 
-  const form = useForm<z.infer<typeof UserFormValidation>>({
-    resolver: zodResolver(UserFormValidation),
+  const form = useForm<z.infer<typeof individualFormValidation>>({
+    resolver: zodResolver(individualFormValidation),
     defaultValues: {
       name: "",
       nationalNumber: "",
@@ -65,7 +67,7 @@ const Page = (props: Props) => {
     },
   });
 
-  const onSubmit = async (values: z.infer<typeof UserFormValidation>) => {
+  const onSubmit = async (values: z.infer<typeof individualFormValidation>) => {
     setIsLoading(true);
     try {
       // Convert file to ArrayBuffer if exists
@@ -107,7 +109,9 @@ const Page = (props: Props) => {
         individualData
       );
       if (response.success) {
+        addIndividual(response.individual); // Add to Zustand store
         router.push("/individuals");
+
       } else {
         console.error("Failed to add individual:", response.error);
       }

@@ -6,3 +6,11 @@ export function cn(...inputs: ClassValue[]) {
 }
 
 export const convertFileToUrl = (file: File) => URL.createObjectURL(file);
+
+export const formatDate = (date: Date): string => {
+  return date.toLocaleDateString('ar-LY', {
+    year: 'numeric',
+    month: 'long',
+    day: 'numeric'
+  });
+};

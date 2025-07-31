@@ -31,7 +31,7 @@ export const individuals = sqliteTable("individuals", {
     .default(sql`CURRENT_TIMESTAMP`),
 });
 
-export const images = sqliteTable("images", {  // Changed to lowercase
+export const images = sqliteTable("images", {
   id: text("id").primaryKey(),
   data: blob("data"),
   type: text("type"),
@@ -42,4 +42,14 @@ export const images = sqliteTable("images", {  // Changed to lowercase
   updatedAt: integer("updated_at", { mode: "timestamp" }).default(
     sql`CURRENT_TIMESTAMP`
   ),
+});
+
+export const battalions = sqliteTable("battalions", {
+  id: integer("id").primaryKey(),
+  name: text("name").notNull().unique(),
+  place: text("place").notNull(),
+  conductor: text("conductor").notNull(),
+  numberOfIndividuals: integer("number_of_individuals").default(1).notNull(),
+  weaponsType: text("weapons_type").notNull(),
+  dateOfCreation: integer("date_of_creation", { mode: "timestamp" }).default(sql`CURRENT_TIMESTAMP`)
 });

@@ -39,9 +39,7 @@
         {
           "from": "main/db/drizzle",
           "to": "db/drizzle",
-          "filter": [
-            "**/*"
-          ]
+          "filter": ["**/*"]
         },
         {
           "from": "main/db/drizzle",

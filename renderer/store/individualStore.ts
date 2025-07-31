@@ -12,7 +12,7 @@ interface IndividualState {
   setError: (error: string | null) => void;
 }
 
-export const useIndividualStore = create<IndividualState>((set, get) => ({
+export const useIndividualStore = create<IndividualState>((set) => ({
   individuals: [],
   loading: false,
   error: null,

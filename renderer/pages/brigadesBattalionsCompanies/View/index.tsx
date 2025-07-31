@@ -1,13 +1,17 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { useRouter } from "next/navigation";
+import { TriangleAlert } from "lucide-react";
+
+import { Battalion } from "../../../../main/db/schema-types";
+import { useBattalionStore } from "../../../store/battalionStore";
+
+import { Columns } from "@/renderer/types";
 
 import { RootLayout, HeaderTitle, CustomTable } from "@/renderer/components";
 import { TableCell, TableRow } from "@/renderer/components/ui/table";
 
-import { MockDataBrigades } from "@/renderer/store/mock";
-import { Columns } from "@/renderer/types";
+import { TextShimmer } from "@/renderer/components/ui/text-shimmer";
 
-type Props = {};
 
 const columns: Columns[] = [
   {
@@ -27,7 +31,45 @@ const columns: Columns[] = [
     label: "الأمر",
   },
 ];
-const Page = (props: Props) => {
+
+const Page = () => {
+  const { battalions, loading, error, fetchBattalions } =
+    useBattalionStore();
+
+  useEffect(() => {
+    fetchBattalions();
+  },[]);
+
+    if (loading) {
+      return (
+        <RootLayout>
+          <HeaderTitle title="الألوية و الكتائب و السرايا" back="/brigadesBattalionsCompanies" />
+          <div className="w-full h-[80vh] flex-1 flex justify-center items-center">
+            <TextShimmer duration={1.5} className="text-2xl font-din-bold">
+              تحميل ...
+            </TextShimmer>
+          </div>
+        </RootLayout>
+      );
+    }
+    if (error)
+      return (
+        <RootLayout>
+          <HeaderTitle title="الألوية و الكتائب و السرايا" back="/brigadesBattalionsCompanies" />
+          <div className="w-full h-[80vh] flex-1 flex justify-center items-center">
+            <div className="flex flex-col items-center gap-2">
+              <TriangleAlert color="#FB623C" className="w-16 h-16" />
+              <p className="text-2xl font-din-bold text-zinc-200">
+                خطأ في تحميل البيانات
+              </p>
+              <p className="text-zinc-400 text-sm text-center">
+                Error: {error || "حدث خطأ غير متوقع"}
+              </p>
+            </div>
+          </div>
+        </RootLayout>
+      );
+
   return (
     <RootLayout>
       <HeaderTitle
@@ -37,7 +79,7 @@ const Page = (props: Props) => {
       <div className="w-full px-4 mt-8">
         <CustomTable
           columns={columns}
-          Data={TableCellBrigadesBattalionsCompanies}
+          Data={() => TableCellBrigadesBattalionsCompanies(battalions)}
         />
       </div>
     </RootLayout>
@@ -46,9 +88,9 @@ const Page = (props: Props) => {
 
 export default Page;
 
-const TableCellBrigadesBattalionsCompanies = () => {
+const TableCellBrigadesBattalionsCompanies = (data: Battalion[]) => {
   const router = useRouter();
-  return MockDataBrigades.map((item) => (
+  return data.map((item) => (
     <TableRow
       key={item.id}
       className="text-zinc-200 text-xs font-SpaceMono text-center cursor-pointer"
@@ -60,8 +102,8 @@ const TableCellBrigadesBattalionsCompanies = () => {
     >
       <TableCell># {item.id}</TableCell>
       <TableCell>{item.name}</TableCell>
-      <TableCell>{item.HerPlace}</TableCell>
-      <TableCell>{item.BattalionCommander}</TableCell>
+      <TableCell>{item.place}</TableCell>
+      <TableCell>{item.conductor}</TableCell>
     </TableRow>
   ));
 };

@@ -1,9 +1,12 @@
+// renderer/pages/brigadesBattalionsCompanies/Create/index.tsx
 import { z } from "zod";
+import { useRouter } from "next/navigation";
 import React, { useState } from "react";
 import { format } from "date-fns";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 
+import { useBattalionStore } from "@/renderer/store/battalionStore";
 import { BattalionsFormValidation } from "@/renderer/lib/validation";
 
 import { HeaderTitle, RootLayout } from "@/renderer/components";
@@ -19,9 +22,13 @@ import {
 } from "@/renderer/components/ui/form";
 import { Textarea } from "@/renderer/components/ui/textarea";
 import { InputDate } from "@/renderer/components/InputDate";
+import { Spinner } from "@/renderer/components/Spinner";
+import { Button } from "@/renderer/components/ui/button";
 
 const Page = () => {
+  const router = useRouter();
   const [isLoading, setIsLoading] = useState(false);
+  const addBattalion = useBattalionStore((state) => state.addBattalion);
 
   const form = useForm<z.infer<typeof BattalionsFormValidation>>({
     resolver: zodResolver(BattalionsFormValidation),
@@ -29,17 +36,33 @@ const Page = () => {
       battalionName: "",
       place: "",
       conductor: "",
-      dateOfCreation: `${format(new Date(),"yyyy-MM-dd")}`,
+      dateOfCreation: `${format(new Date(), "yyyy-MM-dd")}`,
       numberOfIndividuals: 0,
       weaponsType: "",
     },
   });
 
-  const onSubmit = (values: z.infer<typeof BattalionsFormValidation>) => {
-    console.log("done !");
+  const onSubmit = async (values: z.infer<typeof BattalionsFormValidation>) => {
     setIsLoading(true);
     try {
-      console.log({ json: values });
+      const battalionData = {
+        name: values.battalionName, // Changed property name
+        place: values.place,
+        conductor: values.conductor,
+        numberOfIndividuals: values.numberOfIndividuals,
+        weaponsType: values.weaponsType,
+        dateOfCreation: new Date(values.dateOfCreation), // Convert to timestamp
+      };
+
+      // Use correct channel name "add-battalion"
+      const response = await window.ipc.invoke("add-battalion", battalionData);
+
+      if (response.success) {
+        addBattalion(response.battalion);
+        router.push("/brigadesBattalionsCompanies/View");
+      } else {
+        console.error("Failed to add battalion:", response.error);
+      }
     } catch (error) {
       console.error(error);
     } finally {
@@ -145,7 +168,11 @@ const Page = () => {
                     <FormItem>
                       <FormLabel>نوع الأسلحة </FormLabel>
                       <FormControl>
-                        <Textarea className="w-full text-zinc-200 text-base font-din-regular" {...field} placeholder="...اكتب بتفصيل" />
+                        <Textarea
+                          className="w-full text-zinc-200 text-base font-din-regular"
+                          {...field}
+                          placeholder="...اكتب بتفصيل"
+                        />
                       </FormControl>
                       <FormMessage />
                     </FormItem>
@@ -153,6 +180,18 @@ const Page = () => {
                 />
               </div>
             </div>
+            <Button
+              onClick={() => onSubmit(form.getValues())}
+              className="w-full border border-gray-200 text-gray-300 rounded-full bg-transparent hover:bg-blue-700 hover:border-none items-center justify-center py-6 mt-5 justify-self-center self-center duration-500 transition-all ease-out"
+            >
+              {isLoading ? (
+                <Spinner className="mr-2" />
+              ) : (
+                <p className="font-din-bold text-md text-right">
+                  تسجيل كتيبة جديد
+                </p>
+              )}
+            </Button>
           </form>
         </Form>
       </div>

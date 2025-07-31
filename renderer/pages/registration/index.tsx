@@ -35,9 +35,8 @@ import { HeaderTitle, InputPhone } from "@/renderer/components";
 import { InputDate } from "@/renderer/components/InputDate";
 import { Spinner } from "@/renderer/components/Spinner";
 
-type Props = {};
 
-const Page = (props: Props) => {
+const Page = () => {
   const router = useRouter();
   const [isLoading, setIsLoading] = useState(false);
   const [typeOfDefinition, setTypeOfDefinition] = useState<

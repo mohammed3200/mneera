@@ -1,12 +1,17 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
+import { useRouter } from "next/navigation";
+import { TriangleAlert } from "lucide-react";
+
+import { Individual } from "../../../main/db/schema-types";
+import { useIndividualStore } from "../../store/individualStore";
+
+import { Columns } from "@/renderer/types";
+
+import { TextShimmer } from "@/renderer/components/ui/text-shimmer";
+
 import { HeaderTitle, RootLayout, CustomTable } from "@/renderer/components";
 import { TableCell, TableRow } from "@/renderer/components/ui/table";
-import { Columns } from "@/renderer/types";
-import { Individual } from "@/main/db/schema-types";
-import { useIndividualStore } from "../../store/individualStore";
-import { TextShimmer } from "@/renderer/components/ui/text-shimmer";
-import { TriangleAlert } from "lucide-react";
-import { useRouter } from "next/navigation";
+
 
 const columns: Columns[] = [
   { key: "id", label: "ID" },

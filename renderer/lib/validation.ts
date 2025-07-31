@@ -60,7 +60,7 @@ export const BattalionsFormValidation = z.object({
   place: z.string().min(1, "مطلوب"),
   conductor: z.string().min(1, "مطلوب"),
   dateOfCreation: z.string().default(`${new Date()}`),
-  numberOfIndividuals: z.number().default(0),
+  numberOfIndividuals: z.coerce.number().default(0),
   weaponsType: z.string().trim().optional(),
 });
 

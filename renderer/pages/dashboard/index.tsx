@@ -1,3 +1,5 @@
+// renderer/dashboard/index.tsx
+
 import { Header, RootLayout } from "@/renderer/components"
 import { ButtonNavigation } from "@/renderer/components/ButtonNavigation"
 import React from "react"

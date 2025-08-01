@@ -41,8 +41,7 @@ const PageBattalionPersonnel = () => {
 export default PageBattalionPersonnel;
 
 const TableCellIndividuals = () => {
-  const { loading, error, fetchIndividualsByBattalionId } =
-    useIndividualStore();
+  const { fetchIndividualsByBattalionId } = useIndividualStore();
 
   const router = useRouter();
   const routes = useRoutes();

@@ -34,8 +34,8 @@ import FileUploader from "@/renderer/components/FileUploader";
 import { HeaderTitle, InputPhone } from "@/renderer/components";
 import { InputDate } from "@/renderer/components/InputDate";
 import { Spinner } from "@/renderer/components/Spinner";
-import { Combobox } from "@/renderer/components/ui/combobox";
 import { BattalionCombobox } from "./BattalionsCombobox";
+import toast from "react-hot-toast";
 
 const Page = () => {
   const router = useRouter();
@@ -68,7 +68,6 @@ const Page = () => {
   });
 
   const onSubmit = async (values: z.infer<typeof individualFormValidation>) => {
-    console.log(values);
     setIsLoading(true);
     try {
       // Convert file to ArrayBuffer if exists
@@ -109,13 +108,22 @@ const Page = () => {
         "add-individual",
         individualData
       );
+
       if (response.success) {
-        addIndividual(response.individual); // Add to Zustand store
         router.push("/individuals");
-      } else {
-        console.error("Failed to add individual:", response.error);
+      } else if (response.error) {
+        if (response.error.code === "ERR_UNIQUE_NATIONAL_NUMBER") {
+          toast.error("الرقم الوطني مستخدم بالفعل.");
+        } else if (response.error.code === "ERR_UNIQUE_ID_NUMBER") {
+          toast.error("رقم التعريف الشخصي مستخدم بالفعل.");
+        } else if (response.error.code === "ERR_UNIQUE_PASSPORT_NUMBER") {
+          toast.error("جواز السفر مستخدم بالفعل.");
+        } else {
+          toast.error(response.error.message || "Something went wrong.");
+        }
       }
     } catch (error) {
+      toast.error(error.message || "Something went wrong.");
       console.error("Error adding individual:", error);
     } finally {
       setIsLoading(false);

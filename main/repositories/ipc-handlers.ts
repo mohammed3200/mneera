@@ -54,10 +54,15 @@ ipcMain.handle("add-individual", async (_, individualData) => {
 
     const created = await individualRepo.create(newIndividual);
     return { success: true, individual: created };
-  } catch (error) {
-    const errorMessage =
-      error instanceof Error ? error.message : "Unknown error";
-    return { success: false, error: errorMessage };
+  } catch (error: any) {
+    console.log("add individual error: ", error);
+    return {
+      success: false,
+      error: {
+        code: error.code || "ERR_UNKNOWN",
+        message: error.message || "unknown error",
+      },
+    };
   }
 });
 

@@ -13,7 +13,7 @@ export const individualFormValidation = z.object({
   phone: z
     .string()
     .refine((phone) => /^\d{3}-\d{6,10}$/.test(phone), "ليس رقم هاتف"),
-  battalion: z.string().min(1, "هذا قصير جدا").max(40, "الاسم طويل جدا"),
+  battalionId: z.number(),
   TypeOfDefinition: z.enum(["ID card", "Passport"]),
   battalionNumber: z.string().optional(),
   IDCard: z
@@ -33,7 +33,7 @@ export const individualFormValidation = z.object({
   address: z.string().min(2, "العنوان قصير جدا"),
   image: z
     .custom<File>((val) => val instanceof File, {
-      message: "يجب رفع صورة"
+      message: "يجب رفع صورة",
     })
     .refine((file) => !file || file.size <= 5_000_000, "حجم الملف كبير جدا")
     .refine(

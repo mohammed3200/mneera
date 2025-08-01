@@ -17,6 +17,13 @@ ipcMain.handle("get-individual", async (_, id: number) => {
   return individualRepo.getById(id);
 });
 
+ipcMain.handle(
+  "get-individuals-by-battalion",
+  async (_, battalionId: number) => {
+    return individualRepo.getByBattalionId(battalionId);
+  }
+);
+
 ipcMain.handle("add-individual", async (_, individualData) => {
   try {
     let imageId: string | null = null;
@@ -34,7 +41,7 @@ ipcMain.handle("add-individual", async (_, individualData) => {
       birthDate: birthDate, // Use converted timestamp
       address: individualData.address,
       placeOfBirth: individualData.placeOfBirth,
-      battalion: individualData.battalion,
+      battalionId: individualData.battalionId,
       phoneNumber: individualData.phoneNumber,
       nationality: individualData.nationality,
       bloodType: individualData.bloodType,

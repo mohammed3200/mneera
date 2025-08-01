@@ -8,6 +8,7 @@ interface IndividualState {
   error: string | null;
   fetchIndividuals: () => Promise<void>;
   fetchIndividual: (id: number) => Promise<Individual | undefined>;
+  fetchIndividualsByBattalionId: (battalionId: number) => Promise<Individual[]>;
   addIndividual: (individual: Individual) => void;
   setError: (error: string | null) => void;
 }
@@ -53,12 +54,14 @@ export const useIndividualStore = create<IndividualState>((set) => ({
 
         // Update store - add or update this individual
         set((state) => {
-          const exists = state.individuals.some(ind => ind.id === id);
+          const exists = state.individuals.some((ind) => ind.id === id);
           return {
             individuals: exists
-              ? state.individuals.map(ind => ind.id === id ? individual : ind)
+              ? state.individuals.map((ind) =>
+                  ind.id === id ? individual : ind
+                )
               : [...state.individuals, individual],
-            loading: false
+            loading: false,
           };
         });
         return individual;
@@ -70,6 +73,31 @@ export const useIndividualStore = create<IndividualState>((set) => ({
         loading: false,
       });
       return null;
+    }
+  },
+
+  fetchIndividualsByBattalionId: async (battalionId: number) => {
+    set({ loading: true, error: null });
+    try {
+      const data = await window.ipc.invoke(
+        "get-individuals-by-battalion",
+        battalionId
+      );
+
+      // Properly convert dates
+      const individuals = data.map((ind: any) => ({
+        ...ind,
+        birthDate: new Date(ind.birthDate),
+        createdAt: new Date(ind.createdAt),
+      }));
+
+      set({ individuals, loading: false });
+      return individuals;
+    } catch (err: any) {
+      set({
+        error: err?.message || "حدث خطأ غير متوقع",
+        loading: false,
+      });
     }
   },
 

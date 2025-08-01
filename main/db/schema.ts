@@ -1,6 +1,6 @@
 // db/schema.ts
 
-import { sql } from "drizzle-orm";
+import { relations, sql } from "drizzle-orm";
 import { sqliteTable, text, integer, blob } from "drizzle-orm/sqlite-core";
 
 export const users = sqliteTable("users", {
@@ -16,11 +16,11 @@ export const individuals = sqliteTable("individuals", {
   image: text("image_id"),
   nationalNumber: text("national_number").notNull().unique(),
   birthDate: integer("birth_date", { mode: "number" }).notNull(),
-  idNumber: text("id_number").unique(),  // Nullable
-  passportNumber: text("passport_number").unique(),  // Nullable
+  idNumber: text("id_number").unique(), // Nullable
+  passportNumber: text("passport_number").unique(), // Nullable
   address: text("address").notNull(),
   placeOfBirth: text("place_of_birth").notNull(),
-  battalion: text("battalion").notNull(),
+  battalionId: integer("battalion_id", { mode: "number" }).notNull(),
   phoneNumber: text("phone_number").notNull(),
   nationality: text("nationality").notNull(),
   bloodType: text("blood_type").notNull(),
@@ -30,6 +30,13 @@ export const individuals = sqliteTable("individuals", {
     .notNull()
     .default(sql`CURRENT_TIMESTAMP`),
 });
+
+export const individualsRelations = relations(individuals, ({ one }) => ({
+  battalion: one(battalions, {
+    fields: [individuals.battalionId],
+    references: [battalions.id],
+  }),
+}));
 
 export const images = sqliteTable("images", {
   id: text("id").primaryKey(),
@@ -51,5 +58,11 @@ export const battalions = sqliteTable("battalions", {
   conductor: text("conductor").notNull(),
   numberOfIndividuals: integer("number_of_individuals").default(1).notNull(),
   weaponsType: text("weapons_type").notNull(),
-  dateOfCreation: integer("date_of_creation", { mode: "timestamp" }).default(sql`CURRENT_TIMESTAMP`)
+  dateOfCreation: integer("date_of_creation", { mode: "timestamp" }).default(
+    sql`CURRENT_TIMESTAMP`
+  ),
 });
+
+export const battalionRelations = relations(battalions, ({ one, many }) => ({
+  individuals: many(individuals),
+}));

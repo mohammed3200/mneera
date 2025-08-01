@@ -34,7 +34,8 @@ import FileUploader from "@/renderer/components/FileUploader";
 import { HeaderTitle, InputPhone } from "@/renderer/components";
 import { InputDate } from "@/renderer/components/InputDate";
 import { Spinner } from "@/renderer/components/Spinner";
-
+import { Combobox } from "@/renderer/components/ui/combobox";
+import { BattalionCombobox } from "./BattalionsCombobox";
 
 const Page = () => {
   const router = useRouter();
@@ -49,7 +50,7 @@ const Page = () => {
     defaultValues: {
       name: "",
       nationalNumber: "",
-      battalion: "",
+      battalionId: null,
       nationality: "ليبي",
       birthDate: "",
       PlaceOfBirth: "",
@@ -67,6 +68,7 @@ const Page = () => {
   });
 
   const onSubmit = async (values: z.infer<typeof individualFormValidation>) => {
+    console.log(values);
     setIsLoading(true);
     try {
       // Convert file to ArrayBuffer if exists
@@ -84,7 +86,7 @@ const Page = () => {
         birthDate: new Date(values.birthDate).toISOString(),
         address: values.address,
         placeOfBirth: values.PlaceOfBirth,
-        battalion: values.battalion,
+        battalionId: values.battalionId,
         phoneNumber: values.phone, // Changed from phone to phoneNumber
         nationality: values.nationality,
         bloodType: values.blood, // Changed from blood to bloodType
@@ -110,7 +112,6 @@ const Page = () => {
       if (response.success) {
         addIndividual(response.individual); // Add to Zustand store
         router.push("/individuals");
-
       } else {
         console.error("Failed to add individual:", response.error);
       }
@@ -306,13 +307,13 @@ const Page = () => {
                 />
               </div>
               <FormField
-                name="battalion"
+                name="battalionId"
                 control={form.control}
                 render={({ field }) => (
                   <FormItem>
-                    <FormLabel> اسم الكتيبة </FormLabel>
+                    <FormLabel> الكتيبة </FormLabel>
                     <FormControl>
-                      <Input {...field} type="text" placeholder="" />
+                      <BattalionCombobox onChange={field.onChange} />
                     </FormControl>
                     <FormMessage />
                   </FormItem>

@@ -2,7 +2,7 @@ import path from "path";
 import { app, ipcMain } from "electron";
 import serve from "electron-serve";
 import { createWindow } from "./helpers";
-import './repositories/ipc-handlers'; // Import IPC handlers
+import "./repositories/ipc-handlers"; // Import IPC handlers
 
 const isProd = process.env.NODE_ENV === "production";
 
@@ -28,7 +28,9 @@ if (isProd) {
 
   if (isProd) {
     mainWindow.setWindowButtonVisibility(true);
-    await mainWindow.loadURL("app://-/home");
+    await mainWindow.loadURL("app://-/home").catch((err) => {
+      console.error("Failed to load:", err);
+    });
   } else {
     const port = process.argv[2];
     await mainWindow.loadURL(`http://localhost:${port}/home`);

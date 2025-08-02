@@ -154,7 +154,10 @@ const IndividualDetail = () => {
                 <DetailCard
                   title="الخدمة العسكرية"
                   items={[
-                    { label: "الكتيبة", value: individual.battalion },
+                    {
+                      label: "الكتيبة",
+                      value: individual.battalionId.toString(),
+                    },
                     { label: "نوع السلاح", value: individual.weaponType },
                   ]}
                 />

@@ -24,8 +24,8 @@
       "**/*"
     ],
     "nodeGypRebuild": false,
-    "appId": "com.example.myapp",
-    "productName": "MilitaryCouncil-System",
+    "appId": "militaryCouncil-system",
+    "productName": "MilitaryCouncil System",
     "files": [
       "app/**/*",
       ".next/**/*",
@@ -34,12 +34,14 @@
     ],
     "win": {
       "target": "nsis",
-      "icon": "build/icon.ico",
+      "icon": "resources/logo.ico",
       "extraResources": [
         {
           "from": "main/db/drizzle",
           "to": "db/drizzle",
-          "filter": ["**/*"]
+          "filter": [
+            "**/*"
+          ]
         },
         {
           "from": "main/db/drizzle",
@@ -115,6 +117,6 @@
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
     "tailwindcss": "^3.4.17",
-    "typescript": "^5.8.3"
+    "typescript": "^5.9.2"
   }
 }

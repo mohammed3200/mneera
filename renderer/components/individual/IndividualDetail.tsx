@@ -1,7 +1,6 @@
 // renderer/components/individual/IndividualDetail.tsx
 import Image from "next/image";
 import { useRouter } from "next/router";
-import { PhoneCallIcon } from "lucide-react";
 import { useEffect, useState } from "react";
 
 import { useIndividualStore } from "@/renderer/store/individualStore";
@@ -13,13 +12,16 @@ import { RootLayout, HeaderTitle } from "@/renderer/components";
 import { formatDate } from "@/renderer/lib/utils";
 import { TextShimmer } from "@/renderer/components/ui/text-shimmer";
 import { Individual } from "../../../main/db/schema-types";
+import { useBattalionStore } from "@/renderer/store/battalionStore";
 
 const IndividualDetail = () => {
   const router = useRouter();
   const { id } = router.query;
   const [imageSrc, setImageSrc] = useState<string | null>(null);
   const [individual, setIndividual] = useState<Individual | null>(null);
+  const [battalionName, setBattalionName] = useState<string | null>(null);
   const [loading, setLoading] = useState(true);
+  const { fetchBattalion } = useBattalionStore();
   const { fetchIndividual } = useIndividualStore();
   const { getImage } = useImageStore();
 
@@ -31,6 +33,10 @@ const IndividualDetail = () => {
           if (!isNaN(numericId)) {
             const data = await fetchIndividual(numericId);
             setIndividual(data || null);
+          }
+          if (individual?.battalionId) {
+            const data = await fetchBattalion(individual.battalionId);
+            setBattalionName(data.name);
           }
         }
       } catch (error) {
@@ -127,11 +133,16 @@ const IndividualDetail = () => {
                   <h3 className="text-white font-bold mb-2 font-din-bold">
                     معلومات الاتصال
                   </h3>
-                  <p className="text-blue-100 flex items-center gap-2">
-                    <PhoneCallIcon className="w-5 h-5" />
+                  <div>
+                  <p className="text-blue-100 flex items-center justify-between font-din-regular">
+                  <span> رقم الهاتف</span>
                     {individual.phoneNumber}
                   </p>
-                  <p className="text-blue-100 mt-2">{individual.address}</p>
+                  </div>
+                  <p className="text-blue-100 mt-2 flex justify-between font-din-regular">
+                    <span>محل الإقامة</span>
+                    {individual.address}
+                  </p>
                 </div>
               </div>
             </div>
@@ -148,6 +159,14 @@ const IndividualDetail = () => {
                       value: formatDate(new Date(individual.birthDate)),
                     },
                     { label: "الجنسية", value: individual.nationality },
+                    {
+                      label: "رقم التعريف",
+                      value: individual.idNumber,
+                    },
+                    {
+                      label: "رقم الجواز",
+                      value: individual.passportNumber,
+                    },
                   ]}
                 />
 
@@ -156,7 +175,7 @@ const IndividualDetail = () => {
                   items={[
                     {
                       label: "الكتيبة",
-                      value: individual.battalionId.toString(),
+                      value: battalionName,
                     },
                     { label: "نوع السلاح", value: individual.weaponType },
                   ]}
@@ -168,14 +187,6 @@ const IndividualDetail = () => {
                     {
                       label: "المؤهل العلمي",
                       value: individual.academicQualification,
-                    },
-                    {
-                      label: "رقم التعريف",
-                      value: individual.idNumber || "غير متوفر",
-                    },
-                    {
-                      label: "رقم الجواز",
-                      value: individual.passportNumber || "غير متوفر",
                     },
                   ]}
                 />
@@ -199,17 +210,22 @@ const DetailCard = ({
   <div className="bg-[#2d3748] rounded-xl p-4 border border-gray-600">
     <h3 className="font-bold text-white mb-3 font-din-bold text-lg">{title}</h3>
     <div className="space-y-3">
-      {items.map((item, index) => (
-        <div
-          key={index}
-          className="flex justify-between border-b border-gray-600 pb-2"
-        >
-          <span className="text-gray-300 font-din-regular">{item.label}</span>
-          <span className="font-medium font-din-regular text-white">
-            {item.value}
-          </span>
-        </div>
-      ))}
+      {items.map(
+        (item, index) =>
+          item.value && (
+            <div
+              key={index}
+              className="flex justify-between border-b border-gray-600 pb-2"
+            >
+              <span className="text-gray-300 font-din-regular">
+                {item.label}
+              </span>
+              <span className="font-medium font-din-regular text-white">
+                {item.value}
+              </span>
+            </div>
+          )
+      )}
     </div>
   </div>
 );

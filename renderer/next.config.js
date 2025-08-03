@@ -21,7 +21,7 @@ const nextConfig = {
         path: false,
         net: false,
         tls: false,
-        electron: false
+        electron: false,
       };
     }
     return config;

@@ -1,3 +1,5 @@
+"use client";
+
 import React from "react";
 import { ComponentProps } from "react";
 import { Footer } from "./Footer";

@@ -34,7 +34,7 @@ import FileUploader from "@/renderer/components/FileUploader";
 import { HeaderTitle, InputPhone } from "@/renderer/components";
 import { InputDate } from "@/renderer/components/InputDate";
 import { Spinner } from "@/renderer/components/Spinner";
-import { BattalionCombobox } from "./BattalionsCombobox";
+import { BattalionCombobox } from "@/renderer/components/individual/BattalionsCombobox";
 import toast from "react-hot-toast";
 
 const Page = () => {

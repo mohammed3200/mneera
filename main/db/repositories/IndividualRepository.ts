@@ -1,9 +1,9 @@
 // main/repositories/IndividualRepository.ts
-import { db } from "../db";
-import { individuals } from "../db/schema";
+import { db } from "@/main/db";
+import { individuals } from "@/main/db/schema";
 import { eq } from "drizzle-orm";
-import type { Individual, NewIndividual } from "../db/schema-types";
-import { UniqueConstraintError } from "../errors/UniqueConstraintError";
+import type { Individual, NewIndividual } from "@/main/db/schema-types";
+import { UniqueConstraintError } from "../../errors/UniqueConstraintError";
 
 export class IndividualRepository {
   async getAll(): Promise<Individual[]> {
@@ -28,7 +28,6 @@ export class IndividualRepository {
 
   async create(data: NewIndividual): Promise<Individual> {
     try {
-      console.error("add individual");
       const result = await db.insert(individuals).values(data).returning();
       return result[0];
     } catch (error: any) {

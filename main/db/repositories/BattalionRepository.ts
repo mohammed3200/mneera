@@ -1,7 +1,7 @@
-import { db } from "../db";
-import { battalions } from "../db/schema";
+import { db } from "@/main/db";
+import { battalions } from "@/main/db/schema";
 import { eq } from "drizzle-orm";
-import type { Battalion, NewBattalion } from "../db/schema-types";
+import type { Battalion, NewBattalion } from "@/main/db/schema-types";
 
 export class BattalionsRepository {
   async create(data: NewBattalion): Promise<Battalion> {

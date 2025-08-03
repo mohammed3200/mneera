@@ -20,5 +20,3 @@ export const BattalionCombobox = ({
     />
   );
 };
-
-export default BattalionCombobox;

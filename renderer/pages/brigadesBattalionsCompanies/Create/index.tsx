@@ -75,7 +75,7 @@ const Page = () => {
         title="نموذج تسجيل الكتائب و الألوية و السرايا"
         back="/brigadesBattalionsCompanies"
       />
-      <div className="w-full flex flex-col items-center">
+      <div className="w-full h-[80vh] flex flex-1 flex-col items-center justify-center px-8">
         <p className="font-din-bold text-2xl text-right text-white my-4">
           نموذج تسجيل كتيبة جديدة
         </p>
@@ -144,7 +144,7 @@ const Page = () => {
               />
             </div>
             {/* Number of members && Weapon type */}
-            <div className="w-full grid grid-cols-4 gap-x-6">
+            <div className="w-full grid grid-cols-8 gap-x-6 items-center">
               <div className="flex items-center col-span-1">
                 <FormField
                   control={form.control}
@@ -160,7 +160,7 @@ const Page = () => {
                   )}
                 />
               </div>
-              <div className="w-full col-span-3">
+              <div className="w-full col-span-7">
                 <FormField
                   control={form.control}
                   name="weaponsType"
@@ -180,9 +180,10 @@ const Page = () => {
                 />
               </div>
             </div>
+            <div className="w-full flex items-center justify-center pt-12">
             <Button
               onClick={() => onSubmit(form.getValues())}
-              className="w-full border border-gray-200 text-gray-300 rounded-full bg-transparent hover:bg-blue-700 hover:border-none items-center justify-center py-6 mt-5 justify-self-center self-center duration-500 transition-all ease-out"
+              className="w-[40%] border border-gray-200 text-gray-300 rounded-full bg-transparent hover:bg-blue-700 hover:border-none items-center justify-center py-6 mt-5 justify-self-center self-center duration-500 transition-all ease-out"
             >
               {isLoading ? (
                 <Spinner className="mr-2" />
@@ -192,6 +193,7 @@ const Page = () => {
                 </p>
               )}
             </Button>
+            </div>
           </form>
         </Form>
       </div>

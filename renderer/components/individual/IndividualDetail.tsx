@@ -5,14 +5,15 @@ import { useEffect, useState } from "react";
 
 import { useIndividualStore } from "@/renderer/store/individualStore";
 import { useImageStore } from "@/renderer/store/imageStore";
+import { useBattalionStore } from "@/renderer/store/battalionStore";
 
 import { Badge } from "@/renderer/components/ui/badge";
 import { RootLayout, HeaderTitle } from "@/renderer/components";
+import PrintableCard from "@/renderer/components/individual/PrintableCard";
 
 import { formatDate } from "@/renderer/lib/utils";
 import { TextShimmer } from "@/renderer/components/ui/text-shimmer";
 import { Individual } from "../../../main/db/schema-types";
-import { useBattalionStore } from "@/renderer/store/battalionStore";
 
 const IndividualDetail = () => {
   const router = useRouter();
@@ -134,10 +135,10 @@ const IndividualDetail = () => {
                     معلومات الاتصال
                   </h3>
                   <div>
-                  <p className="text-blue-100 flex items-center justify-between font-din-regular">
-                  <span> رقم الهاتف</span>
-                    {individual.phoneNumber}
-                  </p>
+                    <p className="text-blue-100 flex items-center justify-between font-din-regular">
+                      <span> رقم الهاتف</span>
+                      {individual.phoneNumber}
+                    </p>
                   </div>
                   <p className="text-blue-100 mt-2 flex justify-between font-din-regular">
                     <span>محل الإقامة</span>
@@ -192,6 +193,16 @@ const IndividualDetail = () => {
                 />
               </div>
             </div>
+          </div>
+          <div className="mt-6 flex justify-center">
+            <PrintableCard
+              data={{
+                name: individual.name,
+                class: individual.academicQualification,
+                idNumber: individual.idNumber,
+                issueDate: new Date().toLocaleDateString("en-GB"),
+              }}
+            />
           </div>
         </div>
       </div>

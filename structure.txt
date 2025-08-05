@@ -15,7 +15,7 @@
  ┣ 📜README.md
  ┣ 📜structure.txt
  ┣ 📜tsconfig.json
- ┣ 📜tsconfig.tsbuildinfo
+ ┗ 📜tsconfig.tsbuildinfo
 
 📦.github
  ┗ 📂workflows
@@ -30,32 +30,40 @@
  ┃ ┃ ┃ ┣ 📜0002_snapshot.json
  ┃ ┃ ┃ ┗ 📜_journal.json
  ┃ ┃ ┣ 📜0000_lyrical_lester.sql
+ ┃ ┃ ┣ 📜0000_secret_thor.sql
  ┃ ┃ ┣ 📜0001_late_dexter_bennett.sql
  ┃ ┃ ┗ 📜0002_quiet_master_chief.sql
+ ┃ ┣ 📂repositories
+ ┃ ┃ ┣ 📜BattalionRepository.ts
+ ┃ ┃ ┣ 📜ImageRepository.ts
+ ┃ ┃ ┣ 📜IndividualRepository.ts
+ ┃ ┃ ┗ 📜ipc-handlers.ts
  ┃ ┣ 📜drizzle.config.ts
  ┃ ┣ 📜index.ts
  ┃ ┣ 📜schema-types.d.ts
  ┃ ┣ 📜schema.ts
  ┃ ┗ 📜sqlite.db
+ ┣ 📂errors
+ ┃ ┗ 📜UniqueConstraintError.ts
  ┣ 📂helpers
  ┃ ┣ 📜create-window.ts
  ┃ ┗ 📜index.ts
- ┣ 📂repositories
- ┃ ┣ 📜ImageRepository.ts
- ┃ ┣ 📜IndividualRepository.ts
- ┃ ┗ 📜ipc-handlers.ts
  ┣ 📜background.ts
- ┣ 📜preload.ts
- ┗ 📜tsconfig.json
+ ┗ 📜preload.ts
 
 📦renderer
  ┣ 📂components
  ┃ ┣ 📂individual
- ┃ ┃ ┗ 📜IndividualDetail.tsx
+ ┃ ┃ ┣ 📜BattalionsCombobox.tsx
+ ┃ ┃ ┣ 📜IndividualDetail.tsx
+ ┃ ┃ ┗ 📜PrintableCard.tsx
  ┃ ┣ 📂ui
  ┃ ┃ ┣ 📜badge.tsx
  ┃ ┃ ┣ 📜button.tsx
  ┃ ┃ ┣ 📜card.tsx
+ ┃ ┃ ┣ 📜combobox.tsx
+ ┃ ┃ ┣ 📜command.tsx
+ ┃ ┃ ┣ 📜dialog.tsx
  ┃ ┃ ┣ 📜form.tsx
  ┃ ┃ ┣ 📜input.tsx
  ┃ ┃ ┣ 📜label.tsx
@@ -176,6 +184,7 @@
  ┣ 📂store
  ┃ ┣ 📂mock
  ┃ ┃ ┗ 📜index.ts
+ ┃ ┣ 📜battalionStore.ts
  ┃ ┣ 📜imageStore.ts
  ┃ ┣ 📜index.ts
  ┃ ┗ 📜individualStore.ts
